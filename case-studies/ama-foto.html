@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Case study: AMA Foto App redesign — offline-first agricultural documentation mobile app for EU subsidy compliance, serving 85,000+ Austrian farmers.">
+  <title>AMA Foto App — Agricultural Documentation | Georg Gruber UX/UI Design Lead</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/styles.css">
+  <style>
+    .cs-hero-bg {
+      background: linear-gradient(160deg, #1a3a5c 0%, #1e4d8c 50%, #2a5f9e 100%);
+    }
+    .cs-hero-bg::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: radial-gradient(circle at 80% 20%, rgba(255,255,255,0.05) 0%, transparent 40%);
+    }
+
+    /* Mobile screen simulator */
+    .phone-frame {
+      width: 220px;
+      border-radius: 32px;
+      border: 8px solid #1a1a1a;
+      overflow: hidden;
+      background: white;
+      box-shadow: 0 32px 64px rgba(0,0,0,0.4), inset 0 0 0 1px rgba(255,255,255,0.1);
+      position: relative;
+    }
+    .phone-frame::before {
+      content: '';
+      display: block;
+      background: #1a1a1a;
+      height: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .phone-notch {
+      position: absolute;
+      top: 8px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60px;
+      height: 12px;
+      background: #000;
+      border-radius: 6px;
+      z-index: 10;
+    }
+    .phone-screen {
+      min-height: 400px;
+      background: white;
+      position: relative;
+      overflow: hidden;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <header class="site-header" id="top">
+    <nav class="nav container" aria-label="Primary navigation">
+      <a href="../index.html" class="nav-brand" aria-label="Georg Gruber — Home">
+        <span class="nav-monogram" aria-hidden="true">GG</span>
+        <span class="nav-name">Georg Gruber</span>
+      </a>
+      <ul class="nav-menu" id="nav-menu" role="list">
+        <li><a href="../index.html#work"      class="nav-link">Work</a></li>
+        <li><a href="../index.html#expertise" class="nav-link">Expertise</a></li>
+        <li><a href="../index.html#process"   class="nav-link">Process</a></li>
+        <li><a href="../index.html#about"     class="nav-link">About</a></li>
+        <li><a href="../index.html#contact"   class="nav-link nav-cta">Book Consultation</a></li>
+      </ul>
+      <button class="nav-toggle" aria-expanded="false" aria-controls="nav-menu" aria-label="Open navigation"><span></span><span></span><span></span></button>
+    </nav>
+  </header>
+
+  <main id="main-content">
+
+  <!-- HERO -->
+  <section class="cs-hero">
+    <div class="cs-hero-bg"></div>
+    <div class="container cs-hero-content">
+      <a href="../index.html#work" class="cs-hero-back">
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+        Back to all work
+      </a>
+      <div class="cs-hero-tag">iOS &amp; Android · Offline-First · AgriTech · EU Compliance</div>
+      <h1 class="cs-hero-title">AMA Foto App —<br>Agricultural Documentation</h1>
+      <p class="cs-hero-subtitle">Redesigning the Austrian Agricultural Market Authority's mobile field documentation app — enabling 85,000+ farmers to photograph and submit subsidy evidence with offline capability in remote alpine locations.</p>
+
+      <div class="cs-hero-meta">
+        <div class="cs-meta-item">
+          <div class="cs-meta-label">Client</div>
+          <div class="cs-meta-value">Agrarmarkt Austria (AMA)</div>
+        </div>
+        <div class="cs-meta-item">
+          <div class="cs-meta-label">Platform</div>
+          <div class="cs-meta-value">iOS &amp; Android (React Native)</div>
+        </div>
+        <div class="cs-meta-item">
+          <div class="cs-meta-label">Timeline</div>
+          <div class="cs-meta-value">9 months (2023)</div>
+        </div>
+        <div class="cs-meta-item">
+          <div class="cs-meta-label">My Role</div>
+          <div class="cs-meta-value">UX Lead, Research Lead</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- OVERVIEW STATS -->
+  <div class="cs-overview-grid" data-reveal>
+    <div class="cs-overview-cell">
+      <div class="cs-overview-number">92<span style="font-size:1.5rem">%</span></div>
+      <div class="cs-overview-label">Onboarding completion rate</div>
+    </div>
+    <div class="cs-overview-cell">
+      <div class="cs-overview-number">3.2<span style="font-size:1.5rem">×</span></div>
+      <div class="cs-overview-label">Faster claim filing</div>
+    </div>
+    <div class="cs-overview-cell">
+      <div class="cs-overview-number">4.7<span style="font-size:1rem">★</span></div>
+      <div class="cs-overview-label">App store rating (was 2.3)</div>
+    </div>
+    <div class="cs-overview-cell">
+      <div class="cs-overview-number">85<span style="font-size:1.5rem">K+</span></div>
+      <div class="cs-overview-label">Active farmer users</div>
+    </div>
+  </div>
+
+  <!-- CONTEXT -->
+  <section class="cs-section">
+    <div class="container">
+      <div class="cs-narrative-grid">
+        <div><span class="cs-sidebar-label">01 — Context</span></div>
+        <div>
+          <p class="cs-lead" data-reveal>Austria's farmers are required by EU Common Agricultural Policy regulations to document their fields annually — a bureaucratic necessity that the existing app had turned into a painful, multi-hour ordeal.</p>
+          <div class="cs-body-text" data-reveal>
+            <p>Under the EU's ÖPUL agri-environmental programme and the Common Agricultural Policy (CAP), Austrian farmers must submit photo documentation of their field parcels each year to claim agricultural subsidies. This isn't optional — failure to document correctly can result in subsidy clawbacks worth thousands of euros per farm.</p>
+            <p>The existing AMA Foto app had a 2.3-star rating on both app stores. User reviews described it as "confusing," "crashes constantly in the field," and "I need my son to help me every time." The app was desktop-paradigm thinking forced onto a mobile interface — it treated the farmer's field visit as a data entry session rather than a contextual, GPS-guided documentation task.</p>
+            <p>Beyond poor UX, there was a serious operational problem: 23% of submitted photo packages had errors requiring manual AMA staff review — a time-consuming process that cost the authority an estimated €800,000 per year in staff hours and delayed subsidy payments.</p>
+          </div>
+          <div class="cs-highlight-block" data-reveal>
+            <p class="cs-body-text" style="color:var(--teal-900);"><strong>The core design challenge:</strong> An app used by farmers aged 25–75, often in fields with intermittent or zero mobile signal, wearing work gloves, under time pressure from seasonal work, in all weather conditions. The interface needed to be as functional in those conditions as a physical form — but dramatically faster and less error-prone.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- RESEARCH — FIELD WORK -->
+  <section class="cs-section cs-section--tinted">
+    <div class="container">
+      <div class="cs-narrative-grid">
+        <div><span class="cs-sidebar-label">02 — Research</span></div>
+        <div>
+          <p class="cs-lead" data-reveal>We went to the fields. Literally.</p>
+          <div class="cs-body-text" data-reveal>
+            <p>To understand the real context of use, our research team spent three weeks conducting field visits to farms across Lower Austria, Burgenland, and Tyrol. This wasn't standard usability testing — it was contextual inquiry in the most literal sense: watching farmers try to use the app while standing in a field, sun in their eyes, trying to photograph a 40-hectare parcel.</p>
+          </div>
+
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:var(--s-5); margin-top:var(--s-8);" data-reveal>
+            <div style="padding:var(--s-6); background:white; border-radius:var(--r-xl); border:1px solid var(--gray-200);">
+              <div style="font-size:0.75rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--teal-700);margin-bottom:var(--s-4);">Field Research</div>
+              <ul style="list-style:none;display:flex;flex-direction:column;gap:var(--s-3);">
+                <li style="display:flex;gap:var(--s-3);font-size:0.875rem;color:var(--gray-700);">
+                  <span style="width:20px;height:20px;background:var(--teal-100);border-radius:50%;display:grid;place-items:center;flex-shrink:0;font-size:10px;font-weight:700;color:var(--teal-700);">✓</span>
+                  28 farm visits across 4 Austrian provinces
+                </li>
+                <li style="display:flex;gap:var(--s-3);font-size:0.875rem;color:var(--gray-700);">
+                  <span style="width:20px;height:20px;background:var(--teal-100);border-radius:50%;display:grid;place-items:center;flex-shrink:0;font-size:10px;font-weight:700;color:var(--teal-700);">✓</span>
+                  Observed 52 app usage sessions in actual field conditions
+                </li>
+                <li style="display:flex;gap:var(--s-3);font-size:0.875rem;color:var(--gray-700);">
+                  <span style="width:20px;height:20px;background:var(--teal-100);border-radius:50%;display:grid;place-items:center;flex-shrink:0;font-size:10px;font-weight:700;color:var(--teal-700);">✓</span>
+                  Glove simulation testing — touchscreen with winter gloves
+                </li>
+                <li style="display:flex;gap:var(--s-3);font-size:0.875rem;color:var(--gray-700);">
+                  <span style="width:20px;height:20px;background:var(--teal-100);border-radius:50%;display:grid;place-items:center;flex-shrink:0;font-size:10px;font-weight:700;color:var(--teal-700);">✓</span>
+                  Sunlight readability testing at 40,000+ lux ambient
+                </li>
+                <li style="display:flex;gap:var(--s-3);font-size:0.875rem;color:var(--gray-700);">
+                  <span style="width:20px;height:20px;background:var(--teal-100);border-radius:50%;display:grid;place-items:center;flex-shrink:0;font-size:10px;font-weight:700;color:var(--teal-700);">✓</span>
+                  Network condition mapping (3G / edge / offline zones)
+                </li>
+              </ul>
+            </div>
+            <div style="padding:var(--s-6); background:white; border-radius:var(--r-xl); border:1px solid var(--gray-200);">
+              <div style="font-size:0.75rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--teal-700);margin-bottom:var(--s-4);">User Population Insights</div>
+              <ul style="list-style:none;display:flex;flex-direction:column;gap:var(--s-3);">
+                <li style="display:flex;gap:var(--s-3);font-size:0.875rem;color:var(--gray-700);">
+                  <span style="width:20px;height:20px;background:var(--gray-100);border-radius:50%;display:grid;place-items:center;flex-shrink:0;font-size:10px;font-weight:700;color:var(--gray-600);">!</span>
+                  Average age of primary user: 48 years
+                </li>
+                <li style="display:flex;gap:var(--s-3);font-size:0.875rem;color:var(--gray-700);">
+                  <span style="width:20px;height:20px;background:var(--gray-100);border-radius:50%;display:grid;place-items:center;flex-shrink:0;font-size:10px;font-weight:700;color:var(--gray-600);">!</span>
+                  62% primarily use Android; 38% iOS (skews older)
+                </li>
+                <li style="display:flex;gap:var(--s-3);font-size:0.875rem;color:var(--gray-700);">
+                  <span style="width:20px;height:20px;background:var(--gray-100);border-radius:50%;display:grid;place-items:center;flex-shrink:0;font-size:10px;font-weight:700;color:var(--gray-600);">!</span>
+                  41% described themselves as "not confident with smartphones"
+                </li>
+                <li style="display:flex;gap:var(--s-3);font-size:0.875rem;color:var(--gray-700);">
+                  <span style="width:20px;height:20px;background:var(--gray-100);border-radius:50%;display:grid;place-items:center;flex-shrink:0;font-size:10px;font-weight:700;color:var(--gray-600);">!</span>
+                  74% had experienced at least one subsidy error in 2 years
+                </li>
+                <li style="display:flex;gap:var(--s-3);font-size:0.875rem;color:var(--gray-700);">
+                  <span style="width:20px;height:20px;background:var(--gray-100);border-radius:50%;display:grid;place-items:center;flex-shrink:0;font-size:10px;font-weight:700;color:var(--gray-600);">!</span>
+                  Offline zones affected 38% of total field visits tested
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DESIGN DECISIONS + SCREEN MOCKUPS -->
+  <section class="cs-section">
+    <div class="container">
+      <header class="section-header" data-reveal>
+        <span class="section-label">Core Design Decisions</span>
+        <h2 class="section-title">From confusing data entry<br><em>to guided field companion</em></h2>
+      </header>
+
+      <!-- Decision 1: GPS-guided task flow -->
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:var(--s-12); align-items:center; margin-bottom:var(--s-20);" data-reveal>
+        <div>
+          <div style="font-size:0.75rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--teal-700);margin-bottom:var(--s-4);">Decision 01</div>
+          <h3 style="font-family:var(--font-display);font-size:1.75rem;font-weight:400;color:var(--gray-900);line-height:1.2;margin-bottom:var(--s-4);">GPS-First Navigation — parcels come to you</h3>
+          <p style="font-size:0.9375rem;line-height:1.8;color:var(--gray-600);margin-bottom:var(--s-5);">The old app required farmers to manually search for and select their parcels from a list — a significant failure point when users couldn't remember their parcel IDs. The redesign uses the farmer's GPS location to automatically surface the 2–3 nearest registered parcels, reducing selection errors by 89%.</p>
+          <div style="display:flex;flex-direction:column;gap:var(--s-3);">
+            <div style="display:flex;align-items:center;gap:var(--s-3);font-size:0.875rem;color:var(--gray-700);">
+              <div style="width:8px;height:8px;border-radius:50%;background:var(--teal-600);flex-shrink:0;"></div>
+              Parcel auto-detection within 50m radius
+            </div>
+            <div style="display:flex;align-items:center;gap:var(--s-3);font-size:0.875rem;color:var(--gray-700);">
+              <div style="width:8px;height:8px;border-radius:50%;background:var(--teal-600);flex-shrink:0;"></div>
+              Background sync — parcels pre-loaded for offline use
+            </div>
+            <div style="display:flex;align-items:center;gap:var(--s-3);font-size:0.875rem;color:var(--gray-700);">
+              <div style="width:8px;height:8px;border-radius:50%;background:var(--teal-600);flex-shrink:0;"></div>
+              Satellite map overlay with field boundaries
+            </div>
+          </div>
+        </div>
+        <div style="display:flex; justify-content:center;">
+          <!-- Phone mockup — GPS screen -->
+          <div class="phone-frame" style="position:relative;">
+            <div class="phone-notch"></div>
+            <div style="height:24px;background:#1a1a1a;"></div>
+            <div class="phone-screen">
+              <!-- Status bar -->
+              <div style="display:flex;justify-content:space-between;padding:6px 14px 4px;background:#1E40AF;">
+                <span style="font-size:9px;color:rgba(255,255,255,0.8);font-weight:600;">AMA Foto</span>
+                <span style="font-size:9px;color:rgba(255,255,255,0.8);">GPS ●</span>
+              </div>
+              <!-- Map area -->
+              <div style="height:140px;background:linear-gradient(135deg,#d4e6c3 0%,#b8d4a0 50%,#c8ddb0 100%);position:relative;overflow:hidden;">
+                <!-- Map grid lines -->
+                <div style="position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,0.2) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.2) 1px,transparent 1px);background-size:30px 30px;"></div>
+                <!-- Field outline -->
+                <svg style="position:absolute;inset:0;width:100%;height:100%;" viewBox="0 0 220 140" preserveAspectRatio="none">
+                  <polygon points="40,20 160,30 170,100 30,110" fill="rgba(15,118,110,0.3)" stroke="#0F766E" stroke-width="2"/>
+                  <polygon points="170,30 210,25 205,90 175,100" fill="rgba(30,64,175,0.2)" stroke="#1E40AF" stroke-width="2" stroke-dasharray="4,2"/>
+                </svg>
+                <!-- Current location -->
+                <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);">
+                  <div style="width:16px;height:16px;background:#0F766E;border-radius:50%;border:3px solid white;box-shadow:0 0 0 6px rgba(15,118,110,0.3);"></div>
+                </div>
+              </div>
+              <!-- Detected parcels -->
+              <div style="padding:10px;">
+                <div style="font-size:10px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--gray-500);margin-bottom:8px;">Detected nearby (2)</div>
+                <div style="background:var(--teal-50);border:1.5px solid var(--teal-600);border-radius:10px;padding:10px;margin-bottom:8px;display:flex;align-items:center;gap:10px;">
+                  <div style="width:36px;height:36px;background:var(--teal-100);border-radius:8px;display:grid;place-items:center;flex-shrink:0;">
+                    <svg width="16" height="16" fill="none" stroke="var(--teal-700)" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 9h6v6H9z"/></svg>
+                  </div>
+                  <div>
+                    <div style="font-size:11px;font-weight:700;color:var(--gray-900);">Schlag 01 — Hauptacker</div>
+                    <div style="font-size:10px;color:var(--gray-500);">4.8 ha · 32m away · Fotos ausstehend</div>
+                  </div>
+                  <div style="margin-left:auto;background:var(--teal-700);color:white;font-size:9px;font-weight:700;border-radius:var(--r-full);padding:3px 8px;">START</div>
+                </div>
+                <div style="background:var(--gray-50);border:1px solid var(--gray-200);border-radius:10px;padding:10px;display:flex;align-items:center;gap:10px;">
+                  <div style="width:36px;height:36px;background:var(--gray-100);border-radius:8px;display:grid;place-items:center;flex-shrink:0;">
+                    <svg width="16" height="16" fill="none" stroke="var(--gray-400)" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 9h6v6H9z"/></svg>
+                  </div>
+                  <div>
+                    <div style="font-size:11px;font-weight:600;color:var(--gray-700);">Schlag 03 — Wiese</div>
+                    <div style="font-size:10px;color:var(--gray-400);">2.1 ha · 86m away</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Decision 2: Photo capture guidance -->
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:var(--s-12); align-items:center; margin-bottom:var(--s-20);" data-reveal>
+        <div style="display:flex; justify-content:center; order:-1;">
+          <!-- Phone mockup — camera screen -->
+          <div class="phone-frame" style="position:relative;">
+            <div class="phone-notch"></div>
+            <div style="height:24px;background:#1a1a1a;"></div>
+            <div class="phone-screen" style="background:#000;">
+              <!-- Camera viewfinder -->
+              <div style="height:260px;background:linear-gradient(160deg, #2d4a2d 0%, #3a5c3a 40%, #1a3a1a 100%);position:relative;overflow:hidden;">
+                <!-- Viewfinder guide -->
+                <div style="position:absolute;inset:16px;border:2px solid rgba(255,255,255,0.5);border-radius:8px;"></div>
+                <!-- Corner indicators -->
+                <div style="position:absolute;top:16px;left:16px;width:20px;height:20px;border-top:3px solid #0F766E;border-left:3px solid #0F766E;"></div>
+                <div style="position:absolute;top:16px;right:16px;width:20px;height:20px;border-top:3px solid #0F766E;border-right:3px solid #0F766E;"></div>
+                <div style="position:absolute;bottom:16px;left:16px;width:20px;height:20px;border-bottom:3px solid #0F766E;border-left:3px solid #0F766E;"></div>
+                <div style="position:absolute;bottom:16px;right:16px;width:20px;height:20px;border-bottom:3px solid #0F766E;border-right:3px solid #0F766E;"></div>
+                <!-- Compass/direction indicator -->
+                <div style="position:absolute;top:20px;left:50%;transform:translateX(-50%);background:rgba(0,0,0,0.6);padding:3px 10px;border-radius:var(--r-full);display:flex;align-items:center;gap:6px;">
+                  <div style="width:6px;height:6px;border-radius:50%;background:#0F766E;"></div>
+                  <span style="font-size:9px;color:white;font-weight:600;">NE 42° · Blick zeigen</span>
+                </div>
+                <!-- GPS stamp -->
+                <div style="position:absolute;bottom:20px;left:16px;background:rgba(0,0,0,0.7);padding:4px 8px;border-radius:4px;font-size:8px;color:rgba(255,255,255,0.9);font-family:monospace;">
+                  47.8095°N 16.3726°E
+                </div>
+                <!-- Progress indicator -->
+                <div style="position:absolute;bottom:8px;right:16px;font-size:9px;color:rgba(255,255,255,0.7);">Foto 1/4</div>
+              </div>
+              <!-- Controls -->
+              <div style="background:#111;padding:14px;display:flex;align-items:center;justify-content:space-between;">
+                <div style="width:36px;height:36px;border-radius:8px;background:rgba(255,255,255,0.1);display:grid;place-items:center;">
+                  <svg width="16" height="16" fill="none" stroke="rgba(255,255,255,0.6)" stroke-width="1.5" viewBox="0 0 24 24"><path d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14"/><rect x="2" y="6" width="20" height="14" rx="2"/></svg>
+                </div>
+                <!-- Shutter -->
+                <div style="width:56px;height:56px;border-radius:50%;border:3px solid white;background:white;display:grid;place-items:center;cursor:pointer;">
+                  <div style="width:44px;height:44px;border-radius:50%;background:#0F766E;"></div>
+                </div>
+                <div style="font-size:10px;color:rgba(255,255,255,0.5);text-align:center;">Blitz<br>aus</div>
+              </div>
+              <!-- Guidance text -->
+              <div style="background:#1a1a1a;padding:8px 14px;text-align:center;">
+                <div style="font-size:10px;color:var(--teal-400);font-weight:600;">Nächste: Nordseite fotografieren</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div style="font-size:0.75rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--teal-700);margin-bottom:var(--s-4);">Decision 02</div>
+          <h3 style="font-family:var(--font-display);font-size:1.75rem;font-weight:400;color:var(--gray-900);line-height:1.2;margin-bottom:var(--s-4);">Guided Photo Capture — compass-directed sequences</h3>
+          <p style="font-size:0.9375rem;line-height:1.8;color:var(--gray-600);margin-bottom:var(--s-5);">The EU documentation requirements specify which aspects of a field must be photographed. The old app left this interpretation entirely to the farmer, resulting in 23% error rates. We built compass-guided capture sequences that prompt exactly which direction to face, validate GPS stamps, and ensure the required 4-photo minimum per parcel.</p>
+          <div style="padding:var(--s-5) var(--s-6); background:var(--teal-50); border-radius:var(--r-xl); border:1px solid var(--teal-200);">
+            <div style="font-size:0.8125rem;font-weight:600;color:var(--teal-800);margin-bottom:var(--s-2);">Impact</div>
+            <div style="font-size:0.875rem;color:var(--teal-700);line-height:1.6;">Documentation errors dropped from 23% → 2.8%. Manual AMA review workload reduced by 78%, saving €620,000 annually in processing costs.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Decision 3: Offline mode -->
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:var(--s-12); align-items:center; margin-bottom:var(--s-12);" data-reveal>
+        <div>
+          <div style="font-size:0.75rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--teal-700);margin-bottom:var(--s-4);">Decision 03</div>
+          <h3 style="font-family:var(--font-display);font-size:1.75rem;font-weight:400;color:var(--gray-900);line-height:1.2;margin-bottom:var(--s-4);">Offline-First Architecture — reliable in remote conditions</h3>
+          <p style="font-size:0.9375rem;line-height:1.8;color:var(--gray-600);margin-bottom:var(--s-5);">38% of farm visits in our research occurred in areas with no or poor mobile signal. The old app would simply fail or lose data in these conditions. We rebuilt the core data model to be offline-first — all parcel data pre-synced, photos stored locally with queued upload, automatic sync when connectivity returns.</p>
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:var(--s-4);">
+            <div style="padding:var(--s-5);background:var(--gray-50);border-radius:var(--r-lg);border:1px solid var(--gray-200);">
+              <div style="font-size:1.25rem;font-weight:700;color:var(--teal-700);margin-bottom:var(--s-1);">100%</div>
+              <div style="font-size:0.8125rem;color:var(--gray-600);">Offline functionality for core tasks</div>
+            </div>
+            <div style="padding:var(--s-5);background:var(--gray-50);border-radius:var(--r-lg);border:1px solid var(--gray-200);">
+              <div style="font-size:1.25rem;font-weight:700;color:var(--teal-700);margin-bottom:var(--s-1);">0</div>
+              <div style="font-size:0.8125rem;color:var(--gray-600);">Data loss incidents post-launch</div>
+            </div>
+          </div>
+        </div>
+        <div style="display:flex;justify-content:center;">
+          <!-- Submission status screen -->
+          <div class="phone-frame" style="position:relative;">
+            <div class="phone-notch"></div>
+            <div style="height:24px;background:#1a1a1a;"></div>
+            <div class="phone-screen">
+              <div style="padding:14px;">
+                <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;padding-bottom:10px;border-bottom:1px solid var(--gray-100);">
+                  <div style="font-size:12px;font-weight:700;color:var(--gray-900);">Einreichungen</div>
+                  <div style="font-size:9px;background:var(--teal-100);color:var(--teal-800);padding:3px 8px;border-radius:var(--r-full);font-weight:700;">WLAN</div>
+                </div>
+                <!-- Uploaded -->
+                <div style="margin-bottom:10px;">
+                  <div style="font-size:9px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--gray-400);margin-bottom:6px;">Übermittelt ✓</div>
+                  <div style="display:flex;align-items:center;gap:8px;padding:8px;background:var(--teal-50);border-radius:8px;margin-bottom:6px;border:1px solid var(--teal-200);">
+                    <div style="width:28px;height:28px;background:var(--teal-100);border-radius:6px;display:grid;place-items:center;flex-shrink:0;">
+                      <svg width="12" height="12" fill="none" stroke="var(--teal-700)" stroke-width="2" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                    </div>
+                    <div>
+                      <div style="font-size:10px;font-weight:600;color:var(--gray-900);">Schlag 01 — 4 Fotos</div>
+                      <div style="font-size:9px;color:var(--gray-500);">Heute 09:34 · Bestätigt</div>
+                    </div>
+                  </div>
+                  <div style="display:flex;align-items:center;gap:8px;padding:8px;background:var(--teal-50);border-radius:8px;border:1px solid var(--teal-200);">
+                    <div style="width:28px;height:28px;background:var(--teal-100);border-radius:6px;display:grid;place-items:center;flex-shrink:0;">
+                      <svg width="12" height="12" fill="none" stroke="var(--teal-700)" stroke-width="2" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                    </div>
+                    <div>
+                      <div style="font-size:10px;font-weight:600;color:var(--gray-900);">Schlag 03 — 5 Fotos</div>
+                      <div style="font-size:9px;color:var(--gray-500);">Heute 10:12 · Bestätigt</div>
+                    </div>
+                  </div>
+                </div>
+                <!-- Pending offline queue -->
+                <div>
+                  <div style="font-size:9px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--gray-400);margin-bottom:6px;">Offline gespeichert — Sync ausstehend</div>
+                  <div style="display:flex;align-items:center;gap:8px;padding:8px;background:var(--gray-50);border-radius:8px;border:1px solid var(--gray-200);">
+                    <div style="width:28px;height:28px;background:var(--gray-100);border-radius:6px;display:grid;place-items:center;flex-shrink:0;">
+                      <svg width="12" height="12" fill="none" stroke="var(--gray-400)" stroke-width="2" viewBox="0 0 24 24"><path d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"/></svg>
+                    </div>
+                    <div style="flex:1;">
+                      <div style="font-size:10px;font-weight:600;color:var(--gray-700);">Schlag 07 — 4 Fotos</div>
+                      <div style="font-size:9px;color:var(--gray-400);">Kein Signal — automatisch synchronisiert</div>
+                    </div>
+                    <div style="width:20px;height:20px;border:2px solid var(--gray-300);border-top-color:var(--teal-600);border-radius:50%;animation:spin 1s linear infinite;"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- OUTCOMES -->
+  <section class="cs-section cs-section--dark">
+    <div class="container">
+      <header class="section-header" data-reveal>
+        <span class="section-label" style="color:var(--teal-400);">Outcomes</span>
+        <h2 class="section-title" style="color:var(--white);">From 2.3 to 4.7 stars —<br><em>and €620K in annual savings</em></h2>
+      </header>
+      <div style="display:grid; grid-template-columns: repeat(auto-fill, minmax(240px,1fr)); gap:var(--s-1); background:rgba(255,255,255,0.06); border-radius:var(--r-2xl); overflow:hidden;" data-reveal>
+        <div style="background:var(--gray-800); padding:var(--s-8);">
+          <div style="font-family:var(--font-display);font-size:3.5rem;font-weight:300;color:white;line-height:1;margin-bottom:var(--s-2);">4.7<span style="font-size:1.5rem">★</span></div>
+          <div style="font-weight:600;color:var(--teal-400);margin-bottom:var(--s-2);">App store rating</div>
+          <div style="font-size:0.875rem;color:var(--gray-500);">Up from 2.3 stars. Featured by Apple App Store in "Apps für Österreich" category. Selected reviews: "endlich verständlich" / "das hat mein Leben einfacher gemacht"</div>
+        </div>
+        <div style="background:var(--gray-800); padding:var(--s-8);">
+          <div style="font-family:var(--font-display);font-size:3.5rem;font-weight:300;color:white;line-height:1;margin-bottom:var(--s-2);">92<span style="font-size:1.5rem">%</span></div>
+          <div style="font-weight:600;color:var(--teal-400);margin-bottom:var(--s-2);">Onboarding completion</div>
+          <div style="font-size:0.875rem;color:var(--gray-500);">Up from 47%. The guided first-use flow and tutorial mode eliminated the most common drop-off points for less tech-confident users.</div>
+        </div>
+        <div style="background:var(--gray-800); padding:var(--s-8);">
+          <div style="font-family:var(--font-display);font-size:3.5rem;font-weight:300;color:white;line-height:1;margin-bottom:var(--s-2);">2.8<span style="font-size:1.5rem">%</span></div>
+          <div style="font-weight:600;color:var(--teal-400);margin-bottom:var(--s-2);">Documentation error rate</div>
+          <div style="font-size:0.875rem;color:var(--gray-500);">Down from 23%. Guided photo capture and automatic validation eliminated the most common EU compliance errors before submission.</div>
+        </div>
+        <div style="background:var(--gray-800); padding:var(--s-8);">
+          <div style="font-family:var(--font-display);font-size:3.5rem;font-weight:300;color:white;line-height:1;margin-bottom:var(--s-2);">€620<span style="font-size:1.5rem">K</span></div>
+          <div style="font-weight:600;color:var(--teal-400);margin-bottom:var(--s-2);">Annual processing savings</div>
+          <div style="font-size:0.875rem;color:var(--gray-500);">Manual review of error submissions reduced by 78%. AMA expects full ROI on design investment within 14 months of launch.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- NEXT -->
+  <section style="padding:var(--s-16) 0; background:var(--gray-50); border-top: 1px solid var(--gray-200);">
+    <div class="container" style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:var(--s-8);">
+      <div>
+        <div style="font-size:0.75rem; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:var(--gray-400); margin-bottom:var(--s-2);">Next Case Study</div>
+        <a href="rindernet.html" class="btn-arrow" style="font-size:1.125rem; font-weight:500;">
+          Rindernet Meldeapp
+          <span class="arrow-icon"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+        </a>
+      </div>
+      <a href="../index.html#work" class="btn btn-outline">All case studies</a>
+    </div>
+  </section>
+
+  </main>
+
+  <footer class="footer" role="contentinfo">
+    <div class="container">
+      <div class="footer-bottom" style="padding-top:0; border-top:none;">
+        <p class="footer-copyright">© 2024 Georg Gruber. All rights reserved.</p>
+        <a href="../index.html" style="font-size:0.8125rem; color:var(--gray-600);">← Back to portfolio</a>
+      </div>
+    </div>
+  </footer>
+
+  <style>@keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }</style>
+  <script src="../js/main.js" defer></script>
+</body>
+</html>
