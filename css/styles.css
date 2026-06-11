@@ -1269,6 +1269,7 @@ input, textarea, select { font: inherit; }
 .testimonial-footer {
   border-top: 1px solid var(--gray-100);
   padding-top: var(--s-5);
+  margin-top: auto;
 }
 
 .testimonial-name {
