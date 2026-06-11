@@ -17,6 +17,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
@@ -268,6 +269,14 @@
         </p>
       </header>
 
+      <!-- Filter tabs -->
+      <div class="work-filter" data-reveal aria-label="Filter projects by type">
+        <button class="work-filter-btn is-active" data-filter="all">All Projects</button>
+        <button class="work-filter-btn" data-filter="portal">Government Portal</button>
+        <button class="work-filter-btn" data-filter="mobile">Mobile App</button>
+        <button class="work-filter-btn" data-filter="system">Design System</button>
+      </div>
+
       <div class="work-grid">
 
         <!-- Card 1 — EAMA -->
@@ -483,7 +492,147 @@
           </div>
         </a>
 
+        <!-- Card 4 — ÖGK Patient Portal (reversed) -->
+        <a href="case-studies/ogk-portal.html" class="work-card work-card--reversed" data-reveal data-filter="portal" aria-label="ÖGK Patient Portal — Healthcare digital transformation. Read case study.">
+          <div class="work-card-content">
+            <div class="work-card-tags">
+              <span class="tag">Healthcare Portal</span>
+              <span class="tag tag--teal">GDPR / DSGVO</span>
+              <span class="tag">2024</span>
+            </div>
+            <h3 class="work-card-title">ÖGK Patient Portal — Healthcare Self-Service</h3>
+            <p class="work-card-desc">End-to-end redesign of Austria's public health insurance patient portal — unifying fragmented services from 9 merged regional health funds into a single, WCAG AAA–compliant account for 8 million insured citizens. Reimbursement claims, benefit overviews, and doctor search redesigned from scratch.</p>
+            <div class="work-card-meta">
+              <div class="work-meta-item">
+                <div class="work-meta-value">78<span style="font-size:0.875rem">%</span></div>
+                <div class="work-meta-label">Digital claims ↑</div>
+              </div>
+              <div class="work-meta-item">
+                <div class="work-meta-value">56<span style="font-size:0.875rem">%</span></div>
+                <div class="work-meta-label">Call volume ↓</div>
+              </div>
+              <div class="work-meta-item">
+                <div class="work-meta-value">WCAG<span style="font-size:0.875rem"> AAA</span></div>
+                <div class="work-meta-label">Critical journeys</div>
+              </div>
+            </div>
+            <span class="btn-arrow">
+              Read Case Study
+              <span class="arrow-icon" aria-hidden="true">
+                <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              </span>
+            </span>
+          </div>
+          <div class="work-card-visual" style="background: linear-gradient(135deg, #1e3a4a 0%, #2a5570 100%);">
+            <div class="mockup-wrapper">
+              <div class="screen-browser">
+                <div class="screen-browser-chrome">
+                  <div class="browser-dots">
+                    <div class="browser-dot"></div><div class="browser-dot"></div><div class="browser-dot"></div>
+                  </div>
+                  <div class="browser-url">gesundheitskasse.at/mein-konto</div>
+                </div>
+                <div class="screen-body">
+                  <!-- Dashboard layout -->
+                  <div class="sim-nav" style="margin-bottom:10px;">
+                    <div class="sim-nav-logo"></div>
+                    <div style="display:flex;gap:6px;align-items:center;">
+                      <div style="width:24px;height:24px;border-radius:50%;background:var(--teal-200);"></div>
+                      <div style="width:40px;height:8px;background:var(--gray-200);border-radius:2px;"></div>
+                    </div>
+                  </div>
+                  <!-- Greeting + benefits card -->
+                  <div style="background:linear-gradient(135deg,#0F766E,#0D9488);border-radius:8px;padding:10px;margin-bottom:10px;color:white;">
+                    <div style="height:8px;width:60%;background:rgba(255,255,255,0.5);border-radius:2px;margin-bottom:5px;"></div>
+                    <div style="display:flex;gap:10px;margin-top:8px;">
+                      <div style="background:rgba(255,255,255,0.15);border-radius:5px;padding:6px 8px;flex:1;text-align:center;">
+                        <div style="height:12px;background:rgba(255,255,255,0.8);border-radius:2px;margin-bottom:3px;"></div>
+                        <div style="height:7px;width:70%;background:rgba(255,255,255,0.4);border-radius:2px;margin:0 auto;"></div>
+                      </div>
+                      <div style="background:rgba(255,255,255,0.15);border-radius:5px;padding:6px 8px;flex:1;text-align:center;">
+                        <div style="height:12px;background:rgba(255,255,255,0.8);border-radius:2px;margin-bottom:3px;"></div>
+                        <div style="height:7px;width:60%;background:rgba(255,255,255,0.4);border-radius:2px;margin:0 auto;"></div>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- Quick actions -->
+                  <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;">
+                    <div class="sim-card"><div class="sim-card-icon"></div><div class="sim-card-line"></div><div class="sim-card-line"></div></div>
+                    <div class="sim-card"><div class="sim-card-icon"></div><div class="sim-card-line"></div><div class="sim-card-line"></div></div>
+                    <div class="sim-card"><div class="sim-card-icon"></div><div class="sim-card-line"></div><div class="sim-card-line"></div></div>
+                    <div class="sim-card"><div class="sim-card-icon"></div><div class="sim-card-line"></div><div class="sim-card-line"></div></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </a>
+
       </div><!-- .work-grid -->
+
+      <!-- Compact additional projects -->
+      <div class="more-projects" data-reveal>
+        <div class="more-projects-header">
+          <span class="section-label">Additional Engagements</span>
+          <p style="font-size:0.9375rem; color:var(--gray-500); margin-top:var(--s-3);">Selected shorter engagements, design sprints, and audits.</p>
+        </div>
+        <div class="more-projects-grid">
+
+          <div class="mini-card">
+            <div class="mini-card-top">
+              <div class="mini-card-tags"><span class="tag">Transport</span><span class="tag">2023</span></div>
+              <div class="mini-card-num">05</div>
+            </div>
+            <h4 class="mini-card-title">Wiener Linien Journey Planner Redesign</h4>
+            <p class="mini-card-desc">Simplified multi-modal journey planning for 1.3M daily Vienna transit users. Reduced average planning time by 40% through task-focused IA redesign and real-time disruption communication improvements.</p>
+            <div class="mini-card-outcome">
+              <span class="mini-outcome-chip">−40% planning time</span>
+              <span class="mini-outcome-chip">NPS +22</span>
+            </div>
+          </div>
+
+          <div class="mini-card">
+            <div class="mini-card-top">
+              <div class="mini-card-tags"><span class="tag">Tax &amp; Finance</span><span class="tag">2022</span></div>
+              <div class="mini-card-num">06</div>
+            </div>
+            <h4 class="mini-card-title">FinanzOnline Dashboard Modernisation</h4>
+            <p class="mini-card-desc">UX audit and incremental redesign of Austria's tax filing portal. Accessibility uplift to WCAG 2.1 AA, reduced form abandonment by 38%, and introduced progressive disclosure to simplify the annual return flow.</p>
+            <div class="mini-card-outcome">
+              <span class="mini-outcome-chip">−38% abandonment</span>
+              <span class="mini-outcome-chip">WCAG AA</span>
+            </div>
+          </div>
+
+          <div class="mini-card">
+            <div class="mini-card-top">
+              <div class="mini-card-tags"><span class="tag">Design System</span><span class="tag">2021–2022</span></div>
+              <div class="mini-card-num">07</div>
+            </div>
+            <h4 class="mini-card-title">VBV Vorsorgekasse — Enterprise Design System</h4>
+            <p class="mini-card-desc">Built a scalable token-driven design system for Austria's leading occupational pension provider — 120+ components, 4 product teams, with governance model enabling consistent delivery across web, iOS, and Android.</p>
+            <div class="mini-card-outcome">
+              <span class="mini-outcome-chip">120+ components</span>
+              <span class="mini-outcome-chip">4 product teams</span>
+            </div>
+          </div>
+
+          <div class="mini-card">
+            <div class="mini-card-top">
+              <div class="mini-card-tags"><span class="tag">Municipal</span><span class="tag">2021</span></div>
+              <div class="mini-card-num">08</div>
+            </div>
+            <h4 class="mini-card-title">Stadt Wien — Municipal Services Ecosystem</h4>
+            <p class="mini-card-desc">Service design and UX strategy for Wien Digital's multi-department citizen services platform. Mapped 34 citizen journeys, identified 12 high-impact consolidation opportunities, and established the UX principles governing the platform.</p>
+            <div class="mini-card-outcome">
+              <span class="mini-outcome-chip">34 journeys mapped</span>
+              <span class="mini-outcome-chip">12 agencies</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
     </div>
   </section>
 
@@ -978,6 +1127,7 @@
             <li><a href="case-studies/eama.html"      class="footer-link">EAMA Portal</a></li>
             <li><a href="case-studies/ama-foto.html"   class="footer-link">AMA Foto App</a></li>
             <li><a href="case-studies/rindernet.html"  class="footer-link">Rindernet Meldeapp</a></li>
+            <li><a href="case-studies/ogk-portal.html" class="footer-link">ÖGK Patient Portal</a></li>
             <li><a href="#work"                        class="footer-link">All projects</a></li>
           </ul>
         </div>

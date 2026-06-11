@@ -2119,3 +2119,245 @@ input, textarea, select { font: inherit; }
   .site-header, .scroll-indicator, [data-reveal] { display: none !important; }
   * { animation: none !important; transition: none !important; }
 }
+
+/* ==========================================================================
+   20. PAGE LOAD TRANSITION
+   ========================================================================== */
+body {
+  animation: page-fade-in 0.45s ease forwards;
+}
+@keyframes page-fade-in {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: none; }
+}
+
+/* ==========================================================================
+   21. BACK TO TOP VISIBILITY
+   ========================================================================== */
+#back-to-top {
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--t-base);
+}
+#back-to-top.visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* ==========================================================================
+   22. WORK FILTER TABS
+   ========================================================================== */
+.work-filter {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s-2);
+  margin-bottom: var(--s-10);
+}
+
+.work-filter-btn {
+  padding: var(--s-2) var(--s-5);
+  background: var(--gray-100);
+  border: 1.5px solid var(--gray-200);
+  border-radius: var(--r-full);
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--gray-600);
+  cursor: pointer;
+  transition: background var(--t-fast), border-color var(--t-fast), color var(--t-fast);
+}
+.work-filter-btn:hover {
+  background: var(--gray-200);
+  color: var(--gray-900);
+}
+.work-filter-btn.is-active {
+  background: var(--gray-900);
+  border-color: var(--gray-900);
+  color: var(--white);
+}
+
+.work-card {
+  transition: box-shadow var(--t-base), transform var(--t-base), opacity var(--t-base);
+}
+.work-card.is-hidden {
+  display: none;
+}
+
+/* ==========================================================================
+   23. MORE / MINI PROJECT CARDS
+   ========================================================================== */
+.more-projects {
+  margin-top: var(--s-16);
+  padding-top: var(--s-12);
+  border-top: 1px solid var(--gray-200);
+}
+
+.more-projects-header {
+  margin-bottom: var(--s-10);
+}
+
+.more-projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: var(--s-5);
+}
+
+.mini-card {
+  padding: var(--s-7) var(--s-7);
+  background: var(--gray-50);
+  border: 1px solid var(--gray-200);
+  border-radius: var(--r-xl);
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-4);
+  transition: border-color var(--t-base), box-shadow var(--t-base), transform var(--t-base);
+}
+.mini-card:hover {
+  border-color: var(--teal-300);
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+}
+
+.mini-card-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--s-3);
+}
+
+.mini-card-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s-2);
+}
+
+.mini-card-num {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--gray-300);
+  letter-spacing: 0.06em;
+  flex-shrink: 0;
+}
+
+.mini-card-title {
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.35;
+  color: var(--gray-900);
+}
+
+.mini-card-desc {
+  font-size: 0.875rem;
+  line-height: 1.7;
+  color: var(--gray-500);
+  flex: 1;
+}
+
+.mini-card-outcome {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s-2);
+  margin-top: auto;
+}
+
+.mini-outcome-chip {
+  padding: var(--s-1) var(--s-3);
+  background: var(--teal-50);
+  border: 1px solid var(--teal-100);
+  border-radius: var(--r-full);
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--teal-800);
+}
+
+/* ==========================================================================
+   24. CASE STUDY — READING PROGRESS BAR
+   ========================================================================== */
+.reading-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  z-index: 300;
+  background: transparent;
+}
+
+.reading-progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--teal-600), var(--teal-400));
+  width: 0%;
+  transition: width 0.1s linear;
+}
+
+/* ==========================================================================
+   25. SECTION DIVIDER ACCENTS
+   ========================================================================== */
+.section--accent-top {
+  position: relative;
+}
+.section--accent-top::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--teal-700) 0%, var(--teal-500) 50%, transparent 100%);
+}
+
+/* ==========================================================================
+   26. ENHANCED HERO GRID PATTERN
+   ========================================================================== */
+.hero::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 50%;
+  background-image:
+    linear-gradient(var(--gray-200) 1px, transparent 1px),
+    linear-gradient(90deg, var(--gray-200) 1px, transparent 1px);
+  background-size: 48px 48px;
+  mask-image: linear-gradient(to left, rgba(0,0,0,0.04) 0%, transparent 80%);
+  -webkit-mask-image: linear-gradient(to left, rgba(0,0,0,0.04) 0%, transparent 80%);
+  pointer-events: none;
+  z-index: 0;
+}
+.hero .container { position: relative; z-index: 1; }
+
+/* ==========================================================================
+   27. STAGGER ANIMATIONS FOR GRIDS
+   ========================================================================== */
+.expertise-grid .expertise-card:nth-child(1) { transition-delay: 0.05s; }
+.expertise-grid .expertise-card:nth-child(2) { transition-delay: 0.10s; }
+.expertise-grid .expertise-card:nth-child(3) { transition-delay: 0.15s; }
+.expertise-grid .expertise-card:nth-child(4) { transition-delay: 0.20s; }
+.expertise-grid .expertise-card:nth-child(5) { transition-delay: 0.25s; }
+.expertise-grid .expertise-card:nth-child(6) { transition-delay: 0.30s; }
+.expertise-grid .expertise-card:nth-child(7) { transition-delay: 0.35s; }
+.expertise-grid .expertise-card:nth-child(8) { transition-delay: 0.40s; }
+.expertise-grid .expertise-card:nth-child(9) { transition-delay: 0.45s; }
+.expertise-grid .expertise-card:nth-child(10){ transition-delay: 0.50s; }
+
+.more-projects-grid .mini-card:nth-child(1) { transition-delay: 0.05s; }
+.more-projects-grid .mini-card:nth-child(2) { transition-delay: 0.12s; }
+.more-projects-grid .mini-card:nth-child(3) { transition-delay: 0.19s; }
+.more-projects-grid .mini-card:nth-child(4) { transition-delay: 0.26s; }
+
+/* ==========================================================================
+   28. IMPROVED TESTIMONIAL LAYOUT FOR 3-COLUMN
+   ========================================================================== */
+@media (min-width: 1024px) {
+  .testimonials-grid {
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: auto auto;
+  }
+}
+
+/* ==========================================================================
+   29. WORK CARD FILTER RESPONSIVE
+   ========================================================================== */
+@media (max-width: 480px) {
+  .work-filter { gap: var(--s-2); }
+  .work-filter-btn { font-size: 0.8125rem; padding: var(--s-2) var(--s-4); }
+  .more-projects-grid { grid-template-columns: 1fr; }
+}

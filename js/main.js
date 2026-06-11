@@ -223,4 +223,62 @@
     }, { passive: true });
   }
 
+  /* ==========================================================================
+     WORK FILTER TABS
+  ========================================================================== */
+  const filterBtns = qsa('.work-filter-btn');
+  const workCards  = qsa('.work-card');
+
+  if (filterBtns.length && workCards.length) {
+    filterBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        filterBtns.forEach(b => b.classList.remove('is-active'));
+        btn.classList.add('is-active');
+
+        const filter = btn.dataset.filter;
+
+        workCards.forEach(card => {
+          if (filter === 'all') {
+            card.classList.remove('is-hidden');
+          } else {
+            const tags = qsa('.tag', card).map(t => t.textContent.toLowerCase());
+            const match = tags.some(t => t.includes(filter));
+            card.classList.toggle('is-hidden', !match);
+          }
+        });
+      });
+    });
+  }
+
+  /* ==========================================================================
+     READING PROGRESS BAR (case study pages)
+  ========================================================================== */
+  const progressBar = qs('.reading-progress-fill');
+  if (progressBar) {
+    const updateProgress = () => {
+      const docH  = document.documentElement.scrollHeight - window.innerHeight;
+      const pct   = docH > 0 ? (window.scrollY / docH) * 100 : 0;
+      progressBar.style.width = pct + '%';
+    };
+    window.addEventListener('scroll', updateProgress, { passive: true });
+    updateProgress();
+  }
+
+  /* ==========================================================================
+     TILT EFFECT ON EXPERTISE CARDS (subtle, desktop only)
+  ========================================================================== */
+  if (window.matchMedia('(pointer: fine)').matches) {
+    qsa('.expertise-card').forEach(card => {
+      card.addEventListener('mousemove', e => {
+        const rect = card.getBoundingClientRect();
+        const x = (e.clientX - rect.left) / rect.width  - 0.5;
+        const y = (e.clientY - rect.top)  / rect.height - 0.5;
+        card.style.transform = `translateY(-2px) rotateX(${-y * 4}deg) rotateY(${x * 4}deg)`;
+      });
+      card.addEventListener('mouseleave', () => {
+        card.style.transform = '';
+      });
+    });
+  }
+
 })();
