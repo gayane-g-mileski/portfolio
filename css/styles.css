@@ -2165,6 +2165,7 @@ input, textarea, select { font: inherit; }
   .section { padding-block: var(--s-12); }
   .section-header { margin-bottom: var(--s-10); }
   .section-header--centered { margin-bottom: var(--s-10); }
+  .cs-section { padding-block: var(--s-10); }
 }
 
 @media (max-width: 480px) {
