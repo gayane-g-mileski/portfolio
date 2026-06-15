@@ -630,7 +630,7 @@ input, textarea, select { font: inherit; }
 .hero-stats-card {
   position: absolute;
   bottom: -20px;
-  left: -20px;
+  right: -20px;
   background: var(--white);
   border-radius: var(--r-xl);
   padding: var(--s-5) var(--s-6);
@@ -2036,7 +2036,7 @@ input, textarea, select { font: inherit; }
   :root { --container-pad: 1.5rem; }
 
   .hero-grid { gap: var(--s-10); }
-  .hero-stats-card { bottom: -10px; left: 0; min-width: 260px; }
+  .hero-stats-card { bottom: -10px; right: 0; min-width: 260px; }
 
   .work-card { grid-template-columns: 1fr; }
   .work-card--reversed { direction: ltr; }
