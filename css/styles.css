@@ -629,16 +629,17 @@ input, textarea, select { font: inherit; }
 /* Hero stats floating card */
 .hero-stats-card {
   position: absolute;
-  bottom: -20px;
-  right: -20px;
+  top: 50%;
+  right: -28px;
+  transform: translateY(-50%);
   background: var(--white);
   border-radius: var(--r-xl);
-  padding: var(--s-5) var(--s-6);
+  padding: var(--s-6) var(--s-6);
   box-shadow: var(--shadow-xl);
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: var(--s-6);
-  min-width: 300px;
+  grid-template-columns: 1fr;
+  gap: var(--s-5);
+  min-width: 150px;
   border: 1px solid var(--gray-100);
 }
 
@@ -2036,7 +2037,7 @@ input, textarea, select { font: inherit; }
   :root { --container-pad: 1.5rem; }
 
   .hero-grid { gap: var(--s-10); }
-  .hero-stats-card { bottom: -10px; right: 0; min-width: 260px; }
+  .hero-stats-card { right: 0; min-width: 140px; }
 
   .work-card { grid-template-columns: 1fr; }
   .work-card--reversed { direction: ltr; }
@@ -2083,7 +2084,7 @@ input, textarea, select { font: inherit; }
   .hero-grid { grid-template-columns: 1fr; gap: var(--s-12); }
   .hero-visual { justify-content: center; }
   .hero-portrait-wrapper { max-width: 360px; }
-  .hero-stats-card { position: static; transform: none; margin-top: var(--s-6); min-width: 100%; }
+  .hero-stats-card { position: static; transform: none; margin-top: var(--s-6); min-width: 100%; grid-template-columns: repeat(3, 1fr); }
   .scroll-indicator { display: none; }
 
   .expertise-grid { grid-template-columns: 1fr 1fr; }
