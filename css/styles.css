@@ -2110,8 +2110,14 @@ input, textarea, select { font: inherit; }
 
   .contact-grid { grid-template-columns: 1fr; gap: var(--s-10); }
   .form-row { grid-template-columns: 1fr; }
+  /* Tighten gap above contact buttons + centre them */
+  .contact-info-body { margin-bottom: var(--s-6); }
+  .contact-link-item { justify-content: center; }
 
-  .footer-grid { grid-template-columns: 1fr; gap: var(--s-8); }
+  /* Centre the footer content */
+  .footer-grid { grid-template-columns: 1fr; gap: var(--s-8); text-align: center; }
+  .footer-brand { display: flex; flex-direction: column; align-items: center; }
+  .footer-links { align-items: center; }
   .footer-bottom { flex-direction: column; gap: var(--s-4); text-align: center; }
 
   .cs-hero-title { font-size: clamp(2rem, 8vw, 3rem); }
