@@ -2110,9 +2110,6 @@ input, textarea, select { font: inherit; }
 
   .contact-grid { grid-template-columns: 1fr; gap: var(--s-10); }
   .form-row { grid-template-columns: 1fr; }
-  /* Tighten gap above contact buttons + centre them */
-  .contact-info-body { margin-bottom: var(--s-6); }
-  .contact-link-item { justify-content: center; }
 
   /* Centre the footer content */
   .footer-grid { grid-template-columns: 1fr; gap: var(--s-8); text-align: center; }
@@ -2128,7 +2125,10 @@ input, textarea, select { font: inherit; }
   .cs-overview-grid { grid-template-columns: 1fr 1fr; }
   .ba-comparison { grid-template-columns: 1fr; }
 
-  .cta-strip-actions { flex-direction: column; align-items: stretch; }
+  /* Centre the "Send an Email" button + tighten the gap to Contact below */
+  .cta-strip { padding-block: var(--s-16) var(--s-10); }
+  .cta-strip-actions { flex-direction: column; align-items: center; }
+  #contact { padding-top: var(--s-10); }
 
   .section { padding-block: var(--s-12); }
   .section-header { margin-bottom: var(--s-10); }
