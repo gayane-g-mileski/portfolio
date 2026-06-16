@@ -1430,7 +1430,7 @@ input, textarea, select { font: inherit; }
 .timeline-item {
   position: relative;
   padding-left: var(--s-10);
-  padding-bottom: var(--s-12);
+  padding-bottom: var(--s-16);
   border-left: 1px solid var(--gray-200);
 }
 .timeline-item:last-child {
@@ -1456,13 +1456,14 @@ input, textarea, select { font: inherit; }
 .timeline-role {
   font-family: var(--font-display);
   font-size: 1.375rem;
-  font-weight: 500;
+  font-weight: 700;
   color: var(--gray-900);
   margin-bottom: var(--s-2);
 }
 .timeline-org {
   font-size: 1rem;
   font-weight: 600;
+  font-style: italic;
   color: var(--teal-700);
   margin-bottom: var(--s-3);
 }
@@ -2177,7 +2178,7 @@ input, textarea, select { font: inherit; }
   .about-image { max-width: 340px; margin-inline: auto; }
   .about-badge { right: 0; transform: none; }
 
-  .timeline-item { padding-left: var(--s-8); padding-bottom: var(--s-10); }
+  .timeline-item { padding-left: var(--s-8); padding-bottom: var(--s-12); }
   .timeline-role { font-size: 1.1875rem; }
 
   .contact-grid { grid-template-columns: 1fr; gap: var(--s-10); }
