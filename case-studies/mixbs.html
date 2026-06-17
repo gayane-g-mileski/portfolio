@@ -11,6 +11,7 @@
   <link rel="icon" type="image/svg+xml" href="../favicon.svg">
   <link rel="stylesheet" href="../css/styles.css">
   <style>
+    /* Override teal palette to MiXBS brand colours */
     :root {
       --teal-50:  #e8f7f6;
       --teal-100: #beebe8;
@@ -23,51 +24,19 @@
       --teal-800: #064540;
       --teal-900: #032e2a;
     }
-    .cs-hero-bg {
-      background: linear-gradient(160deg, #032e2a 0%, #085d55 40%, #043f38 100%);
-    }
-    .cs-hero-bg::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background-image:
-        radial-gradient(circle at 75% 30%, rgba(75,195,181,0.08) 0%, transparent 50%),
-        radial-gradient(circle at 20% 80%, rgba(0,0,0,0.2) 0%, transparent 50%);
-    }
 
-    /* Full-width image block */
-    .cs-image-block {
-      margin: var(--s-12) 0;
-      border-radius: var(--r-2xl);
-      overflow: hidden;
-      border: 1px solid var(--gray-200);
-      background: white;
-    }
-    .cs-image-block img {
-      width: 100%;
-      height: auto;
-      display: block;
-    }
-    .cs-image-caption {
-      padding: var(--s-4) var(--s-6);
-      font-size: 0.8125rem;
-      color: var(--gray-500);
-      border-top: 1px solid var(--gray-200);
-      background: var(--gray-50);
-    }
-
-    /* Design system side-by-side */
+    /* Design system side-by-side panels */
     .ds-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: var(--s-5);
-      margin: var(--s-12) 0;
+      margin-top: var(--s-8);
       align-items: stretch;
     }
     .ds-panel {
       padding: var(--s-8);
       background: white;
-      border-radius: var(--r-2xl);
+      border-radius: var(--r-xl);
       border: 1px solid var(--gray-200);
       display: flex;
       flex-direction: column;
@@ -85,7 +54,6 @@
       height: auto;
       display: block;
     }
-
     @media (max-width: 768px) {
       .ds-grid { grid-template-columns: 1fr; }
     }
@@ -115,261 +83,203 @@
     </nav>
   </header>
 
-  <!-- ═══════════════════════════════════════════════════════
+  <!-- ═══════════════════════════════════════════════
        HERO
-  ════════════════════════════════════════════════════════ -->
-  <section class="cs-hero cs-hero-bg">
-    <div class="container">
-      <div class="cs-hero-inner">
-        <div class="cs-hero-content" data-reveal>
-          <div class="cs-hero-tags">
-            <span class="tag tag--ghost">Contact Centre SaaS</span>
-            <span class="tag tag--ghost">UX Consulting</span>
-            <span class="tag tag--ghost">2022–2025</span>
-          </div>
-          <h1 class="cs-hero-title">MiXBS — BayCX Platform</h1>
-          <p class="cs-hero-subtitle">
-            UX consulting for BayCX — MiXBS's proprietary remote working software powering contact centre operations for 4,000+ agents across 10 business directions.
-          </p>
-          <div class="cs-hero-meta">
-            <div class="cs-meta-item">
-              <div class="cs-meta-label">Role</div>
-              <div class="cs-meta-value">UX Consultant</div>
-            </div>
-            <div class="cs-meta-item">
-              <div class="cs-meta-label">Client</div>
-              <div class="cs-meta-value">MiXBS LLC</div>
-            </div>
-            <div class="cs-meta-item">
-              <div class="cs-meta-label">Timeline</div>
-              <div class="cs-meta-value">2022–2025</div>
-            </div>
-            <div class="cs-meta-item">
-              <div class="cs-meta-label">Scope</div>
-              <div class="cs-meta-value">Platform UX, design system, mobile</div>
-            </div>
-          </div>
+  ══════════════════════════════════════════════════ -->
+  <section class="cs-hero">
+    <div class="cs-hero-bg" style="background: linear-gradient(160deg, #032e2a 0%, #085d55 40%, #043f38 100%);"></div>
+    <div class="container cs-hero-content">
+      <a href="../index.html#work" class="cs-hero-back">
+        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+        All case studies
+      </a>
+      <div class="cs-hero-tag">Contact Centre SaaS · UX Consulting · 2022–2025</div>
+      <h1 class="cs-hero-title">MiXBS — BayCX Platform</h1>
+      <p class="cs-hero-subtitle">UX consulting for BayCX — MiXBS's proprietary remote working software powering contact centre operations for 4,000+ agents across 10 business directions.</p>
+      <div class="cs-hero-meta">
+        <div class="cs-meta-item">
+          <div class="cs-meta-label">Role</div>
+          <div class="cs-meta-value">UX Consultant</div>
+        </div>
+        <div class="cs-meta-item">
+          <div class="cs-meta-label">Client</div>
+          <div class="cs-meta-value">MiXBS LLC</div>
+        </div>
+        <div class="cs-meta-item">
+          <div class="cs-meta-label">Timeline</div>
+          <div class="cs-meta-value">2022–2025</div>
+        </div>
+        <div class="cs-meta-item">
+          <div class="cs-meta-label">Scope</div>
+          <div class="cs-meta-value">Platform UX, design system, mobile</div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ═══════════════════════════════════════════════════════
+  <!-- ═══════════════════════════════════════════════
        OVERVIEW STATS
-  ════════════════════════════════════════════════════════ -->
-  <section class="section section--tinted" style="padding: var(--s-10) 0;">
+  ══════════════════════════════════════════════════ -->
+  <div class="cs-overview-grid" data-reveal>
+    <div class="cs-overview-cell">
+      <div class="cs-overview-number">15</div>
+      <div class="cs-overview-label">Years of experience</div>
+    </div>
+    <div class="cs-overview-cell">
+      <div class="cs-overview-number">4,000+</div>
+      <div class="cs-overview-label">Agents on platform</div>
+    </div>
+    <div class="cs-overview-cell">
+      <div class="cs-overview-number">10</div>
+      <div class="cs-overview-label">Active business directions</div>
+    </div>
+    <div class="cs-overview-cell">
+      <div class="cs-overview-number">14–16k</div>
+      <div class="cs-overview-label">Daily interactions (CDEK)</div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════
+       01 BRIEF
+  ══════════════════════════════════════════════════ -->
+  <section class="cs-section">
     <div class="container">
-      <div class="cs-stats-row" data-reveal>
-        <div class="cs-stat">
-          <div class="cs-stat-num">15</div>
-          <div class="cs-stat-label">Years of experience</div>
-        </div>
-        <div class="cs-stat">
-          <div class="cs-stat-num">4,000+</div>
-          <div class="cs-stat-label">Agents on platform</div>
-        </div>
-        <div class="cs-stat">
-          <div class="cs-stat-num">10</div>
-          <div class="cs-stat-label">Active business directions</div>
-        </div>
-        <div class="cs-stat">
-          <div class="cs-stat-num">14k–16k</div>
-          <div class="cs-stat-label">Daily interactions (CDEK)</div>
+      <div class="cs-narrative-grid">
+        <div><span class="cs-sidebar-label">01 — Brief</span></div>
+        <div>
+          <div class="cs-body-text" data-reveal>
+            <p>MiXBS is a US-based contact centre outsourcing company with 15 years of experience, recognised by DesignRush as one of the top 10 contact centres in Florida. The company builds and manages expert remote teams for customer service, marketing support, and business process outsourcing — training, managing, and delivering measurable results across industries including logistics, healthcare, retail, and events.</p>
+            <p>At the core of MiXBS operations is <strong>BayCX</strong> — the company's proprietary remote working software. BayCX is designed to increase customer engagement and boost sales by giving agents and operations teams a unified platform for managing interactions, workflows, and performance. The platform handles up to 14,000–16,000 daily interactions for clients such as CDEK, covering inbound and outbound calls across multiple channels and languages.</p>
+            <p>My engagement as UX Consultant ran from 2022 to 2025, covering platform architecture mapping, visual design exploration, design system definition, component development, and mobile authentication flows.</p>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ═══════════════════════════════════════════════════════
-       BRIEF
-  ════════════════════════════════════════════════════════ -->
-  <section class="section" id="cs-brief">
-    <div class="container cs-content-col">
-
-      <div class="cs-section-header" data-reveal>
-        <span class="cs-section-num">01</span>
-        <h2 class="cs-section-title">Brief</h2>
-      </div>
-
-      <div class="cs-prose" data-reveal>
-        <p>
-          MiXBS is a US-based contact centre outsourcing company with 15 years of experience, recognised by DesignRush as one of the top 10 contact centres in Florida. The company builds and manages expert remote teams for customer service, marketing support, and business process outsourcing — training, managing, and delivering measurable results across industries including logistics, healthcare, retail, and events.
-        </p>
-        <p>
-          At the core of MiXBS operations is <strong>BayCX</strong> — the company's proprietary remote working software. BayCX is designed to increase customer engagement and boost sales by giving agents and operations teams a unified platform for managing interactions, workflows, and performance. The platform handles up to 14,000–16,000 daily interactions for clients such as CDEK, covering inbound and outbound calls across multiple channels and languages.
-        </p>
-        <p>
-          My engagement as UX Consultant ran from 2022 to 2025, covering platform architecture mapping, visual design exploration, design system definition, component development, and mobile authentication flows.
-        </p>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- ═══════════════════════════════════════════════════════
-       SYSTEM ARCHITECTURE
-  ════════════════════════════════════════════════════════ -->
-  <section class="section section--tinted" id="cs-architecture">
-    <div class="container cs-content-col">
-
-      <div class="cs-section-header" data-reveal>
-        <span class="cs-section-num">02</span>
-        <h2 class="cs-section-title">System Architecture</h2>
-      </div>
-
-      <div class="cs-prose" data-reveal>
-        <p>
-          Before designing any screen, the platform's service architecture needed to be mapped. BayCX is built around a central <strong>Orchestrator</strong> layer that coordinates all platform modules: scheduling (Scheduler, Calendar), operational processing (Factory, PBX Gateway, Inquiries, Tickets), data services (PKI, Contacts, ChatDesk, GLAP), and infrastructure (SMS, Email, Notifications, Auth Server, Analytics).
-        </p>
-        <p>
-          Mapping these dependencies was the foundation for every interaction design decision — particularly for understanding which modules drove the authentication flow, how session state moved through the system, and where communication channel handoffs occurred. The user flow diagram covers the login and password recovery sequence: entry, forgotten credentials, verification via OTP, and setting a new password.
-        </p>
-      </div>
-
-      <div class="cs-image-block" data-reveal>
-        <img src="../images/case-studies/mixbs/mb-research.png" alt="BayCX system architecture diagram showing Orchestrator with connected modules, and user authentication flow" loading="lazy">
-        <div class="cs-image-caption">Platform architecture map and login / password-recovery user flow</div>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- ═══════════════════════════════════════════════════════
-       VISUAL EXPLORATION
-  ════════════════════════════════════════════════════════ -->
-  <section class="section" id="cs-exploration">
-    <div class="container cs-content-col">
-
-      <div class="cs-section-header" data-reveal>
-        <span class="cs-section-num">03</span>
-        <h2 class="cs-section-title">Visual Exploration</h2>
-      </div>
-
-      <div class="cs-prose" data-reveal>
-        <p>
-          Before finalising the visual direction, multiple colour themes were explored systematically across identical interface layouts. Five distinct palettes — spanning the approved teal direction, purple, deep navy, maroon, and green — were applied to the same BayCX screens and compared side by side.
-        </p>
-        <p>
-          This approach made it straightforward to evaluate readability, brand alignment, and usability without the distraction of layout variation. The matrix format — same screens, different colour systems — was presented to stakeholders and became the basis for selecting and refining the final Poppy Glow teal direction.
-        </p>
-      </div>
-
-      <div class="cs-image-block" data-reveal>
-        <img src="../images/case-studies/mixbs/mb-experiments.png" alt="Grid of BayCX interface screens with five different colour theme experiments" loading="lazy">
-        <div class="cs-image-caption">Five colour theme explorations applied across identical interface layouts for direct comparison</div>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- ═══════════════════════════════════════════════════════
-       DESIGN SYSTEM
-  ════════════════════════════════════════════════════════ -->
-  <section class="section section--tinted" id="cs-design-system">
-    <div class="container cs-content-col">
-
-      <div class="cs-section-header" data-reveal>
-        <span class="cs-section-num">04</span>
-        <h2 class="cs-section-title">Design System</h2>
-      </div>
-
-      <div class="cs-prose" data-reveal>
-        <p>
-          The BayCX design system defines two primary colour families: <strong>Poppy Glow</strong> — a teal range across 5 steps from #E6F1F2 to #022F32 — and <strong>Kanz Orange</strong> — 5 steps from #FFF0E6 to #662900. A 9-step neutral grey scale (#5F738C to #F5F5F5) handles all UI surface and text states, alongside a two-tone black/white pair (#FFFFFF / #192427) for base contrast.
-        </p>
-        <p>
-          The button component covers all states across both brand colours: 5 sizes (extra small through extra large), 6 variants (filled, filled with icon, text-only, text with icon, outlined, outlined with icon), and full dark-background support — giving developers a complete, consistent token set across every context the platform uses.
-        </p>
-      </div>
-
-      <div class="ds-grid" data-reveal>
-        <div class="ds-panel">
-          <div class="ds-panel-label">Colour tokens</div>
-          <img src="../images/case-studies/mixbs/mb-colors.png" alt="BayCX colour system — Black & White, Neutral Grey, Poppy Glow teal, Kanz Orange" loading="lazy">
-        </div>
-        <div class="ds-panel">
-          <div class="ds-panel-label">Button components</div>
-          <img src="../images/case-studies/mixbs/mb-buttons.png" alt="BayCX button component library — 5 sizes, 6 variants, 2 brand colours, light and dark backgrounds" loading="lazy">
-        </div>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- ═══════════════════════════════════════════════════════
-       AUTHENTICATION
-  ════════════════════════════════════════════════════════ -->
-  <section class="section" id="cs-auth">
-    <div class="container cs-content-col">
-
-      <div class="cs-section-header" data-reveal>
-        <span class="cs-section-num">05</span>
-        <h2 class="cs-section-title">Authentication</h2>
-      </div>
-
-      <div class="cs-prose" data-reveal>
-        <p>
-          The mobile authentication flow covers the full password recovery sequence across six screens: selecting the recovery method (email or phone), receiving and entering a time-limited OTP code, handling code expiry with a resend option, verifying the code, and setting a new password with inline validation feedback.
-        </p>
-        <p>
-          The flow prioritises clarity at each step — progressive disclosure keeps each screen to a single task, error states are specific rather than generic, and the keyboard layout is matched to the input type (numeric for OTP, standard for email input) to reduce friction on mobile.
-        </p>
-      </div>
-
-      <div class="cs-image-block" data-reveal>
-        <img src="../images/case-studies/mixbs/mb-authorisation.png" alt="Mobile app password recovery flow — six screens from entry method selection to new password confirmation" loading="lazy">
-        <div class="cs-image-caption">Mobile authentication — password recovery flow across six sequential screens</div>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- ═══════════════════════════════════════════════════════
-       INTERFACE
-  ════════════════════════════════════════════════════════ -->
-  <section class="section section--tinted" id="cs-interface">
-    <div class="container cs-content-col">
-
-      <div class="cs-section-header" data-reveal>
-        <span class="cs-section-num">06</span>
-        <h2 class="cs-section-title">Interface</h2>
-      </div>
-
-      <div class="cs-prose" data-reveal>
-        <p>
-          BayCX is designed to deliver seamless integration, user-friendly interfaces, and high-level performance for contact centre operations. The platform supports agents across all active business directions — from logistics and healthcare to retail and events — through a unified, responsive interface that scales across desktop and mobile environments.
-        </p>
-      </div>
-
-      <div class="cs-image-block" data-reveal>
-        <img src="../images/mb.png" alt="MiXBS BayCX platform interface on desktop and mobile" loading="lazy">
-        <div class="cs-image-caption">BayCX platform — desktop and mobile interface</div>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- ═══════════════════════════════════════════════════════
-       FOOTER NAV
-  ════════════════════════════════════════════════════════ -->
-  <section class="section section--dark" style="padding: var(--s-12) 0;">
+  <!-- ═══════════════════════════════════════════════
+       02 SYSTEM ARCHITECTURE
+  ══════════════════════════════════════════════════ -->
+  <section class="cs-section cs-section--tinted">
     <div class="container">
-      <div class="cs-nav-footer" data-reveal>
-        <a href="../index.html#work" class="cs-nav-back">
-          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
-          All case studies
-        </a>
-        <a href="eama.html" class="cs-nav-next">
-          Next: eAMA.at
-          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-        </a>
+      <div class="cs-narrative-grid">
+        <div><span class="cs-sidebar-label">02 — System Architecture</span></div>
+        <div>
+          <div class="cs-body-text" data-reveal>
+            <p>Before designing any screen, the platform's service architecture needed to be mapped. BayCX is built around a central <strong>Orchestrator</strong> layer that coordinates all platform modules: scheduling (Scheduler, Calendar), operational processing (Factory, PBX Gateway, Inquiries, Tickets), data services (PKI, Contacts, ChatDesk, GLAP), and infrastructure (SMS, Email, Notifications, Auth Server, Analytics).</p>
+            <p>Mapping these dependencies was the foundation for every interaction design decision — particularly for understanding which modules drove the authentication flow, how session state moved through the system, and where communication channel handoffs occurred. The user flow diagram covers the login and password recovery sequence: entry, forgotten credentials, verification via OTP, and setting a new password.</p>
+          </div>
+          <div class="cs-screen-item" data-reveal style="margin-top: var(--s-8);">
+            <img src="../images/case-studies/mixbs/mb-research.png" alt="BayCX system architecture diagram showing Orchestrator with connected modules, and user authentication flow" loading="lazy" style="width:100%; height:auto; display:block; border-radius: var(--r-xl); border: 1px solid var(--gray-200);">
+            <div class="cs-screen-caption">Platform architecture map and login / password-recovery user flow</div>
+          </div>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- ═══════════════════════════════════════════════════════
+  <!-- ═══════════════════════════════════════════════
+       03 VISUAL EXPLORATION
+  ══════════════════════════════════════════════════ -->
+  <section class="cs-section">
+    <div class="container">
+      <div class="cs-narrative-grid">
+        <div><span class="cs-sidebar-label">03 — Visual Exploration</span></div>
+        <div>
+          <div class="cs-body-text" data-reveal>
+            <p>Before finalising the visual direction, multiple colour themes were explored systematically across identical interface layouts. Five distinct palettes — spanning the approved teal direction, purple, deep navy, maroon, and green — were applied to the same BayCX screens and compared side by side.</p>
+            <p>This approach made it straightforward to evaluate readability, brand alignment, and usability without the distraction of layout variation. The matrix format — same screens, different colour systems — was presented to stakeholders and became the basis for selecting and refining the final Poppy Glow teal direction.</p>
+          </div>
+          <div class="cs-screen-item" data-reveal style="margin-top: var(--s-8);">
+            <img src="../images/case-studies/mixbs/mb-experiments.png" alt="Grid of BayCX interface screens with five different colour theme experiments" loading="lazy" style="width:100%; height:auto; display:block; border-radius: var(--r-xl); border: 1px solid var(--gray-200);">
+            <div class="cs-screen-caption">Five colour theme explorations applied across identical interface layouts for direct comparison</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════
+       04 DESIGN SYSTEM
+  ══════════════════════════════════════════════════ -->
+  <section class="cs-section cs-section--tinted">
+    <div class="container">
+      <div class="cs-narrative-grid">
+        <div><span class="cs-sidebar-label">04 — Design System</span></div>
+        <div>
+          <div class="cs-body-text" data-reveal>
+            <p>The BayCX design system defines two primary colour families: <strong>Poppy Glow</strong> — a teal range across 5 steps from #E6F1F2 to #022F32 — and <strong>Kanz Orange</strong> — 5 steps from #FFF0E6 to #662900. A 9-step neutral grey scale (#5F738C to #F5F5F5) handles all UI surface and text states, alongside a two-tone black/white pair (#FFFFFF / #192427) for base contrast.</p>
+            <p>The button component covers all states across both brand colours: 5 sizes (extra small through extra large), 6 variants (filled, filled with icon, text-only, text with icon, outlined, outlined with icon), and full dark-background support — giving developers a complete, consistent token set across every context the platform uses.</p>
+          </div>
+          <div class="ds-grid" data-reveal>
+            <div class="ds-panel">
+              <div class="ds-panel-label">Colour tokens</div>
+              <img src="../images/case-studies/mixbs/mb-colors.png" alt="BayCX colour system — Black & White, Neutral Grey, Poppy Glow teal, Kanz Orange" loading="lazy">
+            </div>
+            <div class="ds-panel">
+              <div class="ds-panel-label">Button components</div>
+              <img src="../images/case-studies/mixbs/mb-buttons.png" alt="BayCX button component library — 5 sizes, 6 variants, 2 brand colours, light and dark backgrounds" loading="lazy">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════
+       05 AUTHENTICATION
+  ══════════════════════════════════════════════════ -->
+  <section class="cs-section">
+    <div class="container">
+      <div class="cs-narrative-grid">
+        <div><span class="cs-sidebar-label">05 — Authentication</span></div>
+        <div>
+          <div class="cs-body-text" data-reveal>
+            <p>The mobile authentication flow covers the full password recovery sequence across six screens: selecting the recovery method (email or phone), receiving and entering a time-limited OTP code, handling code expiry with a resend option, verifying the code, and setting a new password with inline validation feedback.</p>
+            <p>The flow prioritises clarity at each step — progressive disclosure keeps each screen to a single task, error states are specific rather than generic, and the keyboard layout is matched to the input type (numeric for OTP, standard for email input) to reduce friction on mobile.</p>
+          </div>
+          <div class="cs-screen-item" data-reveal style="margin-top: var(--s-8);">
+            <img src="../images/case-studies/mixbs/mb-authorisation.png" alt="Mobile app password recovery flow — six screens from entry method selection to new password confirmation" loading="lazy" style="width:100%; height:auto; display:block; border-radius: var(--r-xl); border: 1px solid var(--gray-200);">
+            <div class="cs-screen-caption">Mobile authentication — password recovery flow across six sequential screens</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════
+       06 INTERFACE
+  ══════════════════════════════════════════════════ -->
+  <section class="cs-section cs-section--tinted">
+    <div class="container">
+      <div class="cs-narrative-grid">
+        <div><span class="cs-sidebar-label">06 — Interface</span></div>
+        <div>
+          <div class="cs-body-text" data-reveal>
+            <p>BayCX is designed to deliver seamless integration, user-friendly interfaces, and high-level performance for contact centre operations. The platform supports agents across all active business directions — from logistics and healthcare to retail and events — through a unified, responsive interface that scales across desktop and mobile environments.</p>
+          </div>
+          <div class="cs-screen-item" data-reveal style="margin-top: var(--s-8);">
+            <img src="../images/mb.png" alt="MiXBS BayCX platform interface on desktop and mobile" loading="lazy" style="width:100%; height:auto; display:block; border-radius: var(--r-xl); border: 1px solid var(--gray-200);">
+            <div class="cs-screen-caption">BayCX platform — desktop and mobile interface</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════
+       CLOSE / NEXT
+  ══════════════════════════════════════════════════ -->
+  <section class="cs-section cs-section--dark">
+    <div class="container" style="text-align:center;">
+      <a href="../index.html#work" class="btn btn-outline" style="margin-right: var(--s-4);">All case studies</a>
+      <a href="eama.html" class="btn btn-primary">Next: eAMA.at</a>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════
        SITE FOOTER
-  ════════════════════════════════════════════════════════ -->
+  ══════════════════════════════════════════════════ -->
   <footer class="site-footer">
     <div class="container">
       <div class="footer-inner">
@@ -381,19 +291,19 @@
           <div class="footer-col">
             <div class="footer-col-title">Work</div>
             <ul role="list">
-              <li><a href="eama.html"      class="footer-link">eAMA.at</a></li>
-              <li><a href="ama-foto.html"  class="footer-link">AMA Foto App</a></li>
-              <li><a href="rindernet.html" class="footer-link">Rindernet Meldeapp</a></li>
-              <li><a href="mixbs.html"     class="footer-link">MiXBS BayCX</a></li>
-              <li><a href="../other-works.html" class="footer-link">Other Works</a></li>
+              <li><a href="eama.html"           class="footer-link">eAMA.at</a></li>
+              <li><a href="ama-foto.html"        class="footer-link">AMA Foto App</a></li>
+              <li><a href="rindernet.html"       class="footer-link">Rindernet Meldeapp</a></li>
+              <li><a href="mixbs.html"           class="footer-link">MiXBS BayCX</a></li>
+              <li><a href="../other-works.html"  class="footer-link">Other Works</a></li>
             </ul>
           </div>
           <div class="footer-col">
             <div class="footer-col-title">Connect</div>
             <ul role="list">
-              <li><a href="mailto:gayane@mileski.at"          class="footer-link">gayane@mileski.at</a></li>
-              <li><a href="https://linkedin.com/in/gayane-mileski" class="footer-link" target="_blank" rel="noopener">LinkedIn</a></li>
-              <li><a href="tel:+436602308530"                 class="footer-link">Phone</a></li>
+              <li><a href="mailto:gayane@mileski.at"                   class="footer-link">gayane@mileski.at</a></li>
+              <li><a href="https://linkedin.com/in/gayane-mileski"     class="footer-link" target="_blank" rel="noopener">LinkedIn</a></li>
+              <li><a href="tel:+436602308530"                          class="footer-link">Phone</a></li>
             </ul>
           </div>
         </nav>
