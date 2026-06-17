@@ -377,27 +377,67 @@
           <!-- Workflow diagram — MFA submission flow -->
           <div style="margin-top:var(--s-10);" data-reveal>
             <h3 style="font-size:0.9375rem; font-weight:600; color:var(--gray-900); margin-bottom:var(--s-5);">Redesigned MFA Submission Flow</h3>
-            <div class="workflow-diagram">
-              <div style="font-size:0.8125rem; color:var(--gray-500); margin-bottom:var(--s-6);">Before: 4 separate modules, no shared state · After: Unified 5-step wizard with draft save &amp; resume</div>
-              <div style="display:flex; flex-direction:column; gap:var(--s-3);">
-                <div class="workflow-row">
-                  <div class="workflow-node workflow-node--start">Farm login</div>
-                  <div class="workflow-arrow">→</div>
-                  <div class="workflow-node">1 · Farm &amp; season<br><span style="font-size:0.7rem;color:var(--gray-400);">Pre-filled from previous year</span></div>
-                  <div class="workflow-arrow">→</div>
-                  <div class="workflow-node">2 · Parcel map<br><span style="font-size:0.7rem;color:var(--gray-400);">Touch-first GIS viewer</span></div>
-                  <div class="workflow-arrow">→</div>
-                  <div class="workflow-node">3 · Crop declaration<br><span style="font-size:0.7rem;color:var(--gray-400);">Per-parcel, validated live</span></div>
-                </div>
-                <div class="workflow-row workflow-row--indent">
-                  <div class="workflow-node">4 · ÖPUL measures<br><span style="font-size:0.7rem;color:var(--gray-400);">Optional — save &amp; return</span></div>
-                  <div class="workflow-arrow">→</div>
-                  <div class="workflow-node">5 · Review &amp; submit<br><span style="font-size:0.7rem;color:var(--gray-400);">Full summary, PDF preview</span></div>
-                  <div class="workflow-arrow">→</div>
-                  <div class="workflow-node workflow-node--end">Confirmation<br><span style="font-size:0.7rem;color:rgba(255,255,255,0.7);">+ AMA-signed PDF receipt</span></div>
-                </div>
-              </div>
-              <div style="margin-top:var(--s-6); padding:var(--s-4) var(--s-5); background:var(--teal-50); border-radius:var(--r-md); border:1px solid var(--teal-100);">
+            <div class="workflow-diagram" style="padding:var(--s-6);">
+              <div style="font-size:0.8125rem; color:var(--gray-500); margin-bottom:var(--s-5);">Before: 4 separate modules, no shared state · After: Unified 5-step wizard with draft save &amp; resume</div>
+
+              <!-- Vertical step list — always fits the column width -->
+              <ol style="list-style:none;margin:0;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:var(--s-2);">
+
+                <!-- Login — full width -->
+                <li style="grid-column:1/-1;display:flex;align-items:center;gap:var(--s-3);padding:var(--s-3) var(--s-4);background:var(--teal-700);border-radius:var(--r-md);">
+                  <span style="font-size:0.8125rem;font-weight:700;color:rgba(255,255,255,0.6);flex-shrink:0;">→</span>
+                  <span style="font-size:0.8125rem;font-weight:600;color:var(--white);">Farm login</span>
+                </li>
+
+                <!-- Steps 1–4 in 2-col grid -->
+                <li style="display:flex;align-items:flex-start;gap:var(--s-3);padding:var(--s-3) var(--s-4);background:var(--gray-50);border:1.5px solid var(--gray-200);border-radius:var(--r-md);">
+                  <span style="font-size:0.75rem;font-weight:700;color:var(--teal-600);flex-shrink:0;min-width:1.25rem;">01</span>
+                  <div>
+                    <div style="font-size:0.8125rem;font-weight:600;color:var(--gray-800);">Farm &amp; season</div>
+                    <div style="font-size:0.75rem;color:var(--gray-400);margin-top:2px;">Pre-filled from previous year</div>
+                  </div>
+                </li>
+                <li style="display:flex;align-items:flex-start;gap:var(--s-3);padding:var(--s-3) var(--s-4);background:var(--gray-50);border:1.5px solid var(--gray-200);border-radius:var(--r-md);">
+                  <span style="font-size:0.75rem;font-weight:700;color:var(--teal-600);flex-shrink:0;min-width:1.25rem;">02</span>
+                  <div>
+                    <div style="font-size:0.8125rem;font-weight:600;color:var(--gray-800);">Parcel map</div>
+                    <div style="font-size:0.75rem;color:var(--gray-400);margin-top:2px;">Touch-first GIS viewer</div>
+                  </div>
+                </li>
+                <li style="display:flex;align-items:flex-start;gap:var(--s-3);padding:var(--s-3) var(--s-4);background:var(--gray-50);border:1.5px solid var(--gray-200);border-radius:var(--r-md);">
+                  <span style="font-size:0.75rem;font-weight:700;color:var(--teal-600);flex-shrink:0;min-width:1.25rem;">03</span>
+                  <div>
+                    <div style="font-size:0.8125rem;font-weight:600;color:var(--gray-800);">Crop declaration</div>
+                    <div style="font-size:0.75rem;color:var(--gray-400);margin-top:2px;">Per-parcel, validated live</div>
+                  </div>
+                </li>
+                <li style="display:flex;align-items:flex-start;gap:var(--s-3);padding:var(--s-3) var(--s-4);background:var(--gray-50);border:1.5px solid var(--gray-200);border-radius:var(--r-md);">
+                  <span style="font-size:0.75rem;font-weight:700;color:var(--teal-600);flex-shrink:0;min-width:1.25rem;">04</span>
+                  <div>
+                    <div style="font-size:0.8125rem;font-weight:600;color:var(--gray-800);">ÖPUL measures</div>
+                    <div style="font-size:0.75rem;color:var(--gray-400);margin-top:2px;">Optional — save &amp; return</div>
+                  </div>
+                </li>
+                <li style="grid-column:1/-1;display:flex;align-items:flex-start;gap:var(--s-3);padding:var(--s-3) var(--s-4);background:var(--gray-50);border:1.5px solid var(--gray-200);border-radius:var(--r-md);">
+                  <span style="font-size:0.75rem;font-weight:700;color:var(--teal-600);flex-shrink:0;min-width:1.25rem;">05</span>
+                  <div>
+                    <div style="font-size:0.8125rem;font-weight:600;color:var(--gray-800);">Review &amp; submit</div>
+                    <div style="font-size:0.75rem;color:var(--gray-400);margin-top:2px;">Full summary, PDF preview</div>
+                  </div>
+                </li>
+
+                <!-- Confirmation — full width -->
+                <li style="grid-column:1/-1;display:flex;align-items:center;gap:var(--s-3);padding:var(--s-3) var(--s-4);background:var(--gray-900);border-radius:var(--r-md);">
+                  <span style="font-size:0.8125rem;font-weight:700;color:rgba(255,255,255,0.5);flex-shrink:0;">✓</span>
+                  <div>
+                    <div style="font-size:0.8125rem;font-weight:600;color:var(--white);">Confirmation</div>
+                    <div style="font-size:0.75rem;color:rgba(255,255,255,0.5);margin-top:2px;">+ AMA-signed PDF receipt</div>
+                  </div>
+                </li>
+
+              </ol>
+
+              <div style="margin-top:var(--s-5); padding:var(--s-4) var(--s-5); background:var(--teal-50); border-radius:var(--r-md); border:1px solid var(--teal-100);">
                 <span style="font-size:0.8125rem; color:var(--teal-800); font-weight:500;">Result: Average submission time for returning users reduced from 14.8 min → 6.3 min. Draft resumption used by 38% of sessions in first MFA season.</span>
               </div>
             </div>
