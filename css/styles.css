@@ -1300,9 +1300,9 @@ input, textarea, select { font: inherit; }
    ========================================================================== */
 .about-grid {
   display: grid;
-  grid-template-columns: 1fr;
-  gap: var(--s-20);
-  align-items: center;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--s-16);
+  align-items: start;
 }
 
 .about-image {
@@ -1387,7 +1387,6 @@ input, textarea, select { font: inherit; }
 .about-highlights {
   display: grid;
   gap: var(--s-4);
-  margin: var(--s-8) 0;
 }
 
 .about-highlight {
