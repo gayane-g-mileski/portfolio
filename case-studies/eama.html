@@ -102,21 +102,30 @@
     .ia-roles { display:flex; justify-content:center; gap:6px; margin-bottom:0; flex-wrap:wrap; }
     .ia-role { font-size:0.5625rem; color:var(--teal-600); background:var(--teal-50); border:1px solid var(--teal-100); border-radius:var(--r-full); padding:2px 8px; white-space:nowrap; }
     .ia-roles-stem { display:flex; flex-direction:column; align-items:center; }
-    .ia-scroll-hint { display:none; font-size:0.5625rem; color:var(--gray-500); font-style:italic; white-space:nowrap; }
+    /* IA mobile card grid */
+    .ia-mobile-grid { display:none; padding:var(--s-4) var(--s-3); background:#F1F3F5; }
+    .ia-mc-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:6px; }
+    .ia-mc { background:white; border:1px solid #E2E8F0; border-radius:5px; padding:6px; border-top:3px solid var(--teal-700); }
+    .ia-mc--hi { border-top-color:var(--teal-400); background:var(--teal-50); }
+    .ia-mc-name { font-size:0.5rem; font-weight:700; text-transform:uppercase; letter-spacing:0.04em; color:var(--teal-700); margin-bottom:4px; line-height:1.25; }
+    .ia-mc-name--hi { color:var(--teal-600); }
+    .ia-mc-items { display:flex; flex-direction:column; gap:2px; }
+    .ia-mc-item { font-size:0.4375rem; line-height:1.35; color:#475569; }
+    .ia-mc-item--dead { color:#B91C1C; }
+    .ia-mc-item--dup  { color:#1D4ED8; }
+    .ia-mc-item--sub  { color:#94A3B8; padding-left:5px; }
+    .ia-mc-legend { display:flex; gap:10px; margin-top:8px; padding-top:6px; border-top:1px solid #E2E8F0; flex-wrap:wrap; }
+    .ia-mc-leg { display:flex; align-items:center; gap:3px; font-size:0.4375rem; color:var(--gray-500); }
+    .ia-mc-dot { width:5px; height:5px; border-radius:1px; flex-shrink:0; }
+    .ia-mc-dot--dead { background:#EF4444; }
+    .ia-mc-dot--dup  { background:#3B82F6; }
     @media (max-width:768px) {
-      .ia-scroll { padding:var(--s-5) var(--s-4); -webkit-overflow-scrolling:touch; }
       .ia-topbar { padding:var(--s-3) var(--s-4); }
-      .ia-legend { gap:var(--s-3); }
-      .ia-scroll-hint { display:block; }
-      .ia-module { min-width:68px; max-width:84px; }
-      .ia-module--wide { min-width:90px; max-width:110px; }
-      .ia-viewer::after {
-        content:'';
-        position:absolute;
-        top:44px; right:0; bottom:0; width:48px;
-        background:linear-gradient(to right, transparent, #F1F3F5);
-        pointer-events:none;
-      }
+      .ia-scroll { display:none; }
+      .ia-mobile-grid { display:block; }
+    }
+    @media (max-width:420px) {
+      .ia-mc-grid { grid-template-columns:1fr 1fr; }
     }
 
     /* Design System component sheets — equal-height, equal-padding cards */
@@ -513,7 +522,6 @@
           <!-- header bar -->
           <div class="ia-topbar">
             <span class="ia-topbar-title">Legacy eAMA · Full IA Audit · 140+ screens · 12 modules</span>
-            <span class="ia-scroll-hint" aria-hidden="true">scroll to explore all 12 modules →</span>
           </div>
 
           <!-- diagram canvas -->
@@ -710,6 +718,135 @@
             </div><!-- /spine wrapper -->
 
           </div><!-- /ia-scroll -->
+
+          <!-- Mobile card grid — shown on ≤768px, hidden on desktop -->
+          <div class="ia-mobile-grid">
+            <div class="ia-mc-grid">
+
+              <div class="ia-mc">
+                <div class="ia-mc-name">RinderNET</div>
+                <div class="ia-mc-items">
+                  <div class="ia-mc-item">Abfragen &amp; Erfassen</div>
+                  <div class="ia-mc-item">Lieferschein-Assistent</div>
+                  <div class="ia-mc-item">Betriebsgeschichte &amp; Archiv</div>
+                  <div class="ia-mc-item ia-mc-item--dead">↳ Handbuch (ama.at)</div>
+                  <div class="ia-mc-item ia-mc-item--dead">↳ FAQ (ama.at)</div>
+                </div>
+              </div>
+
+              <div class="ia-mc ia-mc--hi">
+                <div class="ia-mc-name ia-mc-name--hi">Flächen</div>
+                <div class="ia-mc-items">
+                  <div class="ia-mc-item">Mehrfachantrag (ab 2023)</div>
+                  <div class="ia-mc-item">Mehrfachantrag (bis 2022)</div>
+                  <div class="ia-mc-item">Abfragen</div>
+                  <div class="ia-mc-item">Weinbaukataster</div>
+                  <div class="ia-mc-item">eGIS</div>
+                </div>
+              </div>
+
+              <div class="ia-mc">
+                <div class="ia-mc-name">Eingaben</div>
+                <div class="ia-mc-items">
+                  <div class="ia-mc-item">Eingaben</div>
+                  <div class="ia-mc-item">Abfragen</div>
+                </div>
+              </div>
+
+              <div class="ia-mc">
+                <div class="ia-mc-name">Wein</div>
+                <div class="ia-mc-items">
+                  <div class="ia-mc-item">Weininvestitionen</div>
+                  <div class="ia-mc-item ia-mc-item--dup ia-mc-item--sub">Antragsübersicht</div>
+                </div>
+              </div>
+
+              <div class="ia-mc">
+                <div class="ia-mc-name">AMB</div>
+                <div class="ia-mc-items">
+                  <div class="ia-mc-item">Beitragserklärung</div>
+                  <div class="ia-mc-item">Gesetzliche Grundlagen</div>
+                  <div class="ia-mc-item">Papier-Vordruck</div>
+                  <div class="ia-mc-item">Kontakt</div>
+                </div>
+              </div>
+
+              <div class="ia-mc">
+                <div class="ia-mc-name">LE-Projekte</div>
+                <div class="ia-mc-items">
+                  <div class="ia-mc-item">Förderungsantrag</div>
+                  <div class="ia-mc-item">Zahlungsantrag</div>
+                  <div class="ia-mc-item ia-mc-item--dead">↳ Ausfüllhilfe</div>
+                </div>
+              </div>
+
+              <div class="ia-mc ia-mc--hi">
+                <div class="ia-mc-name ia-mc-name--hi">Markttransparenz</div>
+                <div class="ia-mc-items">
+                  <div class="ia-mc-item">Düngemittel</div>
+                  <div class="ia-mc-item">Eier</div>
+                  <div class="ia-mc-item">Futtermittel</div>
+                  <div class="ia-mc-item">Geflügel</div>
+                  <div class="ia-mc-item">Getreide &amp; Ölsaaten</div>
+                  <div class="ia-mc-item">Lebensmitteleinzelhandel</div>
+                  <div class="ia-mc-item">Obst &amp; Gemüse</div>
+                  <div class="ia-mc-item">Milch &amp; Milchprodukte</div>
+                  <div class="ia-mc-item">Verarbeitungsbetriebe</div>
+                  <div class="ia-mc-item">Vieh &amp; Fleisch</div>
+                  <div class="ia-mc-item ia-mc-item--dead">↳ Benutzerhandbücher</div>
+                </div>
+              </div>
+
+              <div class="ia-mc">
+                <div class="ia-mc-name">Schulprogramm</div>
+                <div class="ia-mc-items">
+                  <div class="ia-mc-item">Budget</div>
+                  <div class="ia-mc-item ia-mc-item--dup ia-mc-item--sub">INVEKOS-GIS</div>
+                  <div class="ia-mc-item">Anträge</div>
+                  <div class="ia-mc-item">Mitteilungen</div>
+                </div>
+              </div>
+
+              <div class="ia-mc">
+                <div class="ia-mc-name">Zuckerrübe</div>
+                <div class="ia-mc-items">
+                  <div class="ia-mc-item">Online Erfassung</div>
+                </div>
+              </div>
+
+              <div class="ia-mc">
+                <div class="ia-mc-name">DFP</div>
+                <div class="ia-mc-items">
+                  <div class="ia-mc-item ia-mc-item--dead">Digitale Förderplattform</div>
+                </div>
+              </div>
+
+              <div class="ia-mc">
+                <div class="ia-mc-name">Kundendaten</div>
+                <div class="ia-mc-items">
+                  <div class="ia-mc-item">Stammdaten</div>
+                  <div class="ia-mc-item">Betrieb</div>
+                  <div class="ia-mc-item">Datenfreigabe</div>
+                  <div class="ia-mc-item">eKonto</div>
+                  <div class="ia-mc-item ia-mc-item--dead">↳ FAQ (ama.at)</div>
+                </div>
+              </div>
+
+              <div class="ia-mc">
+                <div class="ia-mc-name">eAdmin</div>
+                <div class="ia-mc-items">
+                  <div class="ia-mc-item">eAdministrator</div>
+                  <div class="ia-mc-item">Verfüger</div>
+                </div>
+              </div>
+
+            </div>
+            <div class="ia-mc-legend">
+              <div class="ia-mc-leg"><div class="ia-mc-dot ia-mc-dot--dead"></div> Navigation dead-end</div>
+              <div class="ia-mc-leg"><div class="ia-mc-dot ia-mc-dot--dup"></div> Duplicate entry point</div>
+            </div>
+          </div>
+
         </div><!-- /ia-viewer -->
       </div>
     </div>
