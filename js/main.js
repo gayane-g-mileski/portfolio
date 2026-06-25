@@ -264,31 +264,4 @@
     updateProgress();
   }
 
-  /* ==========================================================================
-     ALIGN HERO STATS CARD BOTTOM WITH HERO ACTIONS BOTTOM (desktop only)
-  ========================================================================== */
-  function alignStatsCard() {
-    const actions   = qs('.hero-actions');
-    const statsCard = qs('.hero-stats-card');
-    const wrapper   = qs('.hero-portrait-wrapper');
-    if (!actions || !statsCard || !wrapper) return;
-
-    if (window.innerWidth < 900) {
-      statsCard.style.top = '';
-      statsCard.style.transform = '';
-      return;
-    }
-
-    const actionsBottom  = actions.getBoundingClientRect().bottom;
-    const wrapperTop     = wrapper.getBoundingClientRect().top;
-    const cardH          = statsCard.offsetHeight;
-    const targetTop      = actionsBottom - wrapperTop - cardH;
-
-    statsCard.style.top       = targetTop + 'px';
-    statsCard.style.transform = 'none';
-  }
-
-  window.addEventListener('load',   alignStatsCard);
-  window.addEventListener('resize', alignStatsCard);
-
 })();
