@@ -629,9 +629,10 @@ input, textarea, select { font: inherit; }
 /* Hero stats floating card */
 .hero-stats-card {
   position: absolute;
-  top: 50%;
+  top: auto;
+  bottom: 13%;
   right: -28px;
-  transform: translateY(-50%);
+  transform: none;
   background: var(--white);
   border-radius: var(--r-xl);
   padding: var(--s-6) var(--s-6);
