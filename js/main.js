@@ -224,6 +224,23 @@
   }
 
   /* ==========================================================================
+     FLOATING BACK-TO-TOP BUTTON — injected on every page
+  ========================================================================== */
+  const toTop = document.createElement('button');
+  toTop.className = 'to-top';
+  toTop.type = 'button';
+  toTop.setAttribute('aria-label', 'Back to top');
+  toTop.innerHTML = '<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 19V6M6 12l6-6 6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+  document.body.appendChild(toTop);
+  const toggleToTop = () => toTop.classList.toggle('visible', window.scrollY > 500);
+  window.addEventListener('scroll', toggleToTop, { passive: true });
+  toggleToTop();
+  toTop.addEventListener('click', () => {
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    window.scrollTo({ top: 0, behavior: reduce ? 'auto' : 'smooth' });
+  });
+
+  /* ==========================================================================
      WORK FILTER TABS
   ========================================================================== */
   const filterBtns = qsa('.work-filter-btn');
