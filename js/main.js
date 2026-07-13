@@ -241,6 +241,57 @@
   });
 
   /* ==========================================================================
+     LEFT RULER — section scroll-spy + click-to-scroll
+  ========================================================================== */
+  const ruler = qs('.ruler');
+  if (ruler) {
+    const items = qsa('.ruler-item', ruler);
+    const navH = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--nav-height')) || 72;
+    const secForItem = (it) => document.getElementById(it.getAttribute('href').slice(1));
+
+    items.forEach(it => {
+      it.addEventListener('click', (e) => {
+        const sec = secForItem(it);
+        if (!sec) return;
+        e.preventDefault();
+        const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        const y = Math.max(0, sec.getBoundingClientRect().top + window.scrollY - navH + 2);
+        window.scrollTo({ top: y, behavior: reduce ? 'auto' : 'smooth' });
+      });
+    });
+
+    const setActive = (id) => {
+      items.forEach(it => {
+        const on = it.getAttribute('href') === '#' + id;
+        it.classList.toggle('is-active', on);
+        if (on) it.setAttribute('aria-current', 'true'); else it.removeAttribute('aria-current');
+      });
+    };
+
+    let ticking = false;
+    const spy = () => {
+      ticking = false;
+      const line = navH + 48;                 // reference just below the fixed nav
+      let active = null;
+      items.forEach(it => {
+        const sec = secForItem(it);
+        if (sec && sec.getBoundingClientRect().top <= line) active = sec.id;
+      });
+      if (!active) active = secForItem(items[0]) ? items[0].getAttribute('href').slice(1) : null;
+      // bottom of page → force last section active
+      if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 4) {
+        const last = items[items.length - 1];
+        if (secForItem(last)) active = last.getAttribute('href').slice(1);
+      }
+      if (active) setActive(active);
+    };
+    const onScroll = () => { if (!ticking) { ticking = true; requestAnimationFrame(spy); } };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll);
+    spy();
+  }
+
+  /* ==========================================================================
      WORK FILTER TABS
   ========================================================================== */
   const filterBtns = qsa('.work-filter-btn');
