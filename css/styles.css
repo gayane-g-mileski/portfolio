@@ -219,6 +219,75 @@ input, textarea, select { font: inherit; }
 }
 
 /* ==========================================================================
+   LEFT RULER — section navigation (large screens only)
+   ========================================================================== */
+.ruler { display: none; }
+@media (min-width: 1440px) {
+  .ruler {
+    display: block;
+    position: fixed;
+    left: 0; top: 0; bottom: 0;
+    width: 90px;
+    z-index: 200;
+    pointer-events: none;
+  }
+  /* dense short tick marks (ruler graduations) */
+  .ruler-ticks {
+    position: absolute;
+    left: 46px; width: 20px;
+    top: calc(var(--nav-height) + 24px); bottom: 24px;
+    background-image: repeating-linear-gradient(to bottom, #D6CFC3 0, #D6CFC3 2px, transparent 2px, transparent 15px);
+    opacity: 0.8;
+  }
+  .ruler-list {
+    list-style: none; margin: 0; padding: 0;
+    position: absolute; left: 0; right: 0;
+    top: calc(var(--nav-height) + 7vh); bottom: 7vh;
+    display: flex; flex-direction: column; justify-content: space-between;
+  }
+  .ruler-item {
+    pointer-events: auto;
+    position: relative;
+    display: flex; align-items: center;
+    height: 24px;
+    color: #ABA498;
+    text-decoration: none;
+    transition: color var(--t-base);
+  }
+  .ruler-ico { display: grid; place-items: center; width: 22px; height: 22px; margin-left: 14px; flex-shrink: 0; }
+  .ruler-ico svg { width: 22px; height: 22px; display: block; }
+  /* the "major" tick beside each section icon */
+  .ruler-item::after {
+    content: ''; position: absolute; left: 46px; top: 50%;
+    width: 34px; height: 2px; border-radius: 1px;
+    background: currentColor; opacity: 0.55;
+    transform: translateY(-50%);
+    transition: width var(--t-base), opacity var(--t-base), background var(--t-base);
+  }
+  .ruler-item:hover { color: #6b6459; }
+  .ruler-item.is-active { color: var(--color-accent); }
+  .ruler-item.is-active::after { opacity: 1; width: 42px; }
+  .ruler-item:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 3px; border-radius: 4px; }
+  /* section-name tooltip on hover/focus */
+  .ruler-name {
+    position: absolute; left: 88px; top: 50%;
+    transform: translateY(-50%) translateX(-6px);
+    font-size: 0.75rem; font-weight: 600; letter-spacing: 0.01em;
+    color: var(--color-accent); white-space: nowrap;
+    background: var(--white); padding: 4px 11px; border-radius: var(--r-full);
+    box-shadow: 0 8px 22px -10px rgba(0,0,0,0.3), 0 0 0 1px rgba(0,0,0,0.04);
+    opacity: 0; pointer-events: none;
+    transition: opacity var(--t-base), transform var(--t-base);
+  }
+  .ruler-item:hover .ruler-name,
+  .ruler-item:focus-visible .ruler-name { opacity: 1; transform: translateY(-50%) translateX(0); }
+}
+@media (min-width: 1440px) and (prefers-reduced-motion: reduce) {
+  .ruler-item, .ruler-item::after, .ruler-name { transition: color var(--t-base), opacity var(--t-base); }
+  .ruler-name { transform: translateY(-50%); }
+}
+
+/* ==========================================================================
    3. LAYOUT
    ========================================================================== */
 .container {
