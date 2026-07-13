@@ -249,6 +249,28 @@
     const navH = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--nav-height')) || 72;
     const secForItem = (it) => document.getElementById(it.getAttribute('href').slice(1));
 
+    /* equidistant layout: pitch between icons is an exact integer multiple of
+       the tick spacing, so every tick line sits the same distance apart */
+    const ITEM_H = 24;
+    const layout = () => {
+      const vh = window.innerHeight;
+      const topPad = navH + 64;
+      const botPad = 100;
+      const firstC = topPad + ITEM_H / 2;
+      const lastC = vh - botPad - ITEM_H / 2;
+      const span = Math.max(60, lastC - firstC);
+      const pitch = span / (items.length - 1);
+      const K = Math.max(3, Math.round(pitch / 15));
+      const S = pitch / K;
+      const M = 3;
+      ruler.style.setProperty('--rk-top', topPad + 'px');
+      ruler.style.setProperty('--rk-gap', (pitch - ITEM_H) + 'px');
+      ruler.style.setProperty('--rk-tick', S + 'px');
+      ruler.style.setProperty('--rk-ticks-top', (firstC - M * S - 1) + 'px');
+      ruler.style.setProperty('--rk-ticks-h', (span + 2 * M * S) + 'px');
+    };
+    layout();
+
     items.forEach(it => {
       it.addEventListener('click', (e) => {
         const sec = secForItem(it);
@@ -284,10 +306,13 @@
         if (secForItem(last)) active = last.getAttribute('href').slice(1);
       }
       if (active) setActive(active);
+      // hide the ruler once the dark contact / footer zone is reached
+      const contact = document.getElementById('contact');
+      if (contact) ruler.classList.toggle('is-hidden', contact.getBoundingClientRect().top < window.innerHeight * 0.5);
     };
     const onScroll = () => { if (!ticking) { ticking = true; requestAnimationFrame(spy); } };
     window.addEventListener('scroll', onScroll, { passive: true });
-    window.addEventListener('resize', onScroll);
+    window.addEventListener('resize', () => { layout(); onScroll(); });
     spy();
   }
 

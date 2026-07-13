@@ -230,20 +230,24 @@ input, textarea, select { font: inherit; }
     width: 90px;
     z-index: 200;
     pointer-events: none;
+    opacity: 1;
+    transition: opacity var(--t-base);
   }
-  /* dense short tick marks (ruler graduations) */
+  .ruler.is-hidden { opacity: 0; pointer-events: none; }
+  /* dense tick marks — spacing set by JS so every tick is equidistant and
+     the major ticks land exactly on the icon rows */
   .ruler-ticks {
     position: absolute;
     left: 46px; width: 20px;
-    top: calc(var(--nav-height) + 24px); bottom: 24px;
-    background-image: repeating-linear-gradient(to bottom, #D6CFC3 0, #D6CFC3 2px, transparent 2px, transparent 15px);
+    top: var(--rk-ticks-top, 140px); height: var(--rk-ticks-h, 520px);
+    background-image: repeating-linear-gradient(to bottom, #D6CFC3 0, #D6CFC3 2px, transparent 2px, transparent var(--rk-tick, 15px));
     opacity: 0.8;
   }
   .ruler-list {
     list-style: none; margin: 0; padding: 0;
     position: absolute; left: 0; right: 0;
-    top: calc(var(--nav-height) + 7vh); bottom: 7vh;
-    display: flex; flex-direction: column; justify-content: space-between;
+    top: var(--rk-top, 140px);
+    display: flex; flex-direction: column; gap: var(--rk-gap, 60px);
   }
   .ruler-item {
     pointer-events: auto;
@@ -471,6 +475,16 @@ input, textarea, select { font: inherit; }
 }
 .nav-cta:hover { background: var(--teal-700); color: var(--white); }
 .nav-cta::after { display: none; }
+
+/* Icon buttons in the nav (contact = mail, linkedin) */
+.nav-icon { display: grid; place-items: center; width: 40px; height: 40px; padding: 0; border-radius: 50%; }
+.nav-icon svg { width: 20px; height: 20px; display: block; }
+.nav-cta.nav-icon { background: var(--gray-900); color: var(--white); }
+.nav-cta.nav-icon:hover { background: var(--teal-700); }
+.nav-social { color: var(--gray-600); transition: color var(--t-fast), background var(--t-fast); }
+.nav-social svg { width: 22px; height: 22px; }
+.nav-social::after { display: none; }
+.nav-social:hover { color: var(--gray-900); background: var(--gray-100); }
 
 .nav-toggle {
   display: none;
