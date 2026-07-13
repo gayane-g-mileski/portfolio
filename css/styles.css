@@ -486,6 +486,16 @@ input, textarea, select { font: inherit; }
 .nav-social::after { display: none; }
 .nav-social:hover { color: var(--gray-900); background: var(--gray-100); }
 
+/* Homepage header — teal links (Work, About, LinkedIn, Contact) */
+.nav-menu--teal .nav-link { color: #2b5761; }
+.nav-menu--teal .nav-link:hover,
+.nav-menu--teal .nav-link.active { color: #1d3d45; }
+.nav-menu--teal .nav-link::after { background: #2b5761; }
+.nav-menu--teal .nav-social { color: #2b5761; }
+.nav-menu--teal .nav-social:hover { color: #1d3d45; background: #e3eef0; }
+.nav-menu--teal .nav-cta.nav-icon { background: #2b5761; }
+.nav-menu--teal .nav-cta.nav-icon:hover { background: #1d3d45; }
+
 .nav-toggle {
   display: none;
   flex-direction: column;
@@ -937,6 +947,11 @@ input, textarea, select { font: inherit; }
 .work-card--reversed {
   direction: rtl;
 }
+
+/* Per-project card colours — two light shades from the project's palette */
+.work-card--foto   { background: #E5EAE4; border-color: #C7D2C4; }
+.work-card--rinder { background: #E4E7E3; border-color: #C3CBC1; }
+.work-card--mixbs  { background: #E6EBEC; border-color: #C8D3D6; }
 .work-card--reversed > * {
   direction: ltr;
 }
@@ -979,6 +994,17 @@ input, textarea, select { font: inherit; }
   color: var(--teal-800);
   border-color: var(--teal-100);
 }
+
+/* "Under NDA" confidentiality chip */
+.tag--nda {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: transparent;
+  color: var(--gray-500);
+  border: 1px dashed var(--gray-300);
+}
+.tag--nda svg { width: 11px; height: 11px; flex-shrink: 0; }
 
 .work-card-title {
   font-family: var(--font-display);
