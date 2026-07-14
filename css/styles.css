@@ -950,7 +950,7 @@ input, textarea, select { font: inherit; }
 
 /* Per-project card colours — two light shades from the project's palette */
 .work-card--foto   { background: #E5EAE4; border-color: #C7D2C4; }
-.work-card--rinder { background: #E4E7E3; border-color: #C3CBC1; }
+.work-card--rinder { background: #EDEDED; border-color: #D9D9D9; }
 .work-card--mixbs  { background: #E6EBEC; border-color: #C8D3D6; }
 .work-card--reversed > * {
   direction: ltr;
