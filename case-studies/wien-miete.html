@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Case study: Wien Miete — a rent-check app that walks Vienna tenants through Austrian rent law and returns a clear verdict on whether their rent is lawful.">
+  <title>Wien Miete — Vienna Rent Check | Gayane G. Mileski</title>
+  <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/styles.css">
+  <style>
+    /* ---- page palette: caffè latte + the portfolio green ---- */
+    :root {
+      /* caffè-latte neutrals */
+      --gray-50:#FAF6F0;--gray-100:#F2EADD;--gray-200:#E8DCC8;--gray-300:#D9C3A9;--gray-400:#A9856B;
+      --gray-500:#8A6A4F;--gray-600:#6F4E37;--gray-700:#4E3A2A;--gray-800:#3B2A1E;--gray-900:#3B2A1E;
+      /* green accents from the portfolio */
+      --teal-50:#EDF3E6;--teal-100:#CEDDC0;--teal-200:#A0BE86;--teal-300:#77A150;--teal-400:#77A150;
+      --teal-500:#427C0C;--teal-600:#427C0C;--teal-700:#427C0C;--teal-800:#2D5408;--teal-900:#2D5408;
+      --color-primary:#3B2A1E;--color-accent:#427C0C;--color-accent-mid:#427C0C;
+      --color-text:#4E3A2A;--color-muted:#8A6A4F;--color-border:#E8DCC8;--color-bg-alt:#FAF6F0;
+    }
+    .cs-hero, .cs-section--dark, .footer { --gray-400:#D9C3A9; --gray-500:#D9C3A9; --gray-600:#D9C3A9; }
+    .footer { background:#2A1D14; }
+
+    .cs-hero-bg { background: linear-gradient(160deg, #4E3A2A 0%, #3B2A1E 55%, #2A1D14 100%); }
+    .cs-hero-bg::before {
+      content: ''; position: absolute; inset: 0;
+      background-image:
+        radial-gradient(circle at 78% 28%, rgba(255,255,255,0.05) 0%, transparent 52%),
+        radial-gradient(circle at 18% 82%, rgba(0,0,0,0.22) 0%, transparent 55%);
+    }
+
+    /* figures */
+    .wm-figure { margin: var(--s-10) 0 0; }
+    .wm-figure svg { display: block; width: 100%; height: auto; }
+    .wm-figure-frame {
+      background: #FFFFFF;
+      border: 1px solid var(--gray-200);
+      border-radius: var(--r-xl);
+      padding: clamp(16px, 2.4vw, 30px);
+      overflow: hidden;
+    }
+    .wm-figure-caption {
+      margin-top: var(--s-4);
+      font-size: 0.8125rem;
+      line-height: 1.55;
+      color: var(--gray-500);
+    }
+
+    /* legal-regime cards */
+    .wm-regimes { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: var(--s-5); margin-top: var(--s-10); }
+    .wm-regime { background: #FFFFFF; border: 1px solid var(--gray-200); border-left: 3px solid var(--teal-600); border-radius: var(--r-lg); padding: var(--s-6); }
+    .wm-regime-name { font-weight: 700; font-size: 0.9375rem; color: var(--gray-900); margin-bottom: var(--s-2); }
+    .wm-regime-applies { font-size: 0.6875rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--teal-700); margin-bottom: var(--s-3); }
+    .wm-regime-desc { font-size: 0.875rem; line-height: 1.6; color: var(--gray-600); }
+
+    /* build-up / calculation list */
+    .wm-steps { list-style: none; margin: var(--s-10) 0 0; padding: 0; display: flex; flex-direction: column; gap: var(--s-3); }
+    .wm-step { display: flex; gap: var(--s-4); align-items: flex-start; background: #FFFFFF; border: 1px solid var(--gray-200); border-radius: var(--r-md); padding: var(--s-4) var(--s-5); }
+    .wm-step-n { flex-shrink: 0; width: 26px; height: 26px; border-radius: 50%; display: grid; place-items: center; background: var(--teal-50); color: var(--teal-700); font-size: 0.75rem; font-weight: 700; font-variant-numeric: tabular-nums; }
+    .wm-step-label { font-weight: 600; font-size: 0.9375rem; color: var(--gray-900); margin-bottom: 2px; }
+    .wm-step-detail { font-size: 0.875rem; line-height: 1.6; color: var(--gray-600); }
+
+    /* pain points */
+    .wm-pains { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: var(--s-4); margin-top: var(--s-10); }
+    .wm-pain { background: var(--gray-100); border-radius: var(--r-lg); padding: var(--s-5) var(--s-6); font-size: 0.875rem; line-height: 1.6; color: var(--gray-700); border-left: 3px solid var(--gray-300); }
+
+    /* palette swatches */
+    .wm-swatches { display: flex; flex-wrap: wrap; gap: var(--s-3); margin-top: var(--s-8); }
+    .wm-swatch { border-radius: var(--r-md); overflow: hidden; border: 1px solid var(--gray-200); min-width: 104px; flex: 1 1 104px; }
+    .wm-swatch-chip { height: 56px; }
+    .wm-swatch-meta { padding: 8px 10px; background: #FFFFFF; }
+    .wm-swatch-name { font-size: 0.6875rem; font-weight: 700; color: var(--gray-800); }
+    .wm-swatch-hex { font-size: 0.6875rem; color: var(--gray-500); font-variant-numeric: tabular-nums; }
+
+    /* placeholder note */
+    .wm-note {
+      margin-top: var(--s-8);
+      border: 1px dashed var(--gray-300);
+      border-radius: var(--r-lg);
+      padding: var(--s-5) var(--s-6);
+      background: var(--gray-50);
+      font-size: 0.8125rem;
+      line-height: 1.65;
+      color: var(--gray-600);
+    }
+    .wm-note strong { color: var(--gray-800); }
+  </style>
+</head>
+<body>
+
+  <div class="reading-progress" aria-hidden="true"><div class="reading-progress-fill"></div></div>
+
+  <header class="site-header" id="top">
+    <nav class="nav container" aria-label="Primary navigation">
+      <a href="../index.html" class="nav-brand" aria-label="Gayane G. Mileski — Home">
+        <span class="nav-monogram" aria-hidden="true">GG</span>
+        <span class="nav-name">Gayane G. Mileski</span>
+      </a>
+      <ul class="nav-menu" id="nav-menu" role="list">
+        <li><a href="../index.html#work"    class="nav-link">Work</a></li>
+        <li><a href="../index.html#about"   class="nav-link">About</a></li>
+        <li><a href="../index.html#contact" class="nav-link nav-cta">Book Consultation</a></li>
+      </ul>
+      <button class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="nav-menu" aria-label="Open navigation">
+        <span></span><span></span><span></span>
+      </button>
+    </nav>
+  </header>
+
+  <!-- ═══════════════════════════════════════════════
+       HERO
+  ══════════════════════════════════════════════════ -->
+  <section class="cs-hero">
+    <div class="cs-hero-bg"></div>
+    <div class="container cs-hero-content">
+      <a href="../index.html#work" class="cs-hero-back">
+        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+        All case studies
+      </a>
+      <div class="cs-hero-tag">Mobile App · Legal Tech · Vienna</div>
+      <h1 class="cs-hero-title">Wien Miete — Is My Rent Lawful?</h1>
+      <p class="cs-hero-subtitle">Austrian rent law routes every Vienna flat into a different pricing regime, and each lawful rent is assembled from surcharges and deductions that almost nobody can reconstruct from their contract. Wien Miete walks a tenant through that calculation in plain language — and returns a clear verdict.</p>
+      <div class="cs-hero-meta">
+        <div class="cs-meta-item">
+          <div class="cs-meta-label">Role</div>
+          <div class="cs-meta-value">UX/UI Design</div>
+        </div>
+        <div class="cs-meta-item">
+          <div class="cs-meta-label">Domain</div>
+          <div class="cs-meta-value">Austrian tenancy law</div>
+        </div>
+        <div class="cs-meta-item">
+          <div class="cs-meta-label">Users</div>
+          <div class="cs-meta-value">Vienna tenants</div>
+        </div>
+        <div class="cs-meta-item">
+          <div class="cs-meta-label">Scope</div>
+          <div class="cs-meta-value">Concept, flows, UI, design system</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="cs-overview-grid" data-reveal>
+    <div class="cs-overview-cell">
+      <div class="cs-overview-number">4</div>
+      <div class="cs-overview-label">Rent regimes a flat can fall under</div>
+    </div>
+    <div class="cs-overview-cell">
+      <div class="cs-overview-number">3</div>
+      <div class="cs-overview-label">Levels of MRG applicability</div>
+    </div>
+    <div class="cs-overview-cell">
+      <div class="cs-overview-number">25 %</div>
+      <div class="cs-overview-label">Statutory deduction on fixed-term contracts</div>
+    </div>
+    <div class="cs-overview-cell">
+      <div class="cs-overview-number">10 %</div>
+      <div class="cs-overview-label">VAT on residential rent, billed on top</div>
+    </div>
+  </div>
+
+  <!-- ═══ 01 BRIEF ═══ -->
+  <section class="cs-section">
+    <div class="container">
+      <div class="cs-narrative-grid">
+        <div><span class="cs-sidebar-label">01 — Brief</span></div>
+        <div>
+          <div class="cs-body-text" data-reveal>
+            <p>Vienna is a city of tenants. Roughly three quarters of households rent, a large share of the stock is regulated, and the rules that decide what a landlord may charge are among the most intricate in Europe. The result is a very ordinary question that is remarkably hard to answer: <strong>is the rent I pay every month actually lawful?</strong></p>
+            <p>The difficulty is not that the law is secret. It is published, and advice bodies explain it well. The difficulty is that the answer is <em>assembled</em>: first the flat has to be routed into the right legal regime, then a base value has to be found for the right point in time, then a series of qualitative surcharges and deductions have to be argued one by one. Miss any step and the number you end up with is meaningless.</p>
+            <p><strong>Wien Miete</strong> takes that assembly line and turns it into a guided conversation. The tenant answers plain questions about their flat and their contract; the app keeps track of which regime applies, what the law adds and subtracts, and where the answer is still uncertain — and ends with a verdict they can act on.</p>
+          </div>
+          <div class="wm-pains">
+            <div class="wm-pain">The regime that applies is decided by the building permit date and the contract date — neither of which is printed on a rent bill.</div>
+            <div class="wm-pain">The surcharges and deductions are qualitative judgements, not a table you can look up.</div>
+            <div class="wm-pain">The Richtwert is revalorised periodically, so the lawful figure depends on when the contract was signed.</div>
+            <div class="wm-pain">Tenants compare the gross amount they transfer with a net statutory cap, and conclude the wrong thing.</div>
+            <div class="wm-pain">Fixed-term contracts carry a statutory deduction that is very often simply not applied.</div>
+            <div class="wm-pain">Challenging a rent runs through the Schlichtungsstelle or the courts, so people want confidence before they start.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ 02 WHICH LAW APPLIES ═══ -->
+  <section class="cs-section cs-section--tinted">
+    <div class="container">
+      <div class="cs-narrative-grid">
+        <div><span class="cs-sidebar-label">02 — Which law applies</span></div>
+        <div>
+          <div class="cs-body-text" data-reveal>
+            <p>Everything downstream depends on one branch point: how far the Mietrechtsgesetz applies to this particular flat. That is decided by facts a tenant rarely has to hand — when the building was permitted, when the contract was signed, how large the flat is — rather than by anything printed on the monthly bill.</p>
+            <p>Rather than asking the tenant to self-classify, the app infers the regime from ordinary questions and then tells them which set of rules it is applying, and why.</p>
+          </div>
+          <figure class="wm-figure">
+            <div class="wm-figure-frame"><svg viewBox="0 0 720 232" xmlns="http://www.w3.org/2000/svg" fill="none" role="img" aria-label="Decision tree routing a Vienna flat into one of four rent regimes"><rect x="280" y="14" width="160" height="38" rx="9" fill="#3B2A1E"/><text x="360" y="38" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="12.5" font-weight="600" fill="#FFFFFF">Wohnung in Wien</text><path d="M360 52 V78" stroke="#D9C3A9" stroke-width="2"/><path d="M87 78 H627" stroke="#D9C3A9" stroke-width="2"/><path d="M87 78 V100" stroke="#D9C3A9" stroke-width="2"/><rect x="6" y="100" width="162" height="120" rx="9" fill="#FFFFFF" stroke="#D9C3A9" stroke-width="1.5"/><rect x="7" y="101" width="160" height="5" rx="2.5" fill="#427C0C"/><text x="87" y="132" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="13" font-weight="700" fill="#3B2A1E">Richtwert</text><path d="M28 144 H146" stroke="#E8DCC8" stroke-width="1.5"/><text x="87" y="164" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="9.5" fill="#8A6A4F">Altbau, Vollanwendung</text><text x="87" y="182" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="9.5" fill="#8A6A4F">Baubewilligung vor 1945</text><rect x="46" y="196" width="82" height="7" rx="3.5" fill="#F2EADD"/><path d="M267 78 V100" stroke="#D9C3A9" stroke-width="2"/><rect x="186" y="100" width="162" height="120" rx="9" fill="#FFFFFF" stroke="#D9C3A9" stroke-width="1.5"/><rect x="187" y="101" width="160" height="5" rx="2.5" fill="#8A6A4F"/><text x="267" y="132" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="13" font-weight="700" fill="#3B2A1E">Kategorie</text><path d="M208 144 H326" stroke="#E8DCC8" stroke-width="1.5"/><text x="267" y="164" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="9.5" fill="#8A6A4F">Altverträge</text><text x="267" y="182" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="9.5" fill="#8A6A4F">vor 1. März 1994</text><rect x="226" y="196" width="82" height="7" rx="3.5" fill="#F2EADD"/><path d="M447 78 V100" stroke="#D9C3A9" stroke-width="2"/><rect x="366" y="100" width="162" height="120" rx="9" fill="#FFFFFF" stroke="#D9C3A9" stroke-width="1.5"/><rect x="367" y="101" width="160" height="5" rx="2.5" fill="#8A6A4F"/><text x="447" y="132" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="13" font-weight="700" fill="#3B2A1E">Angemessen</text><path d="M388 144 H506" stroke="#E8DCC8" stroke-width="1.5"/><text x="447" y="164" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="9.5" fill="#8A6A4F">über 130 m² Nutzfläche</text><text x="447" y="182" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="9.5" fill="#8A6A4F">oder Denkmalschutz</text><rect x="406" y="196" width="82" height="7" rx="3.5" fill="#F2EADD"/><path d="M627 78 V100" stroke="#D9C3A9" stroke-width="2"/><rect x="546" y="100" width="162" height="120" rx="9" fill="#FFFFFF" stroke="#D9C3A9" stroke-width="1.5"/><rect x="547" y="101" width="160" height="5" rx="2.5" fill="#A9856B"/><text x="627" y="132" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="13" font-weight="700" fill="#3B2A1E">Freier Markt</text><path d="M568 144 H686" stroke="#E8DCC8" stroke-width="1.5"/><text x="627" y="164" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="9.5" fill="#8A6A4F">Voll- / Teilausnahme</text><text x="627" y="182" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="9.5" fill="#8A6A4F">Neubau nach 1953</text><rect x="586" y="196" width="82" height="7" rx="3.5" fill="#F2EADD"/></svg></div>
+            <figcaption class="wm-figure-caption">Every flat is routed into one of four regimes before any number is calculated. The Richtwert path, highlighted, covers the pre-1945 stock where most disputes arise.</figcaption>
+          </figure>
+          <div class="wm-regimes">
+            <div class="wm-regime">
+              <div class="wm-regime-applies">Altbau · Vollanwendung MRG</div>
+              <div class="wm-regime-name">Richtwertmietzins</div>
+              <p class="wm-regime-desc">The main system for flats in buildings whose building permit predates 8 May 1945, where the contract was concluded from 1 March 1994 onwards. A statutory base value per square metre is adjusted up and down for the specific flat.</p>
+            </div>
+            <div class="wm-regime">
+              <div class="wm-regime-applies">Contracts before March 1994</div>
+              <div class="wm-regime-name">Kategoriemietzins</div>
+              <p class="wm-regime-desc">Older tenancies are still capped by the category system, which grades a flat A to D by its fitments and condition rather than by a location-adjusted base value.</p>
+            </div>
+            <div class="wm-regime">
+              <div class="wm-regime-applies">Large flats · listed buildings</div>
+              <div class="wm-regime-name">Angemessener Mietzins</div>
+              <p class="wm-regime-desc">A "reasonable" market-referenced rent applies to particular cases — for example flats over 130 m² of usable floor area, or listed buildings after substantial investment.</p>
+            </div>
+            <div class="wm-regime">
+              <div class="wm-regime-applies">Teil- / Vollausnahme</div>
+              <div class="wm-regime-name">Free market</div>
+              <p class="wm-regime-desc">Where the MRG applies only partly or not at all — typically new builds permitted after 30 June 1953, small owner-occupied buildings and holiday lets — the rent is negotiated freely.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ 03 HOW A LAWFUL RENT IS ASSEMBLED ═══ -->
+  <section class="cs-section">
+    <div class="container">
+      <div class="cs-narrative-grid">
+        <div><span class="cs-sidebar-label">03 — How a lawful rent is assembled</span></div>
+        <div>
+          <div class="cs-body-text" data-reveal>
+            <p>Inside the Richtwert system a lawful rent is not looked up — it is built. A statutory base value per square metre is adjusted upwards for advantages and downwards for defects, and only then can it be compared with what is actually being charged.</p>
+          </div>
+          <figure class="wm-figure">
+            <div class="wm-figure-frame"><svg viewBox="0 0 734 272" xmlns="http://www.w3.org/2000/svg" fill="none" role="img" aria-label="Waterfall showing how a lawful Richtwert rent is assembled from a base value, surcharges and deductions"><path d="M28 240 H706" stroke="#D9C3A9" stroke-width="2"/><rect x="40" y="140" width="90" height="100" rx="4" fill="#6F4E37"/><text x="85.0" y="260" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="10" font-weight="700" fill="#3B2A1E">Richtwert</text><rect x="150" y="110" width="70" height="30" rx="4" fill="#A9856B"/><text x="185.0" y="260" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="10" font-weight="500" fill="#8A6A4F">+ Lage</text><rect x="240" y="88" width="70" height="22" rx="4" fill="#A9856B"/><text x="275.0" y="260" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="10" font-weight="500" fill="#8A6A4F">+ Stockwerk</text><rect x="330" y="70" width="70" height="18" rx="4" fill="#C4A484"/><text x="365.0" y="260" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="10" font-weight="500" fill="#8A6A4F">+ Ausstattung</text><rect x="420" y="70" width="70" height="26" rx="4" fill="#F2EADD" stroke="#C4A484" stroke-width="1.5" stroke-dasharray="5 4"/><text x="455.0" y="260" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="10" font-weight="500" fill="#8A6A4F">- Erhaltung</text><rect x="510" y="96" width="70" height="30" rx="4" fill="#F2EADD" stroke="#C4A484" stroke-width="1.5" stroke-dasharray="5 4"/><text x="545.0" y="260" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="10" font-weight="500" fill="#8A6A4F">- Befristung</text><rect x="610" y="126" width="90" height="114" rx="4" fill="#427C0C"/><text x="655.0" y="260" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="10" font-weight="700" fill="#2D5408">= zulässig</text><path d="M130 140 H150" stroke="#D9C3A9" stroke-width="1.5" stroke-dasharray="4 3"/><path d="M220 110 H240" stroke="#D9C3A9" stroke-width="1.5" stroke-dasharray="4 3"/><path d="M310 88 H330" stroke="#D9C3A9" stroke-width="1.5" stroke-dasharray="4 3"/><path d="M400 70 H420" stroke="#D9C3A9" stroke-width="1.5" stroke-dasharray="4 3"/><path d="M490 96 H510" stroke="#D9C3A9" stroke-width="1.5" stroke-dasharray="4 3"/><path d="M580 126 H610" stroke="#D9C3A9" stroke-width="1.5" stroke-dasharray="4 3"/><text x="655" y="116" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="10" font-weight="700" fill="#2D5408">Hauptmietzins</text><text x="367" y="24" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="10" fill="#8A6A4F">Betriebskosten und 10 % USt kommen separat dazu</text></svg></div>
+            <figcaption class="wm-figure-caption">The build-up from statutory base value to lawful net rent. Surcharges stack on; deductions come back off; operating costs and VAT sit outside the cap entirely.</figcaption>
+          </figure>
+          <ol class="wm-steps">
+            <li class="wm-step">
+              <span class="wm-step-n">1</span>
+              <div>
+                <div class="wm-step-label">Start from the statutory base value</div>
+                <div class="wm-step-detail">The Richtwert is set per federal state and revalorised periodically, so any calculation has to be pinned to the value in force on the day the contract was signed.</div>
+              </div>
+            </li>
+            <li class="wm-step">
+              <span class="wm-step-n">2</span>
+              <div>
+                <div class="wm-step-label">Add location surcharge (Lagezuschlag)</div>
+                <div class="wm-step-detail">Districts better than the average attract a surcharge, which the landlord must have disclosed in writing at the time of contract.</div>
+              </div>
+            </li>
+            <li class="wm-step">
+              <span class="wm-step-n">3</span>
+              <div>
+                <div class="wm-step-label">Add fitment and layout surcharges</div>
+                <div class="wm-step-detail">Balcony, terrace or garden, floor level and lift, storage, and the standard of the fitments each move the figure up.</div>
+              </div>
+            </li>
+            <li class="wm-step">
+              <span class="wm-step-n">4</span>
+              <div>
+                <div class="wm-step-label">Subtract condition deductions</div>
+                <div class="wm-step-detail">Poor maintenance, noise exposure, awkward layouts and a missing lift all pull the lawful figure back down.</div>
+              </div>
+            </li>
+            <li class="wm-step">
+              <span class="wm-step-n">5</span>
+              <div>
+                <div class="wm-step-label">Subtract the fixed-term deduction</div>
+                <div class="wm-step-detail">A fixed-term (befristet) tenancy carries a statutory 25 % deduction on the net rent for as long as it stays fixed-term.</div>
+              </div>
+            </li>
+            <li class="wm-step">
+              <span class="wm-step-n">6</span>
+              <div>
+                <div class="wm-step-label">Separate the other lines on the bill</div>
+                <div class="wm-step-detail">Only the net main rent is capped this way. Operating costs are billed separately and residential rent carries 10 % VAT — comparing gross figures is the most common mistake.</div>
+              </div>
+            </li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ 04 THE RENT-CHECK WORKFLOW ═══ -->
+  <section class="cs-section cs-section--tinted">
+    <div class="container">
+      <div class="cs-narrative-grid">
+        <div><span class="cs-sidebar-label">04 — The rent-check workflow</span></div>
+        <div>
+          <div class="cs-body-text" data-reveal>
+            <p>The core design problem was sequencing. A tenant cannot be asked for a location surcharge before the app knows the flat is in the Richtwert system, and cannot be asked about fitments before it knows what the fitments are worth. So the flow is ordered by what the calculation needs next, not by what is convenient to ask.</p>
+            <p>Each stage collects one kind of fact and shows its effect immediately, so the verdict at the end never arrives as a surprise. Where an answer is missing or contradictory the flow loops back and asks again for exactly that gap — it never fails silently or guesses.</p>
+          </div>
+          <figure class="wm-figure">
+            <div class="wm-figure-frame"><svg viewBox="0 0 930 370" xmlns="http://www.w3.org/2000/svg" fill="none" role="img" aria-label="End to end rent check workflow across seven stages with a feedback loop and background services"><rect x="6" y="56" width="112" height="128" rx="9" fill="#FFFFFF" stroke="#D9C3A9" stroke-width="1.5"/><rect x="7" y="57" width="110" height="5" rx="2.5" fill="#A9856B"/><text x="18" y="82" font-family="Inter, system-ui, sans-serif" font-size="9" font-weight="700" fill="#A9856B">01</text><rect x="18" y="94" width="70" height="8" rx="4" fill="#F2EADD"/><rect x="18" y="110" width="44" height="8" rx="4" fill="#F2EADD"/><rect x="18" y="126" width="58" height="8" rx="4" fill="#F2EADD"/><rect x="18" y="148" width="46" height="20" rx="6" fill="#F2EADD"/><text x="62.0" y="204" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="10.5" font-weight="600" fill="#3B2A1E">Address</text><path d="M121 120.0 H131" stroke="#C4A484" stroke-width="2" stroke-linecap="round"/><path d="M128 116.0 l4 4 l-4 4" stroke="#C4A484" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><rect x="138" y="56" width="112" height="128" rx="9" fill="#FFFFFF" stroke="#D9C3A9" stroke-width="1.5"/><rect x="139" y="57" width="110" height="5" rx="2.5" fill="#A9856B"/><text x="150" y="82" font-family="Inter, system-ui, sans-serif" font-size="9" font-weight="700" fill="#A9856B">02</text><rect x="150" y="94" width="62" height="8" rx="4" fill="#F2EADD"/><rect x="150" y="110" width="50" height="8" rx="4" fill="#F2EADD"/><rect x="150" y="126" width="40" height="8" rx="4" fill="#F2EADD"/><rect x="150" y="148" width="46" height="20" rx="6" fill="#F2EADD"/><text x="194.0" y="204" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="10.5" font-weight="600" fill="#3B2A1E">Era & type</text><path d="M253 120.0 H263" stroke="#C4A484" stroke-width="2" stroke-linecap="round"/><path d="M260 116.0 l4 4 l-4 4" stroke="#C4A484" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><rect x="270" y="56" width="112" height="128" rx="9" fill="#FFFFFF" stroke="#D9C3A9" stroke-width="1.5"/><rect x="271" y="57" width="110" height="5" rx="2.5" fill="#A9856B"/><text x="282" y="82" font-family="Inter, system-ui, sans-serif" font-size="9" font-weight="700" fill="#A9856B">03</text><rect x="282" y="94" width="74" height="8" rx="4" fill="#F2EADD"/><rect x="282" y="110" width="38" height="8" rx="4" fill="#F2EADD"/><rect x="282" y="126" width="54" height="8" rx="4" fill="#F2EADD"/><rect x="282" y="148" width="46" height="20" rx="6" fill="#F2EADD"/><text x="326.0" y="204" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="10.5" font-weight="600" fill="#3B2A1E">Size</text><path d="M385 120.0 H395" stroke="#C4A484" stroke-width="2" stroke-linecap="round"/><path d="M392 116.0 l4 4 l-4 4" stroke="#C4A484" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><rect x="402" y="56" width="112" height="128" rx="9" fill="#FFFFFF" stroke="#D9C3A9" stroke-width="1.5"/><rect x="403" y="57" width="110" height="5" rx="2.5" fill="#A9856B"/><text x="414" y="82" font-family="Inter, system-ui, sans-serif" font-size="9" font-weight="700" fill="#A9856B">04</text><rect x="414" y="94" width="58" height="8" rx="4" fill="#F2EADD"/><rect x="414" y="110" width="66" height="8" rx="4" fill="#F2EADD"/><rect x="414" y="126" width="42" height="8" rx="4" fill="#F2EADD"/><rect x="414" y="148" width="46" height="20" rx="6" fill="#F2EADD"/><text x="458.0" y="204" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="10.5" font-weight="600" fill="#3B2A1E">Fitments</text><path d="M517 120.0 H527" stroke="#C4A484" stroke-width="2" stroke-linecap="round"/><path d="M524 116.0 l4 4 l-4 4" stroke="#C4A484" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><rect x="534" y="56" width="112" height="128" rx="9" fill="#FFFFFF" stroke="#D9C3A9" stroke-width="1.5"/><rect x="535" y="57" width="110" height="5" rx="2.5" fill="#A9856B"/><text x="546" y="82" font-family="Inter, system-ui, sans-serif" font-size="9" font-weight="700" fill="#A9856B">05</text><rect x="546" y="94" width="70" height="8" rx="4" fill="#F2EADD"/><rect x="546" y="110" width="52" height="8" rx="4" fill="#F2EADD"/><rect x="546" y="126" width="60" height="8" rx="4" fill="#F2EADD"/><rect x="546" y="148" width="46" height="20" rx="6" fill="#F2EADD"/><text x="590.0" y="204" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="10.5" font-weight="600" fill="#3B2A1E">Review</text><path d="M649 120.0 H659" stroke="#C4A484" stroke-width="2" stroke-linecap="round"/><path d="M656 116.0 l4 4 l-4 4" stroke="#C4A484" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><rect x="666" y="56" width="112" height="128" rx="9" fill="#FFFFFF" stroke="#A0BE86" stroke-width="2"/><rect x="667" y="57" width="110" height="5" rx="2.5" fill="#427C0C"/><text x="678" y="82" font-family="Inter, system-ui, sans-serif" font-size="9" font-weight="700" fill="#427C0C">06</text><rect x="678" y="94" width="66" height="8" rx="4" fill="#CEDDC0"/><rect x="678" y="110" width="46" height="8" rx="4" fill="#F2EADD"/><rect x="678" y="126" width="56" height="8" rx="4" fill="#F2EADD"/><circle cx="754" cy="152" r="13" fill="#427C0C"/><path d="M747 152 l5 5 l9 -10" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/><text x="722.0" y="204" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="10.5" font-weight="600" fill="#3B2A1E">Verdict</text><path d="M781 120.0 H791" stroke="#C4A484" stroke-width="2" stroke-linecap="round"/><path d="M788 116.0 l4 4 l-4 4" stroke="#C4A484" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><rect x="798" y="56" width="112" height="128" rx="9" fill="#FFFFFF" stroke="#D9C3A9" stroke-width="1.5"/><rect x="799" y="57" width="110" height="5" rx="2.5" fill="#A9856B"/><text x="810" y="82" font-family="Inter, system-ui, sans-serif" font-size="9" font-weight="700" fill="#A9856B">07</text><rect x="810" y="94" width="54" height="8" rx="4" fill="#F2EADD"/><rect x="810" y="110" width="62" height="8" rx="4" fill="#F2EADD"/><rect x="810" y="126" width="38" height="8" rx="4" fill="#F2EADD"/><rect x="810" y="148" width="46" height="20" rx="6" fill="#F2EADD"/><text x="854.0" y="204" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="10.5" font-weight="600" fill="#3B2A1E">Export</text><path d="M590.0 184 V216" stroke="#C4A484" stroke-width="1.5" stroke-dasharray="5 4"/><path d="M590.0 216 l24 20 l-24 20 l-24 -20 Z" fill="#F2EADD" stroke="#C4A484" stroke-width="1.5"/><text x="590.0" y="240" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="9" font-weight="600" fill="#6F4E37">gaps?</text><path d="M566.0 236 H326.0 V218" stroke="#C4A484" stroke-width="1.5" stroke-dasharray="5 4"/><path d="M322.0 226 l4 -8 l4 8" stroke="#C4A484" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><text x="458.0" y="228" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="9" fill="#8A6A4F">ask again for what is missing</text><text x="6" y="308" font-family="Inter, system-ui, sans-serif" font-size="9" font-weight="700" fill="#A9856B" letter-spacing="1.2">IN THE BACKGROUND</text><rect x="6" y="318" width="240" height="40" rx="8" fill="none" stroke="#D9C3A9" stroke-width="1.5" stroke-dasharray="6 4"/><text x="126.0" y="343" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="9.5" fill="#8A6A4F">Address and building data lookup</text><rect x="266" y="318" width="240" height="40" rx="8" fill="none" stroke="#D9C3A9" stroke-width="1.5" stroke-dasharray="6 4"/><text x="386.0" y="343" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="9.5" fill="#8A6A4F">Rule engine per regime</text><rect x="526" y="318" width="240" height="40" rx="8" fill="none" stroke="#D9C3A9" stroke-width="1.5" stroke-dasharray="6 4"/><text x="646.0" y="343" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="9.5" fill="#8A6A4F">Report and letter generation</text></svg></div>
+            <figcaption class="wm-figure-caption">The end-to-end rent check. Seven stages of questions, a loop back for anything missing, and three background services doing the lookups, the rule evaluation and the paperwork.</figcaption>
+          </figure>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ 05 BEFORE AND AFTER ═══ -->
+  <section class="cs-section">
+    <div class="container">
+      <div class="cs-narrative-grid">
+        <div><span class="cs-sidebar-label">05 — Before and after</span></div>
+        <div>
+          <div class="cs-body-text" data-reveal>
+            <p>The comparison that mattered most was not against another app — it was against what a tenant does today: piecing an answer together from the contract, a rent bill, a couple of advice pages and, often, a phone call. It usually ends in an estimate nobody trusts enough to act on.</p>
+          </div>
+          <figure class="wm-figure">
+            <div class="wm-figure-frame"><svg viewBox="0 0 730 366" xmlns="http://www.w3.org/2000/svg" fill="none" role="img" aria-label="Comparison between a tangled manual process and a linear three step app flow ending in a clear verdict"><text x="12" y="22" font-family="Inter, system-ui, sans-serif" font-size="11" font-weight="700" fill="#8A6A4F" letter-spacing="1.2">BEFORE</text><text x="424" y="22" font-family="Inter, system-ui, sans-serif" font-size="11" font-weight="700" fill="#2D5408" letter-spacing="1.2">AFTER</text><path d="M394 10 V360" stroke="#D9C3A9" stroke-width="1.5" stroke-dasharray="6 5"/><path d="M48 74 L140 58" stroke="#D9C3A9" stroke-width="1.5" stroke-dasharray="5 5"/><path d="M140 58 L232 92" stroke="#D9C3A9" stroke-width="1.5"/><path d="M48 74 L96 140" stroke="#D9C3A9" stroke-width="1.5"/><path d="M96 140 L196 150" stroke="#D9C3A9" stroke-width="1.5" stroke-dasharray="5 5"/><path d="M196 150 L298 128" stroke="#D9C3A9" stroke-width="1.5"/><path d="M96 140 L60 206" stroke="#D9C3A9" stroke-width="1.5"/><path d="M60 206 L160 214" stroke="#D9C3A9" stroke-width="1.5" stroke-dasharray="5 5"/><path d="M160 214 L258 196" stroke="#D9C3A9" stroke-width="1.5"/><path d="M60 206 L120 272" stroke="#D9C3A9" stroke-width="1.5"/><path d="M120 272 L226 268" stroke="#D9C3A9" stroke-width="1.5" stroke-dasharray="5 5"/><path d="M226 268 L316 240" stroke="#D9C3A9" stroke-width="1.5"/><path d="M196 150 L160 214" stroke="#D9C3A9" stroke-width="1.5"/><path d="M232 92 L298 128" stroke="#D9C3A9" stroke-width="1.5" stroke-dasharray="5 5"/><rect x="29" y="63" width="38" height="22" rx="5" fill="#F2EADD" stroke="#D9C3A9" stroke-width="1.3"/><rect x="121" y="47" width="38" height="22" rx="5" fill="#F2EADD" stroke="#D9C3A9" stroke-width="1.3"/><rect x="213" y="81" width="38" height="22" rx="5" fill="#F2EADD" stroke="#D9C3A9" stroke-width="1.3"/><rect x="77" y="129" width="38" height="22" rx="5" fill="#F2EADD" stroke="#D9C3A9" stroke-width="1.3"/><rect x="177" y="139" width="38" height="22" rx="5" fill="#F2EADD" stroke="#D9C3A9" stroke-width="1.3"/><rect x="279" y="117" width="38" height="22" rx="5" fill="#F2EADD" stroke="#D9C3A9" stroke-width="1.3"/><rect x="41" y="195" width="38" height="22" rx="5" fill="#F2EADD" stroke="#D9C3A9" stroke-width="1.3"/><rect x="141" y="203" width="38" height="22" rx="5" fill="#F2EADD" stroke="#D9C3A9" stroke-width="1.3"/><rect x="239" y="185" width="38" height="22" rx="5" fill="#F2EADD" stroke="#D9C3A9" stroke-width="1.3"/><rect x="101" y="261" width="38" height="22" rx="5" fill="#F2EADD" stroke="#D9C3A9" stroke-width="1.3"/><rect x="207" y="257" width="38" height="22" rx="5" fill="#F2EADD" stroke="#D9C3A9" stroke-width="1.3"/><rect x="297" y="229" width="38" height="22" rx="5" fill="#F2EADD" stroke="#D9C3A9" stroke-width="1.3"/><path d="M342 234 l10 10 M352 234 l-10 10" stroke="#A9856B" stroke-width="2" stroke-linecap="round"/><path d="M324 122 l10 10 M334 122 l-10 10" stroke="#A9856B" stroke-width="2" stroke-linecap="round"/><text x="12" y="330" font-family="Inter, system-ui, sans-serif" font-size="9.5" fill="#8A6A4F">Scattered sources, no single answer, dead ends</text><rect x="452" y="58" width="248" height="56" rx="9" fill="#FFFFFF" stroke="#D9C3A9" stroke-width="1.5"/><rect x="468" y="74" width="150" height="8" rx="4" fill="#E8DCC8"/><rect x="468" y="90" width="104" height="8" rx="4" fill="#F2EADD"/><text x="712" y="91" text-anchor="end" font-family="Inter, system-ui, sans-serif" font-size="9" font-weight="700" fill="#A9856B">01</text><path d="M576 114 V134" stroke="#A0BE86" stroke-width="2"/><rect x="452" y="134" width="248" height="56" rx="9" fill="#FFFFFF" stroke="#D9C3A9" stroke-width="1.5"/><rect x="468" y="150" width="122" height="8" rx="4" fill="#E8DCC8"/><rect x="468" y="166" width="76" height="8" rx="4" fill="#F2EADD"/><text x="712" y="167" text-anchor="end" font-family="Inter, system-ui, sans-serif" font-size="9" font-weight="700" fill="#A9856B">02</text><path d="M576 190 V210" stroke="#A0BE86" stroke-width="2"/><rect x="452" y="210" width="248" height="56" rx="9" fill="#FFFFFF" stroke="#D9C3A9" stroke-width="1.5"/><rect x="468" y="226" width="96" height="8" rx="4" fill="#E8DCC8"/><rect x="468" y="242" width="50" height="8" rx="4" fill="#F2EADD"/><text x="712" y="243" text-anchor="end" font-family="Inter, system-ui, sans-serif" font-size="9" font-weight="700" fill="#A9856B">03</text><path d="M576 286 V304" stroke="#A0BE86" stroke-width="2"/><circle cx="576" cy="326" r="21" fill="#427C0C"/><path d="M566 326 l7 7 l13 -14" stroke="#FFFFFF" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+            <figcaption class="wm-figure-caption">Left: the path a tenant takes today, with dead ends and no single answer. Right: three ordered steps and one verdict.</figcaption>
+          </figure>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ 06 INFORMATION ARCHITECTURE ═══ -->
+  <section class="cs-section cs-section--tinted">
+    <div class="container">
+      <div class="cs-narrative-grid">
+        <div><span class="cs-sidebar-label">06 — Information architecture</span></div>
+        <div>
+          <div class="cs-body-text" data-reveal>
+            <p>The check itself is one journey, but it has to be re-enterable — people stop when they cannot find their contract and come back later. Everything else in the app exists to support that: saved checks, the plain-language explanations, and the documents produced at the end.</p>
+          </div>
+          <figure class="wm-figure">
+            <div class="wm-figure-frame"><svg viewBox="0 0 760 240" xmlns="http://www.w3.org/2000/svg" fill="none" role="img" aria-label="Information architecture tree with five primary sections and their sub screens"><rect x="310" y="10" width="140" height="34" rx="8" fill="#3B2A1E"/><text x="380" y="32" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="12" font-weight="600" fill="#FFFFFF">Wien Miete</text><path d="M380 44 V64" stroke="#D9C3A9" stroke-width="2"/><path d="M90 64 H670" stroke="#D9C3A9" stroke-width="2"/><path d="M90 64 V86" stroke="#A0BE86" stroke-width="2"/><rect x="25" y="86" width="130" height="32" rx="7" fill="#427C0C"/><text x="90" y="107" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="11" font-weight="600" fill="#FFFFFF">Rent check</text><path d="M41 118 V192" stroke="#D9C3A9" stroke-width="1.5"/><path d="M41 132 H51" stroke="#D9C3A9" stroke-width="1.5"/><rect x="51" y="121" width="104" height="22" rx="5" fill="#FFFFFF" stroke="#A0BE86" stroke-width="1.3"/><text x="103" y="136" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="9" fill="#6F4E37">Address</text><path d="M41 162 H51" stroke="#D9C3A9" stroke-width="1.5"/><rect x="51" y="151" width="104" height="22" rx="5" fill="#FFFFFF" stroke="#A0BE86" stroke-width="1.3"/><text x="103" y="166" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="9" fill="#6F4E37">Contract</text><path d="M41 192 H51" stroke="#D9C3A9" stroke-width="1.5"/><rect x="51" y="181" width="104" height="22" rx="5" fill="#FFFFFF" stroke="#A0BE86" stroke-width="1.3"/><text x="103" y="196" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="9" fill="#6F4E37">Result</text><path d="M235 64 V86" stroke="#D9C3A9" stroke-width="2"/><rect x="170" y="86" width="130" height="32" rx="7" fill="#8A6A4F"/><text x="235" y="107" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="11" font-weight="600" fill="#FFFFFF">My flats</text><path d="M186 118 V162" stroke="#D9C3A9" stroke-width="1.5"/><path d="M186 132 H196" stroke="#D9C3A9" stroke-width="1.5"/><rect x="196" y="121" width="104" height="22" rx="5" fill="#FFFFFF" stroke="#D9C3A9" stroke-width="1.3"/><text x="248" y="136" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="9" fill="#6F4E37">Saved checks</text><path d="M186 162 H196" stroke="#D9C3A9" stroke-width="1.5"/><rect x="196" y="151" width="104" height="22" rx="5" fill="#FFFFFF" stroke="#D9C3A9" stroke-width="1.3"/><text x="248" y="166" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="9" fill="#6F4E37">Compare</text><path d="M380 64 V86" stroke="#D9C3A9" stroke-width="2"/><rect x="315" y="86" width="130" height="32" rx="7" fill="#8A6A4F"/><text x="380" y="107" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="11" font-weight="600" fill="#FFFFFF">The law</text><path d="M331 118 V192" stroke="#D9C3A9" stroke-width="1.5"/><path d="M331 132 H341" stroke="#D9C3A9" stroke-width="1.5"/><rect x="341" y="121" width="104" height="22" rx="5" fill="#FFFFFF" stroke="#D9C3A9" stroke-width="1.3"/><text x="393" y="136" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="9" fill="#6F4E37">Regimes</text><path d="M331 162 H341" stroke="#D9C3A9" stroke-width="1.5"/><rect x="341" y="151" width="104" height="22" rx="5" fill="#FFFFFF" stroke="#D9C3A9" stroke-width="1.3"/><text x="393" y="166" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="9" fill="#6F4E37">Glossary</text><path d="M331 192 H341" stroke="#D9C3A9" stroke-width="1.5"/><rect x="341" y="181" width="104" height="22" rx="5" fill="#FFFFFF" stroke="#D9C3A9" stroke-width="1.3"/><text x="393" y="196" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="9" fill="#6F4E37">Sources</text><path d="M525 64 V86" stroke="#D9C3A9" stroke-width="2"/><rect x="460" y="86" width="130" height="32" rx="7" fill="#8A6A4F"/><text x="525" y="107" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="11" font-weight="600" fill="#FFFFFF">Documents</text><path d="M476 118 V162" stroke="#D9C3A9" stroke-width="1.5"/><path d="M476 132 H486" stroke="#D9C3A9" stroke-width="1.5"/><rect x="486" y="121" width="104" height="22" rx="5" fill="#FFFFFF" stroke="#D9C3A9" stroke-width="1.3"/><text x="538" y="136" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="9" fill="#6F4E37">Report</text><path d="M476 162 H486" stroke="#D9C3A9" stroke-width="1.5"/><rect x="486" y="151" width="104" height="22" rx="5" fill="#FFFFFF" stroke="#D9C3A9" stroke-width="1.3"/><text x="538" y="166" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="9" fill="#6F4E37">Letter</text><path d="M670 64 V86" stroke="#D9C3A9" stroke-width="2"/><rect x="605" y="86" width="130" height="32" rx="7" fill="#8A6A4F"/><text x="670" y="107" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="11" font-weight="600" fill="#FFFFFF">Help</text><path d="M621 118 V162" stroke="#D9C3A9" stroke-width="1.5"/><path d="M621 132 H631" stroke="#D9C3A9" stroke-width="1.5"/><rect x="631" y="121" width="104" height="22" rx="5" fill="#FFFFFF" stroke="#D9C3A9" stroke-width="1.3"/><text x="683" y="136" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="9" fill="#6F4E37">FAQ</text><path d="M621 162 H631" stroke="#D9C3A9" stroke-width="1.5"/><rect x="631" y="151" width="104" height="22" rx="5" fill="#FFFFFF" stroke="#D9C3A9" stroke-width="1.3"/><text x="683" y="166" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="9" fill="#6F4E37">Advice bodies</text></svg></div>
+            <figcaption class="wm-figure-caption">Five primary areas. The rent check is the spine; the other four make it resumable, explainable and actionable.</figcaption>
+          </figure>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ 07 RESULT STATES ═══ -->
+  <section class="cs-section">
+    <div class="container">
+      <div class="cs-narrative-grid">
+        <div><span class="cs-sidebar-label">07 — Result states</span></div>
+        <div>
+          <div class="cs-body-text" data-reveal>
+            <p>A rent check has three honest outcomes, and the third one matters as much as the other two. Where the evidence is thin the app says so rather than manufacturing confidence — an over-confident "your rent is illegal" would send someone into a formal dispute on bad footing.</p>
+            <p>The verdict screen always shows the calculation that produced it, so the tenant can see which surcharge or deduction is doing the work and take that to an advice body or the Schlichtungsstelle.</p>
+          </div>
+          <figure class="wm-figure">
+            <div class="wm-figure-frame"><svg viewBox="0 0 780 248" xmlns="http://www.w3.org/2000/svg" fill="none" role="img" aria-label="Three verdict card states: lawful, likely too high, and inconclusive"><rect x="6" y="10" width="236" height="228" rx="12" fill="#FFFFFF" stroke="#A0BE86" stroke-width="2"/><circle cx="40" cy="60" r="19" fill="#427C0C"/><path d="M32 60 l6 6 l11 -12" stroke="#FFFFFF" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/><text x="72" y="65" font-family="Inter, system-ui, sans-serif" font-size="12.5" font-weight="700" fill="#3B2A1E">Looks lawful</text><path d="M28 100 H220" stroke="#E8DCC8" stroke-width="1.5"/><rect x="28" y="118" width="148" height="9" rx="4.5" fill="#F2EADD"/><rect x="28" y="136" width="110" height="9" rx="4.5" fill="#F2EADD"/><rect x="28" y="166" width="192" height="12" rx="6" fill="#FAF6F0" stroke="#E8DCC8" stroke-width="1.2"/><rect x="28" y="196" width="118" height="28" rx="14" fill="#427C0C"/><rect x="44" y="207" width="86" height="7" rx="3.5" fill="#FFFFFF" fill-opacity="0.85"/><rect x="272" y="10" width="236" height="228" rx="12" fill="#FFFFFF" stroke="#D9C3A9" stroke-width="2"/><circle cx="306" cy="60" r="19" fill="#6F4E37"/><path d="M306 51 V62" stroke="#FFFFFF" stroke-width="2.6" stroke-linecap="round"/><circle cx="306" cy="68" r="1.9" fill="#FFFFFF"/><text x="338" y="65" font-family="Inter, system-ui, sans-serif" font-size="12.5" font-weight="700" fill="#3B2A1E">Likely too high</text><path d="M294 100 H486" stroke="#E8DCC8" stroke-width="1.5"/><rect x="294" y="118" width="136" height="9" rx="4.5" fill="#F2EADD"/><rect x="294" y="136" width="120" height="9" rx="4.5" fill="#F2EADD"/><rect x="294" y="166" width="192" height="12" rx="6" fill="#FAF6F0" stroke="#E8DCC8" stroke-width="1.2"/><rect x="294" y="196" width="118" height="28" rx="14" fill="#6F4E37"/><rect x="310" y="207" width="86" height="7" rx="3.5" fill="#FFFFFF" fill-opacity="0.85"/><rect x="538" y="10" width="236" height="228" rx="12" fill="#FFFFFF" stroke="#C4A484" stroke-width="1.5" stroke-dasharray="6 5"/><circle cx="572" cy="60" r="19" fill="none" stroke="#C4A484" stroke-width="2" stroke-dasharray="5 4"/><path d="M567 56 a5 5 0 1 1 5 6 v3" stroke="#A9856B" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="572" cy="71" r="1.9" fill="#A9856B"/><text x="604" y="65" font-family="Inter, system-ui, sans-serif" font-size="12.5" font-weight="700" fill="#3B2A1E">Need more info</text><path d="M560 100 H752" stroke="#E8DCC8" stroke-width="1.5"/><rect x="560" y="118" width="128" height="9" rx="4.5" fill="#F2EADD"/><rect x="560" y="136" width="102" height="9" rx="4.5" fill="#F2EADD"/><rect x="560" y="166" width="192" height="12" rx="6" fill="#FAF6F0" stroke="#E8DCC8" stroke-width="1.2"/><rect x="560" y="196" width="118" height="28" rx="14" fill="none" stroke="#C4A484" stroke-width="1.5" stroke-dasharray="5 4"/><rect x="576" y="207" width="86" height="7" rx="3.5" fill="#D9C3A9"/></svg></div>
+            <figcaption class="wm-figure-caption">Three verdict states. Green is reserved for the lawful result; a high rent is flagged in the palette's deep brown rather than an alarm colour, and an inconclusive check is shown as unfinished rather than negative.</figcaption>
+          </figure>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ 08 DESIGN LANGUAGE ═══ -->
+  <section class="cs-section cs-section--tinted">
+    <div class="container">
+      <div class="cs-narrative-grid">
+        <div><span class="cs-sidebar-label">08 — Design language</span></div>
+        <div>
+          <div class="cs-body-text" data-reveal>
+            <p>The visual language is deliberately warm. Tenancy disputes are stressful and the subject matter is legal, so the palette is built from caffè-latte tones — espresso through cream — rather than the cold blues and alarm reds that legal-tech products default to.</p>
+            <p>One accent green carries all the way through, and it is rationed: it marks the verdict, the active path and a lawful result, and nothing else. That way the single colour a tenant is looking for is never competing with decoration.</p>
+          </div>
+          <div class="wm-swatches">
+            <div class="wm-swatch">
+              <div class="wm-swatch-chip" style="background:#3B2A1E;"></div>
+              <div class="wm-swatch-meta"><div class="wm-swatch-name">Espresso</div><div class="wm-swatch-hex">#3B2A1E</div></div>
+            </div>
+            <div class="wm-swatch">
+              <div class="wm-swatch-chip" style="background:#6F4E37;"></div>
+              <div class="wm-swatch-meta"><div class="wm-swatch-name">Coffee</div><div class="wm-swatch-hex">#6F4E37</div></div>
+            </div>
+            <div class="wm-swatch">
+              <div class="wm-swatch-chip" style="background:#A9856B;"></div>
+              <div class="wm-swatch-meta"><div class="wm-swatch-name">Latte</div><div class="wm-swatch-hex">#A9856B</div></div>
+            </div>
+            <div class="wm-swatch">
+              <div class="wm-swatch-chip" style="background:#C4A484;"></div>
+              <div class="wm-swatch-meta"><div class="wm-swatch-name">Caffè latte</div><div class="wm-swatch-hex">#C4A484</div></div>
+            </div>
+            <div class="wm-swatch">
+              <div class="wm-swatch-chip" style="background:#E8DCC8;"></div>
+              <div class="wm-swatch-meta"><div class="wm-swatch-name">Foam</div><div class="wm-swatch-hex">#E8DCC8</div></div>
+            </div>
+            <div class="wm-swatch">
+              <div class="wm-swatch-chip" style="background:#FAF6F0;"></div>
+              <div class="wm-swatch-meta"><div class="wm-swatch-name">Cream</div><div class="wm-swatch-hex">#FAF6F0</div></div>
+            </div>
+            <div class="wm-swatch">
+              <div class="wm-swatch-chip" style="background:#427C0C;"></div>
+              <div class="wm-swatch-meta"><div class="wm-swatch-name">Verdict green</div><div class="wm-swatch-hex">#427C0C</div></div>
+            </div>
+            <div class="wm-swatch">
+              <div class="wm-swatch-chip" style="background:#CEDDC0;"></div>
+              <div class="wm-swatch-meta"><div class="wm-swatch-name">Green tint</div><div class="wm-swatch-hex">#CEDDC0</div></div>
+            </div>
+          </div>
+          <div class="wm-note">
+            <strong>A note on this page.</strong> The product screens are still to come and are shown on the portfolio card as placeholders. The legal framework described here is the real Austrian one; the Richtwert base value itself is revalorised periodically and is therefore quoted nowhere on this page — the app always resolves it for the date the contract was signed.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- NAV to next case study -->
+  <section style="padding:var(--s-16) 0; background:var(--gray-50); border-top: 1px solid var(--gray-200);">
+    <div class="container" style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:var(--s-8);">
+      <div>
+        <div style="font-size:0.75rem; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:var(--gray-400); margin-bottom:var(--s-2);">Next Case Study</div>
+        <a href="eama.html" class="btn-arrow" style="font-size:1.125rem; font-weight:500;">
+          eAMA.at — Farmer Services Portal
+          <span class="arrow-icon"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+        </a>
+      </div>
+      <a href="../index.html#work" class="btn btn-outline">All case studies</a>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════
+       SITE FOOTER
+  ══════════════════════════════════════════════════ -->
+  <footer class="footer" role="contentinfo">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="footer-brand-name">Gayane G. Mileski</div>
+          <p class="footer-brand-role">Senior UX/UI Designer — Service &amp; Product Design<br>Vienna, Austria — Available for consultation</p>
+          <a href="#top" class="btn btn-ghost" style="font-size:0.8125rem;" aria-label="Back to top">↑ Back to top</a>
+        </div>
+        <div>
+          <div class="footer-col-title">Work</div>
+          <ul class="footer-links" role="list">
+            <li><a href="wien-miete.html"     class="footer-link">Wien Miete</a></li>
+            <li><a href="eama.html"           class="footer-link">eAMA.at Portal</a></li>
+            <li><a href="ama-foto.html"        class="footer-link">AMA Foto App</a></li>
+            <li><a href="rindernet.html"       class="footer-link">Rindernet Meldeapp</a></li>
+            <li><a href="mixbs.html"           class="footer-link">MiXBS BayCX</a></li>
+            <li><a href="../other-works.html"  class="footer-link">Other Works</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="footer-col-title">Navigate</div>
+          <ul class="footer-links" role="list">
+            <li><a href="../index.html#about"   class="footer-link">About</a></li>
+            <li><a href="../index.html#contact" class="footer-link">Contact</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="footer-col-title">Connect</div>
+          <ul class="footer-links" role="list">
+            <li><a href="mailto:gayane.mileski@gmail.com" class="footer-link">Email</a></li>
+            <li><a href="https://www.linkedin.com/in/gayane-g-mileski/" class="footer-link" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
+            <li><a href="tel:+436602308530" class="footer-link">Phone</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p class="footer-copyright">© 2026 Gayane G. Mileski. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/main.js" defer></script>
+</body>
+</html>
