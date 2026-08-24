@@ -306,9 +306,9 @@
         if (secForItem(last)) active = last.getAttribute('href').slice(1);
       }
       if (active) setActive(active);
-      // hide the ruler once the dark contact / footer zone is reached
-      const contact = document.getElementById('contact');
-      if (contact) ruler.classList.toggle('is-hidden', contact.getBoundingClientRect().top < window.innerHeight * 0.5);
+      // fade the ruler out once the closing zone (contact, or just the footer) is reached
+      const tail = document.getElementById('contact') || qs('.footer');
+      if (tail) ruler.classList.toggle('is-hidden', tail.getBoundingClientRect().top < window.innerHeight * 0.85);
     };
     const onScroll = () => { if (!ticking) { ticking = true; requestAnimationFrame(spy); } };
     window.addEventListener('scroll', onScroll, { passive: true });
