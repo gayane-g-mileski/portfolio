@@ -2748,3 +2748,108 @@ body {
   .work-filter-btn { font-size: 0.8125rem; padding: var(--s-2) var(--s-4); }
   .more-projects-grid { grid-template-columns: 1fr; }
 }
+
+
+/* ==========================================================================
+   STANDALONE PAGES (Product Engineering, About)
+   ========================================================================== */
+.section--page-top { padding-top: calc(var(--nav-height) + var(--s-16)); }
+
+/* current page marker in the nav */
+.nav-link.is-current { color: var(--gray-900); }
+.nav-link.is-current::after { transform: scaleX(1); }
+.nav-menu--teal .nav-link.is-current { color: #1d3d45; }
+
+/* ==========================================================================
+   PROJECT CAROUSEL
+   ========================================================================== */
+.carousel { position: relative; }
+.carousel-viewport { overflow: hidden; }
+
+/* Before JS runs — and if it never does — the projects stay a plain stack. */
+.carousel-track { display: grid; gap: var(--s-8); }
+.carousel-controls { display: none; }
+
+.carousel-track.is-ready {
+  display: flex;
+  gap: 0;
+  align-items: stretch;
+  transition: transform 0.62s cubic-bezier(0.22, 0.61, 0.36, 1);
+  will-change: transform;
+}
+.carousel-track.is-ready > * {
+  flex: 0 0 100%;
+  min-width: 0;
+  /* inactive slides recede — enough to read as depth, not as motion */
+  opacity: 0.35;
+  transition: opacity 0.45s ease;
+}
+.carousel-track.is-ready > .is-active { opacity: 1; }
+
+.carousel.is-ready .carousel-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--s-6);
+  margin-top: var(--s-8);
+}
+.carousel-btn {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  border: 1px solid var(--gray-200);
+  background: var(--white);
+  color: var(--gray-700);
+  cursor: pointer;
+  transition: background var(--t-fast), color var(--t-fast), border-color var(--t-fast), transform var(--t-fast);
+}
+.carousel-btn svg { width: 20px; height: 20px; }
+.carousel-btn:hover:not(:disabled) { background: var(--color-accent); border-color: var(--color-accent); color: var(--white); transform: translateY(-2px); }
+.carousel-btn:disabled { opacity: 0.35; cursor: default; }
+.carousel-btn:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 3px; }
+
+.carousel-dots { display: flex; align-items: center; gap: 8px; }
+.carousel-dot {
+  width: 8px;
+  height: 8px;
+  padding: 0;
+  border: none;
+  border-radius: 999px;
+  background: var(--gray-300);
+  cursor: pointer;
+  transition: width 0.35s cubic-bezier(0.22, 0.61, 0.36, 1), background var(--t-fast);
+}
+.carousel-dot:hover { background: var(--gray-400); }
+.carousel-dot.is-active { width: 26px; background: var(--color-accent); }
+.carousel-dot:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 3px; }
+
+.carousel-status {
+  position: absolute;
+  width: 1px; height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+@media (max-width: 640px) {
+  .carousel-controls { gap: var(--s-4); }
+  .carousel-btn { width: 40px; height: 40px; }
+}
+
+/* ==========================================================================
+   MOTION — kept deliberately light
+   ========================================================================== */
+.work-card { transition: transform var(--t-base), box-shadow var(--t-base); }
+.work-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); }
+
+@media (prefers-reduced-motion: reduce) {
+  .carousel-track.is-ready { transition: none; }
+  .carousel-track.is-ready > * { opacity: 1; transition: none; }
+  .carousel-dot { transition: none; }
+  .carousel-btn:hover:not(:disabled) { transform: none; }
+  .work-card { transition: none; }
+  .work-card:hover { transform: none; }
+}

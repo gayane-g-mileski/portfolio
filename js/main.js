@@ -317,6 +317,89 @@
   }
 
   /* ==========================================================================
+     PROJECT CAROUSEL
+  ========================================================================== */
+  qsa('[data-carousel]').forEach(root => {
+    const track  = qs('.carousel-track', root);
+    const slides = track ? [...track.children] : [];
+    if (!track || slides.length < 2) return;
+
+    const prevBtn = qs('[data-carousel-prev]', root);
+    const nextBtn = qs('[data-carousel-next]', root);
+    const dotsBox = qs('.carousel-dots', root);
+    let index = 0;
+
+    const status = document.createElement('p');
+    status.className = 'carousel-status';
+    status.setAttribute('role', 'status');
+    status.setAttribute('aria-live', 'polite');
+    root.appendChild(status);
+
+    const label = (el, i) => {
+      const t = qs('.work-card-title', el);
+      return t ? t.textContent.trim() : `Project ${i + 1}`;
+    };
+
+    // build the dots
+    const dots = slides.map((el, i) => {
+      const b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'carousel-dot';
+      b.setAttribute('role', 'tab');
+      b.setAttribute('aria-label', label(el, i));
+      b.addEventListener('click', () => go(i));
+      dotsBox && dotsBox.appendChild(b);
+      return b;
+    });
+
+    function go(i) {
+      index = Math.max(0, Math.min(slides.length - 1, i));
+      track.style.transform = `translateX(-${index * 100}%)`;
+      slides.forEach((s, n) => {
+        const on = n === index;
+        s.classList.toggle('is-active', on);
+        // keep off-screen cards out of the tab order
+        s.querySelectorAll('a, button').forEach(el => el.tabIndex = on ? 0 : -1);
+        if (s.matches('a')) s.tabIndex = on ? 0 : -1;
+        s.setAttribute('aria-hidden', on ? 'false' : 'true');
+      });
+      dots.forEach((d, n) => {
+        d.classList.toggle('is-active', n === index);
+        d.setAttribute('aria-selected', n === index ? 'true' : 'false');
+      });
+      if (prevBtn) prevBtn.disabled = index === 0;
+      if (nextBtn) nextBtn.disabled = index === slides.length - 1;
+      status.textContent = `Project ${index + 1} of ${slides.length}: ${label(slides[index], index)}`;
+    }
+
+    prevBtn && prevBtn.addEventListener('click', () => go(index - 1));
+    nextBtn && nextBtn.addEventListener('click', () => go(index + 1));
+
+    // keyboard
+    root.addEventListener('keydown', e => {
+      if (e.key === 'ArrowLeft')  { e.preventDefault(); go(index - 1); }
+      if (e.key === 'ArrowRight') { e.preventDefault(); go(index + 1); }
+    });
+
+    // swipe
+    let x0 = null, y0 = null;
+    track.addEventListener('touchstart', e => {
+      x0 = e.touches[0].clientX; y0 = e.touches[0].clientY;
+    }, { passive: true });
+    track.addEventListener('touchend', e => {
+      if (x0 === null) return;
+      const dx = e.changedTouches[0].clientX - x0;
+      const dy = e.changedTouches[0].clientY - y0;
+      if (Math.abs(dx) > 45 && Math.abs(dx) > Math.abs(dy)) go(index + (dx < 0 ? 1 : -1));
+      x0 = y0 = null;
+    }, { passive: true });
+
+    track.classList.add('is-ready');
+    root.classList.add('is-ready');
+    go(0);
+  });
+
+  /* ==========================================================================
      WORK FILTER TABS
   ========================================================================== */
   const filterBtns = qsa('.work-filter-btn');
