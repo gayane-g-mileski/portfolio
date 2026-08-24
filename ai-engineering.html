@@ -12,22 +12,21 @@
   <link rel="stylesheet" href="css/styles.css">
   <style>
     /* ===== AI Product Engineering — flat panel (light teal) ===== */
-    .aipe-panel { position:relative; border-radius:32px; padding:clamp(24px,3.2vw,44px); color:#173138; overflow:hidden;
-      background:#a9d2d6; box-shadow:0 18px 40px -22px rgba(28,61,69,0.3); }
+    .aipe-panel { position:relative; color:#173138; background:none; padding:0; border-radius:0; box-shadow:none; }
 
     .aipe-panel-head { display:flex; align-items:flex-start; justify-content:space-between; gap:var(--s-6); flex-wrap:wrap; margin-bottom:clamp(22px,2.6vw,34px); }
     .aipe-panel-eyebrow { display:inline-block; font-size:0.6875rem; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; color:#2b5761; margin-bottom:var(--s-3); }
     .aipe-panel-title { font-family:var(--font-body); font-size:clamp(1.5rem,2.6vw,2rem); font-weight:700; line-height:1.12; color:#173138; margin:0; }
     .aipe-panel-sub { font-size:0.9375rem; color:#2c5560; margin-top:var(--s-3); max-width:48ch; }
 
-    .aipe-tasks { display:grid; grid-template-columns:repeat(4,1fr); gap:clamp(13px,1.3vw,18px); }
-    .aipe-task { display:flex; flex-direction:column; border-radius:16px; background:#39737f; border:1px solid rgba(255,255,255,0.12); transition:background var(--t-base); }
+    .aipe-tasks { display:grid; grid-template-columns:repeat(3,1fr); gap:clamp(18px,1.8vw,26px); }
+    .aipe-task { display:flex; flex-direction:column; border-radius:20px; background:#39737f; border:1px solid rgba(255,255,255,0.12); transition:background var(--t-base); }
     .aipe-task:hover { background:#3f7e8b; }
-    .aipe-task-illus { margin:16px 16px 0; border-radius:12px; padding:14px 16px; display:flex; align-items:center; justify-content:center; background:#eaf2f3; }
-    .aipe-task-illus svg { display:block; width:100%; max-width:180px; height:auto; }
-    .aipe-task-body { display:flex; flex-direction:column; flex:1; padding:16px 18px 18px; }
-    .aipe-task-title { font-size:1.0625rem; font-weight:700; color:#fff; line-height:1.25; margin:0 0 var(--s-2); }
-    .aipe-task-copy { font-size:0.875rem; line-height:1.55; color:rgba(255,255,255,0.82); margin:0 0 var(--s-4); }
+    .aipe-task-illus { margin:20px 20px 0; border-radius:14px; padding:22px 24px; display:flex; align-items:center; justify-content:center; background:#eaf2f3; }
+    .aipe-task-illus svg { display:block; width:100%; max-width:230px; height:auto; }
+    .aipe-task-body { display:flex; flex-direction:column; flex:1; padding:20px 24px 24px; }
+    .aipe-task-title { font-size:1.1875rem; font-weight:700; color:#fff; line-height:1.25; margin:0 0 var(--s-2); }
+    .aipe-task-copy { font-size:0.9375rem; line-height:1.6; color:rgba(255,255,255,0.82); margin:0 0 var(--s-4); }
     .aipe-task-tags { display:flex; flex-wrap:wrap; gap:6px; margin-top:auto; }
     .aipe-task-tags span { font-size:0.6875rem; font-weight:500; color:rgba(255,255,255,0.92); background:rgba(255,255,255,0.15); border:1px solid rgba(255,255,255,0.25); padding:3px 9px; border-radius:999px; }
     @media (max-width:1024px) { .aipe-tasks { grid-template-columns:repeat(2,1fr); } }
@@ -224,40 +223,6 @@
             <h3 class="aipe-task-title">Edge Cases, States &amp; Errors</h3>
             <p class="aipe-task-copy">Generate edge cases, exhaustive states and errors from realistic data — and surface worst cases like a 36-column table fast.</p>
             <div class="aipe-task-tags"><span>Edge Cases</span><span>States</span><span>Errors</span></div>
-          </div>
-        </article>
-
-        <article class="aipe-task">
-          <div class="aipe-task-illus"><svg viewBox="0 0 220 100" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><g><rect x="8" y="16" width="80" height="58" rx="6" stroke="#2b5761" stroke-width="2" fill="white"/>
-              <rect x="8" y="16" width="80" height="13" rx="6" fill="#2b5761"/>
-              <circle cx="18" cy="22" r="2.5" fill="white" fill-opacity="0.6"/>
-              <circle cx="26" cy="22" r="2.5" fill="white" fill-opacity="0.6"/>
-              <rect x="15" y="35" width="66" height="5" rx="2" fill="#c2dadf"/>
-              <rect x="15" y="45" width="46" height="5" rx="2" fill="#5b8893"/>
-              <rect x="15" y="55" width="58" height="5" rx="2" fill="#c2dadf"/>
-              <rect x="38" y="74" width="20" height="4" rx="2" fill="#5b8893"/>
-              <path d="M96 46 L112 46" stroke="#2b5761" stroke-width="2.5" stroke-linecap="round"/>
-              <path d="M107 40 L113 46 L107 52" stroke="#2b5761" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-              <rect x="120" y="10" width="36" height="72" rx="8" stroke="#2b5761" stroke-width="2" fill="white"/>
-              <circle cx="138" cy="20" r="2.5" fill="#5b8893"/>
-              <rect x="126" y="29" width="24" height="5" rx="2" fill="#c2dadf"/>
-              <rect x="126" y="39" width="24" height="5" rx="2" fill="#5b8893"/>
-              <rect x="126" y="49" width="16" height="5" rx="2" fill="#c2dadf"/>
-              <rect x="126" y="59" width="20" height="5" rx="2" fill="#5b8893"/>
-              <circle cx="166" cy="26" r="5" fill="#2b5761"/>
-              <line x1="171" y1="26" x2="179" y2="26" stroke="#5b8893" stroke-width="1.5"/>
-              <circle cx="184" cy="26" r="5" fill="#5b8893"/>
-              <line x1="189" y1="26" x2="197" y2="26" stroke="#5b8893" stroke-width="1.5"/>
-              <circle cx="202" cy="26" r="5" fill="#5b8893"/>
-              <rect x="162" y="40" width="50" height="34" rx="4" fill="none" stroke="#c2dadf" stroke-width="1.5"/>
-              <rect x="167" y="45" width="40" height="4" rx="2" fill="#c2dadf"/>
-              <line x1="173" y1="54" x2="184" y2="54" stroke="#5b8893" stroke-width="1.5" stroke-linecap="round"/>
-              <line x1="173" y1="60" x2="180" y2="60" stroke="#c2dadf" stroke-width="1.5" stroke-linecap="round"/>
-              <path d="M184 54 L188 60 L184 66" stroke="#5b8893" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/></g></svg></div>
-          <div class="aipe-task-body">
-            <h3 class="aipe-task-title">Prototyping 2 + 1</h3>
-            <p class="aipe-task-copy">Two fresh-eyes variants plus one built from existing components, with instant visualisation of stakeholder feedback to confirm direction.</p>
-            <div class="aipe-task-tags"><span>Variants</span><span>Feedback</span></div>
           </div>
         </article>
 
