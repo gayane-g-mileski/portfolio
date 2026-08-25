@@ -90,7 +90,7 @@
     .ia-dot { width:8px; height:8px; border-radius:2px; flex-shrink:0; }
     .ia-dot--dead { background:#A0BE86; }
     .ia-dot--dup  { background:#A0BE86; }
-    .ia-scroll { overflow-x:auto; background:#E8EFE2; padding:var(--s-7) var(--s-6); }
+    .ia-scroll { overflow-x:auto; background:#FFFFFF; padding:var(--s-7) var(--s-6); }
     /* root node */
     .ia-root-row { display:flex; justify-content:center; }
     .ia-eama { background:var(--teal-700); color:white; padding:5px 20px; border-radius:5px; font-size:0.8125rem; font-weight:700; letter-spacing:0.04em; display:inline-block; white-space:nowrap; }
@@ -412,7 +412,6 @@
         <div class="impl-frame">
           <img src="../images/case-studies/eama/ux-in-development.png" alt="UX-in-development process map — swimlanes for FA/Infoteam/RE, UX/UI, Entwicklung, and Test-Team across five phases with decision gates and review loops.">
         </div>
-        <figcaption class="impl-caption">The UX-in-development operating model I authored. Swimlanes map each team's involvement across the five phases; decision diamonds enforce the WAS / WIE split — functional changes route back to business, interface changes stay within UX/UI. Non-negotiable quality gates (corporate design, legal, consistency, WCAG AA) are protected from override at every phase boundary.</figcaption>
       </figure>
     </div>
   </section>
@@ -427,7 +426,7 @@
         <div>
           <p class="cs-lead" data-reveal>Ten weeks of discovery across farm sites, AMA offices, and agricultural consultancy practices — spanning three Austrian regions and two growing seasons.</p>
           <div class="cs-body-text" data-reveal>
-            <p>The farming user base presented a distinctive research challenge: a wide age range (significant proportion of operators over 55), high seasonal pressure concentrated into a six-week MFA window, genuinely varied technology literacy, and real-world contexts — barns, fields, muddy equipment — that made standard usability lab methods largely irrelevant.</p>
+            <p>The farming user base presented a distinctive research challenge: a wide age range (significant proportion of operators over 55), high seasonal pressure concentrated into a six-week MFA window, varied technology literacy, and real-world contexts — barns, fields, muddy equipment — that made standard usability lab methods largely irrelevant.</p>
           </div>
         </div>
       </div>
@@ -511,15 +510,14 @@
   <!-- =====================================================================
        INFORMATION ARCHITECTURE
   ====================================================================== -->
-  <section class="cs-section cs-section--tinted">
+  <section class="cs-section">
     <div class="container">
       <div class="cs-narrative-grid">
         <div><span class="cs-sidebar-label">02b — IA Audit</span></div>
         <div>
           <p class="cs-lead" data-reveal>Before redesigning a single screen, we mapped every reachable state in the existing portal — the full scope of what farmers were expected to navigate.</p>
           <div class="cs-body-text" data-reveal>
-            <p>The IA audit produced a complete sitemap of the legacy eAMA system: every module, sub-module, and terminal state. The diagram exposed the structural fragmentation that research had surfaced anecdotally — eight top-level modules, no shared navigation model, and 140+ distinct screens that a farmer submitting the MFA might theoretically encounter.</p>
-            <p>Highlighted in red are the navigation dead-ends where users had no clear path forward. Blue nodes mark the duplicate entry points — the same data input appearing in multiple modules with no reconciliation between them. The audit formed the evidence base for the structural consolidation that followed.</p>
+            <p>The audit mapped the legacy system end to end — every module, sub-module and terminal state — and put numbers on what research had only suggested: eight top-level modules, no shared navigation model, and 140+ distinct screens standing between a farmer and a submitted MFA.</p>
           </div>
         </div>
       </div>
