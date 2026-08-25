@@ -260,8 +260,9 @@
     root.appendChild(status);
 
     const label = (el, i) => {
+      if (el.dataset.carouselLabel) return el.dataset.carouselLabel;
       const t = qs('.work-card-title', el);
-      return t ? t.textContent.trim() : `Project ${i + 1}`;
+      return t ? t.textContent.trim() : `Item ${i + 1}`;
     };
 
     // build the dots
@@ -293,7 +294,7 @@
       });
       if (prevBtn) prevBtn.disabled = index === 0;
       if (nextBtn) nextBtn.disabled = index === slides.length - 1;
-      status.textContent = `Project ${index + 1} of ${slides.length}: ${label(slides[index], index)}`;
+      status.textContent = `${index + 1} of ${slides.length}: ${label(slides[index], index)}`;
     }
 
     prevBtn && prevBtn.addEventListener('click', () => go(index - 1));

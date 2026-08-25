@@ -2276,6 +2276,10 @@ input, textarea, select { font: inherit; }
 
   .work-card { grid-template-columns: 1fr; }
   .work-card--reversed { direction: ltr; }
+  /* single column: every card leads with its illustration, whichever way
+     round the two halves sit in the source */
+  .work-card-visual  { order: -1; }
+  .work-card-content { order: 0; }
   .work-card-visual { min-height: 280px; }
   .work-card-content { padding: var(--s-8) var(--s-8); }
   .work-card-meta { grid-template-columns: repeat(3, auto); gap: var(--s-8); }
@@ -2781,4 +2785,88 @@ body {
   .carousel-btn:hover:not(:disabled) { transform: none; }
   .work-card { transition: none; }
   .work-card:hover { transform: none; }
+}
+
+
+/* ==========================================================================
+   HERO TESTIMONIALS — framed beside the introduction
+   ========================================================================== */
+.hero-quotes {
+  border: 1px solid var(--gray-200);
+  border-radius: var(--r-2xl);
+  background: var(--white);
+  padding: var(--s-8) var(--s-8) var(--s-6);
+  box-shadow: var(--shadow-sm);
+  align-self: start;
+}
+.hero-quotes-head {
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+  margin-bottom: var(--s-5);
+  line-height: 1.5;
+}
+.hero-quote {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  min-height: 236px;
+}
+.hero-quote-mark {
+  font-family: var(--font-display);
+  font-size: 2.75rem;
+  line-height: 0.8;
+  color: var(--gray-300);
+  margin-bottom: var(--s-2);
+}
+.hero-quote-text {
+  margin: 0 0 var(--s-5);
+  font-size: 0.9375rem;
+  line-height: 1.65;
+  color: var(--gray-700);
+  font-style: italic;
+}
+.hero-quote-by { margin-top: auto; display: flex; flex-direction: column; gap: 2px; }
+.hero-quote-name { font-size: 0.875rem; font-weight: 700; color: var(--gray-900); }
+.hero-quote-org  { font-size: 0.75rem; color: var(--gray-500); }
+
+.hero-quotes .carousel-controls { margin-top: var(--s-5); justify-content: flex-start; gap: var(--s-4); }
+.hero-quotes .carousel-btn { width: 34px; height: 34px; }
+.hero-quotes .carousel-btn svg { width: 16px; height: 16px; }
+
+/* two columns once there is room for them */
+@media (min-width: 1000px) {
+  .hero-grid { grid-template-columns: minmax(0, 1.35fr) minmax(340px, 1fr); align-items: center; }
+}
+@media (max-width: 999px) {
+  .hero { min-height: 0; }
+  .hero-quotes { margin-top: var(--s-8); }
+}
+
+
+/* ==========================================================================
+   CONTACT — label, chips, then a centred form
+   ========================================================================== */
+.contact-stack { display: flex; flex-direction: column; align-items: center; gap: var(--s-10); }
+.contact-info--centered { text-align: center; width: 100%; }
+.contact-info--centered .section-label { justify-content: center; }
+.contact-info--centered .contact-links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--s-4);
+  margin-top: var(--s-6);
+}
+/* chips rather than full-width rows */
+.contact-info--centered .contact-link-item {
+  width: auto;
+  flex: 0 1 auto;
+  border-radius: var(--r-full);
+  padding: var(--s-3) var(--s-6) var(--s-3) var(--s-4);
+}
+.contact-stack .contact-form-card { width: 100%; max-width: 680px; }
+@media (max-width: 560px) {
+  .contact-info--centered .contact-links { flex-direction: column; align-items: stretch; }
 }
