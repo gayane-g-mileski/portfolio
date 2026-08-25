@@ -2719,6 +2719,11 @@ body {
 }
 .carousel-track.is-ready > .is-active { opacity: 1; }
 
+/* crossfade mode: every slide shares one grid cell, so looping is seamless */
+.carousel-track.is-ready.is-fade { display: grid; transform: none !important; }
+.carousel-track.is-ready.is-fade > * { grid-area: 1 / 1; opacity: 0; pointer-events: none; }
+.carousel-track.is-ready.is-fade > .is-active { opacity: 1; pointer-events: auto; }
+
 .carousel.is-ready .carousel-controls {
   display: flex;
   align-items: center;
@@ -2836,9 +2841,17 @@ body {
 .hero-quotes .carousel-btn { width: 34px; height: 34px; }
 .hero-quotes .carousel-btn svg { width: 16px; height: 16px; }
 
-/* two columns once there is room for them */
+/* headline full width; text and testimonials centred against each other */
+.hero-head { grid-column: 1 / -1; }
+.hero-head .hero-title { max-width: none; }
 @media (min-width: 1000px) {
-  .hero-grid { grid-template-columns: minmax(0, 1.35fr) minmax(340px, 1fr); align-items: center; }
+  .hero-grid {
+    grid-template-columns: minmax(0, 1.35fr) minmax(340px, 1fr);
+    align-items: center;
+    row-gap: var(--s-10);
+  }
+  .hero-content { align-self: center; }
+  .hero-quotes  { align-self: center; }
 }
 @media (max-width: 999px) {
   .hero { min-height: 0; }

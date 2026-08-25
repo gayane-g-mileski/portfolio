@@ -251,6 +251,9 @@
     const prevBtn = qs('[data-carousel-prev]', root);
     const nextBtn = qs('[data-carousel-next]', root);
     const dotsBox = qs('.carousel-dots', root);
+    const loop = root.hasAttribute('data-carousel-loop');
+    const fade = root.hasAttribute('data-carousel-fade');
+    if (fade) track.classList.add('is-fade');
     let index = 0;
 
     const status = document.createElement('p');
@@ -278,8 +281,9 @@
     });
 
     function go(i) {
-      index = Math.max(0, Math.min(slides.length - 1, i));
-      track.style.transform = `translateX(-${index * 100}%)`;
+      const n = slides.length;
+      index = loop ? ((i % n) + n) % n : Math.max(0, Math.min(n - 1, i));
+      if (!fade) track.style.transform = `translateX(-${index * 100}%)`;
       slides.forEach((s, n) => {
         const on = n === index;
         s.classList.toggle('is-active', on);
@@ -292,8 +296,8 @@
         d.classList.toggle('is-active', n === index);
         d.setAttribute('aria-selected', n === index ? 'true' : 'false');
       });
-      if (prevBtn) prevBtn.disabled = index === 0;
-      if (nextBtn) nextBtn.disabled = index === slides.length - 1;
+      if (prevBtn) prevBtn.disabled = !loop && index === 0;
+      if (nextBtn) nextBtn.disabled = !loop && index === slides.length - 1;
       status.textContent = `${index + 1} of ${slides.length}: ${label(slides[index], index)}`;
     }
 
