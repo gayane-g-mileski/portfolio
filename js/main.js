@@ -323,6 +323,80 @@
       x0 = y0 = null;
     }, { passive: true });
 
+    /* ---- book mode: drag a page like an e-reader ---- */
+    if (root.hasAttribute('data-carousel-book')) {
+      const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const leaf = document.createElement('div');
+      leaf.className = 'book-leaf';
+      leaf.setAttribute('aria-hidden', 'true');
+      root.appendChild(leaf);
+
+      let dragging = false, dir = 0, startX = 0, progress = 0;
+      const width = () => root.getBoundingClientRect().width / 2;
+
+      const setLeaf = (p) => {
+        // p runs 0 -> 1; forward turns the right page left, back turns the left page right
+        const deg = dir > 0 ? -180 * p : 180 * p;
+        leaf.style.transform = `rotateY(${deg}deg)`;
+        leaf.style.opacity = String(1 - Math.max(0, p - 0.75) * 3);
+      };
+      const endDrag = (commit) => {
+        leaf.style.transition = 'transform 0.42s cubic-bezier(0.22,0.61,0.36,1), opacity 0.42s ease';
+        if (commit) {
+          setLeaf(1);
+          setTimeout(() => { go(index + dir); reset(); }, 380);
+        } else {
+          setLeaf(0);
+          setTimeout(reset, 380);
+        }
+      };
+      const reset = () => {
+        leaf.classList.remove('is-active');
+        leaf.style.transition = 'none';
+        leaf.style.transform = '';
+        leaf.style.opacity = '';
+        root.classList.remove('is-turning');
+        dragging = false; progress = 0;
+      };
+
+      root.addEventListener('pointerdown', (e) => {
+        if (reduce || dragging) return;
+        if (e.target.closest('.carousel-dot, a, button')) return;
+        const r = root.getBoundingClientRect();
+        dir = (e.clientX - r.left) > r.width / 2 ? 1 : -1;
+        if (!loop && ((dir > 0 && index === slides.length - 1) || (dir < 0 && index === 0))) return;
+        dragging = true; startX = e.clientX; progress = 0;
+        leaf.className = 'book-leaf is-active ' + (dir > 0 ? 'book-leaf--fwd' : 'book-leaf--back');
+        leaf.style.transition = 'none';
+        setLeaf(0);
+        root.classList.add('is-turning');
+        root.setPointerCapture && root.setPointerCapture(e.pointerId);
+      });
+
+      root.addEventListener('pointermove', (e) => {
+        if (!dragging) return;
+        const dx = (e.clientX - startX) * (dir > 0 ? -1 : 1);   // pull inwards
+        progress = Math.max(0, Math.min(1, dx / width()));
+        setLeaf(progress);
+      });
+
+      const release = () => { if (dragging) endDrag(progress > 0.32); };
+      root.addEventListener('pointerup', release);
+      root.addEventListener('pointercancel', release);
+
+      // one page turn on load, so the gesture is discoverable — then it stays still
+      if (!reduce) {
+        setTimeout(() => {
+          if (dragging) return;
+          dir = 1;
+          leaf.className = 'book-leaf is-active book-leaf--fwd';
+          leaf.style.transition = 'transform 1.15s cubic-bezier(0.42,0,0.22,1), opacity 1.15s ease';
+          requestAnimationFrame(() => setLeaf(1));
+          setTimeout(reset, 1250);
+        }, 900);
+      }
+    }
+
     track.classList.add('is-ready');
     root.classList.add('is-ready');
     go(0);
