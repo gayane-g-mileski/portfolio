@@ -2965,3 +2965,45 @@ body {
 @media (prefers-reduced-motion: reduce) {
   .book-leaf { display: none !important; }
 }
+
+
+/* ==========================================================================
+   PROJECTS AS A BOOK — desktop only, phones keep the plain carousel
+   ========================================================================== */
+@media (min-width: 1000px) {
+  .carousel--book { position: relative; perspective: 2200px; }
+  .carousel--book .carousel-viewport { cursor: grab; }
+  .carousel--book .work-card { user-select: none; -webkit-user-drag: none; }
+  .carousel--book .work-card img { pointer-events: none; -webkit-user-drag: none; }
+  .carousel--book.is-turning .carousel-viewport { cursor: grabbing; }
+
+  /* the card's two halves already read as two pages — add the gutter */
+  .carousel--book .work-card { position: relative; }
+  .carousel--book .work-card::after {
+    content: '';
+    position: absolute;
+    left: 50%; top: 22px; bottom: 22px;
+    width: 16px; margin-left: -8px;
+    pointer-events: none;
+    z-index: 2;
+    background: linear-gradient(90deg,
+      rgba(0,0,0,0) 0%, rgba(0,0,0,0.045) 42%, rgba(0,0,0,0.09) 50%, rgba(0,0,0,0.045) 58%, rgba(0,0,0,0) 100%);
+  }
+  /* stacked page edges down both outer sides of the spread */
+  .carousel--book .carousel-viewport { position: relative; }
+  .carousel--book .carousel-viewport::before,
+  .carousel--book .carousel-viewport::after {
+    content: '';
+    position: absolute; top: 18px; bottom: 18px;
+    width: 6px; z-index: 3; pointer-events: none;
+    background: repeating-linear-gradient(90deg, rgba(0,0,0,0.10) 0 1px, rgba(255,255,255,0.85) 1px 3px);
+  }
+  .carousel--book .carousel-viewport::before { left: 0;  border-radius: var(--r-2xl) 0 0 var(--r-2xl); }
+  .carousel--book .carousel-viewport::after  { right: 0; border-radius: 0 var(--r-2xl) var(--r-2xl) 0; }
+
+  /* the leaf spans the full card, so a turn covers the whole spread */
+  .carousel--book .book-leaf { box-shadow: 0 0 60px -12px rgba(0,0,0,0.45), inset 0 0 0 1px rgba(0,0,0,0.05); }
+}
+@media (max-width: 999px) {
+  .carousel--book .book-leaf { display: none !important; }
+}

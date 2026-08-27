@@ -326,12 +326,13 @@
     /* ---- book mode: drag a page like an e-reader ---- */
     if (root.hasAttribute('data-carousel-book')) {
       const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const bookable = () => window.innerWidth >= 1000;   // phones keep the plain carousel
       const leaf = document.createElement('div');
       leaf.className = 'book-leaf';
       leaf.setAttribute('aria-hidden', 'true');
       root.appendChild(leaf);
 
-      let dragging = false, dir = 0, startX = 0, progress = 0;
+      let dragging = false, dir = 0, startX = 0, progress = 0, travel = 0;
       const width = () => root.getBoundingClientRect().width / 2;
 
       const setLeaf = (p) => {
@@ -344,7 +345,14 @@
         leaf.style.transition = 'transform 0.42s cubic-bezier(0.22,0.61,0.36,1), opacity 0.42s ease';
         if (commit) {
           setLeaf(1);
-          setTimeout(() => { go(index + dir); reset(); }, 380);
+          // swap underneath while the leaf covers the spread, so the turn is the only motion
+          setTimeout(() => {
+            const t = track.style.transition;
+            track.style.transition = 'none';
+            go(index + dir);
+            requestAnimationFrame(() => { track.style.transition = t; });
+            reset();
+          }, 380);
         } else {
           setLeaf(0);
           setTimeout(reset, 380);
@@ -360,32 +368,50 @@
       };
 
       root.addEventListener('pointerdown', (e) => {
-        if (reduce || dragging) return;
-        if (e.target.closest('.carousel-dot, a, button')) return;
+        if (reduce || dragging || !bookable()) return;
+        if (e.target.closest('.carousel-dot, button')) return;
         const r = root.getBoundingClientRect();
         dir = (e.clientX - r.left) > r.width / 2 ? 1 : -1;
         if (!loop && ((dir > 0 && index === slides.length - 1) || (dir < 0 && index === 0))) return;
-        dragging = true; startX = e.clientX; progress = 0;
+        dragging = true; startX = e.clientX; progress = 0; travel = 0;
         leaf.className = 'book-leaf is-active ' + (dir > 0 ? 'book-leaf--fwd' : 'book-leaf--back');
         leaf.style.transition = 'none';
         setLeaf(0);
         root.classList.add('is-turning');
-        root.setPointerCapture && root.setPointerCapture(e.pointerId);
+        window.addEventListener('pointermove', onMove);
+        window.addEventListener('pointerup', release);
+        window.addEventListener('pointercancel', release);
       });
 
-      root.addEventListener('pointermove', (e) => {
+      const onMove = (e) => {
         if (!dragging) return;
-        const dx = (e.clientX - startX) * (dir > 0 ? -1 : 1);   // pull inwards
+        const raw = e.clientX - startX;
+        travel = Math.max(travel, Math.abs(raw));
+        const dx = raw * (dir > 0 ? -1 : 1);   // pull inwards
         progress = Math.max(0, Math.min(1, dx / width()));
         setLeaf(progress);
-      });
+      };
 
-      const release = () => { if (dragging) endDrag(progress > 0.32); };
-      root.addEventListener('pointerup', release);
-      root.addEventListener('pointercancel', release);
+      const release = () => {
+        window.removeEventListener('pointermove', onMove);
+        window.removeEventListener('pointerup', release);
+        window.removeEventListener('pointercancel', release);
+        if (!dragging) return;
+        // a real drag must not also follow the card's link; a tap must
+        if (travel > 6) {
+          root.dataset.dragged = '1';
+          setTimeout(() => { delete root.dataset.dragged; }, 120);
+        }
+        endDrag(progress > 0.32);
+      };
+      root.addEventListener('click', (e) => {
+        if (root.dataset.dragged !== '1') return;
+        e.preventDefault();
+        e.stopPropagation();
+      }, true);
 
       // one page turn on load, so the gesture is discoverable — then it stays still
-      if (!reduce) {
+      if (!reduce && bookable()) {
         setTimeout(() => {
           if (dragging) return;
           dir = 1;
