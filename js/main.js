@@ -431,15 +431,10 @@
   });
 
   /* ==========================================================================
-     THE REVIEWS BOOK — closed, opened, leafed through, then shut again
+     THE REVIEWS BOOK — closed on load, opened with a click, then leafed through
   ========================================================================== */
   const book = qs('.hero-quotes');
   if (book) {
-    const carousel = qs('[data-carousel]', book);
-    const pages = qsa('.hero-quote', book).length || 1;
-    const LOOPS = 2;
-    let turns = 0;
-
     const state = (s) => {
       book.classList.remove('is-closed-front', 'is-open', 'is-closed-back');
       book.classList.add(s);
@@ -451,7 +446,6 @@
 
     const open = () => {
       if (book.classList.contains('is-open')) return;
-      turns = 0;
       state('is-open');
     };
 
@@ -464,15 +458,6 @@
       if ((e.key === 'Enter' || e.key === ' ') && !book.classList.contains('is-open')) {
         e.preventDefault();
         open();
-      }
-    });
-
-    // shut the book once it has been read through twice
-    carousel && carousel.addEventListener('book:turn', () => {
-      turns += 1;
-      if (turns >= pages * LOOPS) {
-        turns = 0;
-        setTimeout(() => state('is-closed-back'), 420);
       }
     });
 

@@ -2894,7 +2894,7 @@ body {
   perspective: 2200px;
   padding: 0;
   width: min(100%, 560px);       /* the open spread: two 280px pages */
-  height: 448px;
+  height: 400px;
   margin-left: auto;
   transition: width 0.95s cubic-bezier(0.3, 0.02, 0.2, 1);
   touch-action: pan-y;
@@ -2906,7 +2906,7 @@ body {
 /* the gutter the leaves hinge on */
 .hero-quotes-spine {
   position: absolute;
-  left: 50%; top: 26px; bottom: 64px;
+  left: 50%; top: 22px; bottom: 22px;
   width: 16px; margin-left: -8px;
   z-index: 5;
   pointer-events: none;
@@ -2931,25 +2931,14 @@ body {
   box-sizing: border-box;
   position: relative;
   margin: 0;
-  padding: 46px 56px 60px;
+  padding: 40px;                  /* 40 at the fore-edges, 80 across the gutter */
   height: 100%;
 }
 .hero-quote-cols {
   column-count: 2;
-  column-gap: 30px;
+  column-gap: 80px;
   column-fill: balance;
 }
-/* folio at the foot of each page */
-.hero-quote::before, .hero-quote::after {
-  position: absolute;
-  bottom: 28px;
-  font-family: var(--font-display);
-  font-size: 0.75rem;
-  color: var(--gray-400);
-  letter-spacing: 0.06em;
-}
-.hero-quote::before { content: attr(data-folio-l); left: 56px; }
-.hero-quote::after  { content: attr(data-folio-r); right: 56px; }
 .hero-quote-mark { display: none; }
 .hero-quote-text { margin: 0 0 var(--s-5); font-size: 0.9375rem; line-height: 1.85; color: var(--gray-700); font-style: italic; }
 .hero-quote-by   { break-inside: avoid; display: flex; flex-direction: column; gap: 2px; }
@@ -3105,14 +3094,11 @@ body {
 .hero-quotes.is-closed-front, .hero-quotes.is-closed-back { cursor: pointer; }
 
 @media (max-width: 999px) {
-  .hero-quotes { width: min(100%, 560px); height: 448px; margin-left: 0; }
+  .hero-quotes { width: min(100%, 560px); height: 400px; margin-left: 0; }
 }
 /* too narrow for a spread — the volume opens on a single page */
 @media (max-width: 640px) {
-  .hero-quote { padding: 38px 34px 50px; }
   .hero-quote-cols { column-count: 1; }
-  .hero-quote::before { left: 34px; }
-  .hero-quote::after  { right: 34px; }
 }
 @media (prefers-reduced-motion: reduce) {
   .book-cover { transition: none; }
