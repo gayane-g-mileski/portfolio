@@ -2846,7 +2846,7 @@ body {
 .hero-head .hero-title { max-width: none; }
 @media (min-width: 1000px) {
   .hero-grid {
-    grid-template-columns: minmax(0, 1.15fr) minmax(430px, 1fr);
+    grid-template-columns: minmax(0, 1fr) minmax(540px, 1.05fr);
     align-items: center;
     row-gap: var(--s-10);
   }
@@ -2893,12 +2893,12 @@ body {
 
 
 /* ==========================================================================
-   TESTIMONIALS AS A BOOK — one page, turned whole
+   TESTIMONIALS AS A BOOK — open spread, each leaf turns on the spine
    ========================================================================== */
 .hero-quotes {
   position: relative;
   overflow: hidden;
-  perspective: 1800px;
+  perspective: 2000px;
   padding: 0;
   touch-action: pan-y;
   cursor: grab;
@@ -2906,64 +2906,72 @@ body {
 }
 .hero-quotes.is-turning { cursor: grabbing; }
 
-/* binding down the left edge */
+/* the gutter the leaves hinge on */
 .hero-quotes-spine {
   position: absolute;
-  left: 0; top: 0; bottom: 0;
-  width: 12px;
+  left: 50%; top: 30px; bottom: 84px;
+  width: 16px; margin-left: -8px;
   z-index: 5;
   pointer-events: none;
-  border-radius: var(--r-2xl) 0 0 var(--r-2xl);
-  background: linear-gradient(90deg, var(--gray-100) 0 5px, var(--white) 5px 8px, var(--gray-100) 8px 10px, rgba(0,0,0,0.04) 10px 12px);
+  background: linear-gradient(90deg,
+    rgba(0,0,0,0) 0%, rgba(0,0,0,0.05) 40%, rgba(0,0,0,0.11) 50%, rgba(0,0,0,0.05) 60%, rgba(0,0,0,0) 100%);
 }
-/* stacked page edges on the outer side */
+/* stacked page edges on both outer sides */
+.hero-quotes::before,
 .hero-quotes::after {
   content: '';
-  position: absolute; top: 14px; bottom: 14px; right: 0;
+  position: absolute; top: 18px; bottom: 18px;
   width: 6px; z-index: 5; pointer-events: none;
-  border-radius: 0 var(--r-2xl) var(--r-2xl) 0;
   background: repeating-linear-gradient(90deg, var(--gray-200) 0 1px, var(--white) 1px 3px);
 }
+.hero-quotes::before { left: 0;  border-radius: var(--r-2xl) 0 0 var(--r-2xl); }
+.hero-quotes::after  { right: 0; border-radius: 0 var(--r-2xl) var(--r-2xl) 0; }
 
-/* the page itself — generous margins so the whole sheet turns, text and all */
+/* the quote runs across both pages */
 .hero-quote {
-  display: block;
+  display: block;                 /* multi-column does not apply to flex containers */
   margin: 0;
-  min-height: 268px;
-  padding: var(--s-10) var(--s-10) var(--s-8) calc(var(--s-10) + 14px);
+  padding: 64px;
+  column-count: 2;
+  column-gap: 52px;
+  column-fill: balance;
+  min-height: 236px;
 }
-.hero-quote-mark {
-  display: block;
-  font-family: var(--font-display);
-  font-size: 2.5rem;
-  line-height: 0.7;
-  color: var(--gray-300);
-  margin-bottom: var(--s-4);
-}
-.hero-quote-text { margin: 0 0 var(--s-6); font-size: 0.9375rem; line-height: 1.75; color: var(--gray-700); font-style: italic; }
-.hero-quote-by   { display: flex; flex-direction: column; gap: 2px; }
+.hero-quote-mark { display: none; }
+.hero-quote-text { margin: 0 0 var(--s-5); font-size: 0.875rem; line-height: 1.72; color: var(--gray-700); font-style: italic; }
+.hero-quote-by   { break-inside: avoid; display: flex; flex-direction: column; gap: 2px; }
 .hero-quote-name { font-size: 0.875rem; font-weight: 700; color: var(--gray-900); }
 .hero-quote-org  { font-size: 0.75rem; color: var(--gray-500); }
 
-/* the leaf spans the whole sheet, so the turn takes the entire page */
+/* one leaf = one page; both hinge on the spine so either side can be turned */
 .book-leaf {
   position: absolute;
-  inset: 0;
-  width: 100%;
+  top: 0; bottom: 0;
+  width: 50%;
   z-index: 4;
   display: none;
-  background: linear-gradient(90deg, #FBF7F2 0%, var(--white) 14%, var(--white) 84%, #F1E9DF 100%);
-  box-shadow: 0 0 52px -10px rgba(0,0,0,0.42), inset 0 0 0 1px rgba(0,0,0,0.05);
+  box-shadow: 0 0 48px -10px rgba(0,0,0,0.40), inset 0 0 0 1px rgba(0,0,0,0.05);
   pointer-events: none;
 }
 .book-leaf.is-active { display: block; }
-.book-leaf--fwd  { transform-origin: left center;  border-radius: var(--r-2xl); }
-.book-leaf--back { transform-origin: right center; border-radius: var(--r-2xl); }
+.book-leaf--fwd {
+  right: 0;
+  transform-origin: left center;
+  border-radius: 0 var(--r-2xl) var(--r-2xl) 0;
+  background: linear-gradient(90deg, #FAF6F1 0%, var(--white) 16%, var(--white) 86%, #F1E9DF 100%);
+}
+.book-leaf--back {
+  left: 0;
+  transform-origin: right center;
+  border-radius: var(--r-2xl) 0 0 var(--r-2xl);
+  background: linear-gradient(270deg, #FAF6F1 0%, var(--white) 16%, var(--white) 86%, #F1E9DF 100%);
+}
 
-.hero-quotes .carousel-controls { justify-content: center; margin: 0 0 var(--s-6); }
+.hero-quotes .carousel-controls { justify-content: center; margin: 0 0 var(--s-7); }
 
 @media (max-width: 999px) {
-  .hero-quote { padding: var(--s-8) var(--s-8) var(--s-6) calc(var(--s-8) + 12px); min-height: 0; }
+  .hero-quote { column-count: 1; padding: var(--s-8); min-height: 0; }
+  .hero-quotes-spine { display: none; }
 }
 @media (prefers-reduced-motion: reduce) {
   .book-leaf { display: none !important; }
