@@ -352,6 +352,7 @@
             go(index + dir);
             requestAnimationFrame(() => { track.style.transition = t; });
             reset();
+            root.dispatchEvent(new CustomEvent('book:turn', { bubbles: true, detail: { dir: dir, index: index } }));
           }, 380);
         } else {
           setLeaf(0);
@@ -369,6 +370,7 @@
 
       root.addEventListener('pointerdown', (e) => {
         if (reduce || dragging || !bookable()) return;
+        if (root.closest('.hero-quotes') && !root.closest('.hero-quotes').classList.contains('is-open')) return;
         if (e.target.closest('.carousel-dot, button')) return;
         const r = root.getBoundingClientRect();
         dir = (e.clientX - r.left) > r.width / 2 ? 1 : -1;
@@ -427,6 +429,55 @@
     root.classList.add('is-ready');
     go(0);
   });
+
+  /* ==========================================================================
+     THE REVIEWS BOOK — closed, opened, leafed through, then shut again
+  ========================================================================== */
+  const book = qs('.hero-quotes');
+  if (book) {
+    const carousel = qs('[data-carousel]', book);
+    const pages = qsa('.hero-quote', book).length || 1;
+    const LOOPS = 2;
+    let turns = 0;
+
+    const state = (s) => {
+      book.classList.remove('is-closed-front', 'is-open', 'is-closed-back');
+      book.classList.add(s);
+      const shut = s !== 'is-open';
+      book.setAttribute('aria-expanded', String(!shut));
+      book.setAttribute('aria-label', shut ? 'Client reviews — open the book' : 'Client reviews');
+      qsa('a, button', book).forEach(el => { el.tabIndex = shut ? -1 : 0; });
+    };
+
+    const open = () => {
+      if (book.classList.contains('is-open')) return;
+      turns = 0;
+      state('is-open');
+    };
+
+    book.addEventListener('click', (e) => {
+      if (book.classList.contains('is-open')) return;
+      if (e.target.closest('a')) return;
+      open();
+    });
+    book.addEventListener('keydown', (e) => {
+      if ((e.key === 'Enter' || e.key === ' ') && !book.classList.contains('is-open')) {
+        e.preventDefault();
+        open();
+      }
+    });
+
+    // shut the book once it has been read through twice
+    carousel && carousel.addEventListener('book:turn', () => {
+      turns += 1;
+      if (turns >= pages * LOOPS) {
+        turns = 0;
+        setTimeout(() => state('is-closed-back'), 420);
+      }
+    });
+
+    state('is-closed-front');
+  }
 
   /* ==========================================================================
      WORK FILTER TABS

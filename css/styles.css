@@ -2813,12 +2813,6 @@ body {
   margin-bottom: var(--s-5);
   line-height: 1.5;
 }
-.hero-quote {
-  margin: 0;
-  display: flex;
-  flex-direction: column;
-  min-height: 236px;
-}
 .hero-quote-mark {
   font-family: var(--font-display);
   font-size: 2.75rem;
@@ -2846,7 +2840,7 @@ body {
 .hero-head .hero-title { max-width: none; }
 @media (min-width: 1000px) {
   .hero-grid {
-    grid-template-columns: minmax(0, 1fr) minmax(540px, 1.05fr);
+    grid-template-columns: minmax(0, 1.25fr) minmax(508px, 0.9fr);
     align-items: center;
     row-gap: var(--s-10);
   }
@@ -2897,9 +2891,12 @@ body {
    ========================================================================== */
 .hero-quotes {
   position: relative;
-  overflow: hidden;
-  perspective: 2000px;
+  overflow: visible;
+  perspective: 2200px;
   padding: 0;
+  width: min(100%, 508px);       /* a portrait volume, open or shut */
+  height: 672px;
+  margin-left: auto;
   touch-action: pan-y;
   cursor: grab;
   user-select: none;
@@ -2909,7 +2906,7 @@ body {
 /* the gutter the leaves hinge on */
 .hero-quotes-spine {
   position: absolute;
-  left: 50%; top: 30px; bottom: 84px;
+  left: 50%; top: 34px; bottom: 96px;
   width: 16px; margin-left: -8px;
   z-index: 5;
   pointer-events: none;
@@ -2929,16 +2926,32 @@ body {
 
 /* the quote runs across both pages */
 .hero-quote {
-  display: block;                 /* multi-column does not apply to flex containers */
+  display: grid;
+  align-content: center;          /* the text block sits on the page, not at its top */
+  box-sizing: border-box;
+  position: relative;
   margin: 0;
-  padding: 64px;
-  column-count: 2;
-  column-gap: 52px;
-  column-fill: balance;
-  min-height: 236px;
+  padding: 56px 56px 74px;
+  height: 100%;
 }
+.hero-quote-cols {
+  column-count: 2;
+  column-gap: 30px;
+  column-fill: balance;
+}
+/* folio at the foot of each page */
+.hero-quote::before, .hero-quote::after {
+  position: absolute;
+  bottom: 40px;
+  font-family: var(--font-display);
+  font-size: 0.75rem;
+  color: var(--gray-400);
+  letter-spacing: 0.06em;
+}
+.hero-quote::before { content: attr(data-folio-l); left: 56px; }
+.hero-quote::after  { content: attr(data-folio-r); right: 56px; }
 .hero-quote-mark { display: none; }
-.hero-quote-text { margin: 0 0 var(--s-5); font-size: 0.875rem; line-height: 1.72; color: var(--gray-700); font-style: italic; }
+.hero-quote-text { margin: 0 0 var(--s-5); font-size: 0.8125rem; line-height: 1.78; color: var(--gray-700); font-style: italic; }
 .hero-quote-by   { break-inside: avoid; display: flex; flex-direction: column; gap: 2px; }
 .hero-quote-name { font-size: 0.875rem; font-weight: 700; color: var(--gray-900); }
 .hero-quote-org  { font-size: 0.75rem; color: var(--gray-500); }
@@ -2970,9 +2983,137 @@ body {
 .hero-quotes .carousel-controls { justify-content: center; margin: 0 0 var(--s-7); }
 
 @media (max-width: 999px) {
-  .hero-quote { column-count: 1; padding: var(--s-8); min-height: 0; }
-  .hero-quotes-spine { display: none; }
+    .hero-quotes-spine { display: none; }
 }
 @media (prefers-reduced-motion: reduce) {
   .book-leaf { display: none !important; }
 }
+
+
+/* ==========================================================================
+   THE REVIEWS BOOK — covers, opening and closing
+   ========================================================================== */
+.hero-quotes { transform-style: preserve-3d; }
+.hero-quotes:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 4px; }
+
+/* page block seen at the fore-edge while the book is shut */
+.book-block-edge {
+  position: absolute;
+  top: 15px; bottom: 15px; right: 4px;
+  width: 9px;
+  z-index: 9;
+  transition: opacity 0.35s ease;
+  border-radius: 0 4px 4px 0;
+  background: repeating-linear-gradient(90deg, #E7DFD2 0 1px, #FBF8F3 1px 3px);
+  box-shadow: inset -2px 0 4px -1px rgba(0,0,0,0.28);
+  opacity: 0;
+  transition: opacity 0.35s ease;
+}
+.hero-quotes.is-closed-front .book-block-edge,
+.hero-quotes.is-closed-back  .book-block-edge { opacity: 1; }
+
+/* the covers */
+.book-cover {
+  position: absolute;
+  inset: 0;
+  z-index: 8;
+  border-radius: 4px var(--r-2xl) var(--r-2xl) 4px;
+  backface-visibility: hidden;
+  transition: transform 0.95s cubic-bezier(0.3, 0.02, 0.2, 1), opacity 0.95s ease;
+  background:
+    /* raised bands down the spine */
+    linear-gradient(90deg,
+      #37101F 0 6px, #4A1628 6px 11px, #2E0C19 11px 15px, #4A1628 15px 21px, #3E1223 21px 27px, rgba(0,0,0,0) 27px),
+    /* leather grain */
+    repeating-linear-gradient(112deg, rgba(255,255,255,0.030) 0 2px, rgba(0,0,0,0.035) 2px 4px),
+    repeating-linear-gradient(18deg, rgba(255,255,255,0.022) 0 3px, rgba(0,0,0,0.028) 3px 6px),
+    radial-gradient(120% 90% at 78% 26%, #6B1B34 0%, #56142A 42%, #40101F 100%);
+  box-shadow:
+    0 28px 46px -22px rgba(0,0,0,0.55),
+    inset -2px 0 0 rgba(255,255,255,0.05),
+    inset 0 1px 0 rgba(255,255,255,0.07);
+}
+/* gilt rule set into the board */
+.book-cover-frame {
+  position: absolute;
+  inset: 20px 22px 20px 40px;
+  border: 1.5px solid rgba(206,168,106,0.62);
+  border-radius: 3px;
+  box-shadow: inset 0 0 0 4px rgba(0,0,0,0.14), 0 0 10px -3px rgba(206,168,106,0.30);
+  pointer-events: none;
+}
+.book-cover-frame::after {
+  content: '';
+  position: absolute; inset: 7px;
+  border: 1px solid rgba(206,168,106,0.32);
+  border-radius: 2px;
+}
+.book-cover-title {
+  position: absolute;
+  left: 40px; right: 22px; top: 50%;
+  transform: translateY(-50%);
+  text-align: center;
+  font-family: var(--font-display);
+  font-size: 2.5rem;
+  font-weight: 400;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #E3C388;
+  text-shadow: 0 1px 0 rgba(0,0,0,0.55), 0 -1px 0 rgba(255,255,255,0.12);
+  pointer-events: none;
+}
+.book-cover-title--small { font-size: 1.25rem; letter-spacing: 0.32em; opacity: 0.9; }
+
+/* front board hinges on the spine; back board swings in from the fore-edge */
+.book-cover--front { transform-origin: left center;  transform: rotateY(0deg) translateZ(3px); }
+.book-cover--back {
+  border-radius: var(--r-2xl) 4px 4px var(--r-2xl);
+  background:
+    linear-gradient(270deg,
+      #37101F 0 6px, #4A1628 6px 11px, #2E0C19 11px 15px, #4A1628 15px 21px, #3E1223 21px 27px, rgba(0,0,0,0) 27px),
+    repeating-linear-gradient(112deg, rgba(255,255,255,0.030) 0 2px, rgba(0,0,0,0.035) 2px 4px),
+    repeating-linear-gradient(18deg, rgba(255,255,255,0.022) 0 3px, rgba(0,0,0,0.028) 3px 6px),
+    radial-gradient(120% 90% at 22% 26%, #6B1B34 0%, #56142A 42%, #40101F 100%);
+}
+.book-cover--back .book-cover-frame { inset: 20px 40px 20px 22px; }
+.book-cover--back .book-cover-title { left: 22px; right: 40px; }
+.hero-quotes.is-closed-back .book-block-edge { right: auto; left: 4px; box-shadow: inset 2px 0 4px -1px rgba(0,0,0,0.28); }
+.book-cover--back  { transform-origin: right center; transform: rotateY(180deg) translateZ(3px); }
+
+.hero-quotes.is-open .book-cover--front { transform: rotateY(-180deg) translateZ(3px); opacity: 0; }
+.hero-quotes.is-open .book-cover--back  { transform: rotateY(180deg)  translateZ(3px); opacity: 0; }
+.hero-quotes.is-closed-back .book-cover--front { transform: rotateY(-180deg) translateZ(3px); opacity: 0; }
+.hero-quotes.is-closed-back .book-cover--back  { transform: rotateY(0deg)    translateZ(3px); }
+
+/* while shut, the spread underneath must not be readable or reachable */
+.hero-quotes.is-closed-front .carousel,
+.hero-quotes.is-closed-back  .carousel { visibility: hidden; }
+/* while it is shut only the volume itself shows — no paper, no card */
+.hero-quotes.is-closed-front,
+.hero-quotes.is-closed-back {
+  background: none;
+  border-color: transparent;
+  box-shadow: none;
+}
+.hero-quotes.is-closed-front .hero-quotes-spine,
+.hero-quotes.is-closed-back  .hero-quotes-spine,
+.hero-quotes.is-closed-front::before, .hero-quotes.is-closed-front::after,
+.hero-quotes.is-closed-back::before,  .hero-quotes.is-closed-back::after { opacity: 0; }
+.hero-quotes::before, .hero-quotes::after, .hero-quotes-spine { transition: opacity 0.4s ease; }
+.hero-quotes.is-closed-front, .hero-quotes.is-closed-back { cursor: pointer; }
+
+@media (max-width: 999px) {
+  .hero-quotes { width: min(100%, 420px); height: auto; min-height: 480px; margin-left: 0; }
+  .book-cover-title { font-size: 1.5rem; }
+  .book-cover-frame { inset: 14px 16px 14px 30px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .book-cover { transition: none; }
+}
+
+
+/* the spread must fill the volume so pages are full height */
+.hero-quotes .carousel,
+.hero-quotes .carousel-viewport { height: 100%; }
+.hero-quotes .carousel-track { height: 100%; }
+.hero-quotes .carousel-track.is-ready.is-fade > * { height: 100%; }
