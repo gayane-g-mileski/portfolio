@@ -2325,10 +2325,9 @@ input, textarea, select { font: inherit; }
   .nav-link { font-size: 1.25rem; }
   .nav-cta { padding: 0.75rem 2rem; font-size: 1rem; }
 
-  /* Hero: text first, portrait second on mobile */
+  /* Hero: headline, then text, then the book */
   .hero { min-height: auto; padding-top: calc(var(--nav-height) + var(--s-6)); padding-bottom: var(--s-10); }
   .hero-grid { grid-template-columns: 1fr; gap: var(--s-8); padding-block: var(--s-4); }
-  .hero-content { order: -1; }
   .hero-eyebrow-location { display: none; }
   .hero-visual { justify-content: center; order: 0; }
   .hero-portrait-wrapper { max-width: 320px; width: 100%; }
@@ -2840,7 +2839,7 @@ body {
 .hero-head .hero-title { max-width: none; }
 @media (min-width: 1000px) {
   .hero-grid {
-    grid-template-columns: minmax(0, 1.25fr) minmax(508px, 0.9fr);
+    grid-template-columns: minmax(0, 1.25fr) minmax(560px, 0.9fr);
     align-items: center;
     row-gap: var(--s-10);
   }
@@ -2894,9 +2893,10 @@ body {
   overflow: visible;
   perspective: 2200px;
   padding: 0;
-  width: min(100%, 508px);       /* a portrait volume, open or shut */
-  height: 672px;
+  width: min(100%, 560px);       /* the open spread: two 280px pages */
+  height: 448px;
   margin-left: auto;
+  transition: width 0.95s cubic-bezier(0.3, 0.02, 0.2, 1);
   touch-action: pan-y;
   cursor: grab;
   user-select: none;
@@ -2906,7 +2906,7 @@ body {
 /* the gutter the leaves hinge on */
 .hero-quotes-spine {
   position: absolute;
-  left: 50%; top: 34px; bottom: 96px;
+  left: 50%; top: 26px; bottom: 64px;
   width: 16px; margin-left: -8px;
   z-index: 5;
   pointer-events: none;
@@ -2931,7 +2931,7 @@ body {
   box-sizing: border-box;
   position: relative;
   margin: 0;
-  padding: 56px 56px 74px;
+  padding: 46px 56px 60px;
   height: 100%;
 }
 .hero-quote-cols {
@@ -2942,7 +2942,7 @@ body {
 /* folio at the foot of each page */
 .hero-quote::before, .hero-quote::after {
   position: absolute;
-  bottom: 40px;
+  bottom: 28px;
   font-family: var(--font-display);
   font-size: 0.75rem;
   color: var(--gray-400);
@@ -2951,7 +2951,7 @@ body {
 .hero-quote::before { content: attr(data-folio-l); left: 56px; }
 .hero-quote::after  { content: attr(data-folio-r); right: 56px; }
 .hero-quote-mark { display: none; }
-.hero-quote-text { margin: 0 0 var(--s-5); font-size: 0.8125rem; line-height: 1.78; color: var(--gray-700); font-style: italic; }
+.hero-quote-text { margin: 0 0 var(--s-5); font-size: 0.9375rem; line-height: 1.85; color: var(--gray-700); font-style: italic; }
 .hero-quote-by   { break-inside: avoid; display: flex; flex-direction: column; gap: 2px; }
 .hero-quote-name { font-size: 0.875rem; font-weight: 700; color: var(--gray-900); }
 .hero-quote-org  { font-size: 0.75rem; color: var(--gray-500); }
@@ -2982,7 +2982,7 @@ body {
 
 .hero-quotes .carousel-controls { justify-content: center; margin: 0 0 var(--s-7); }
 
-@media (max-width: 999px) {
+@media (max-width: 640px) {
     .hero-quotes-spine { display: none; }
 }
 @media (prefers-reduced-motion: reduce) {
@@ -3015,7 +3015,8 @@ body {
 /* the covers */
 .book-cover {
   position: absolute;
-  inset: 0;
+  top: 0; bottom: 0; right: 0;
+  width: 280px; max-width: 100%;   /* one board = one page of the spread */
   z-index: 8;
   border-radius: 4px var(--r-2xl) var(--r-2xl) 4px;
   backface-visibility: hidden;
@@ -3036,7 +3037,7 @@ body {
 /* gilt rule set into the board */
 .book-cover-frame {
   position: absolute;
-  inset: 20px 22px 20px 40px;
+  inset: 18px 20px 18px 34px;
   border: 1.5px solid rgba(206,168,106,0.62);
   border-radius: 3px;
   box-shadow: inset 0 0 0 4px rgba(0,0,0,0.14), 0 0 10px -3px rgba(206,168,106,0.30);
@@ -3050,11 +3051,11 @@ body {
 }
 .book-cover-title {
   position: absolute;
-  left: 40px; right: 22px; top: 50%;
+  left: 34px; right: 20px; top: 50%;
   transform: translateY(-50%);
   text-align: center;
   font-family: var(--font-display);
-  font-size: 2.5rem;
+  font-size: 1.75rem;
   font-weight: 400;
   letter-spacing: 0.2em;
   text-transform: uppercase;
@@ -3062,7 +3063,7 @@ body {
   text-shadow: 0 1px 0 rgba(0,0,0,0.55), 0 -1px 0 rgba(255,255,255,0.12);
   pointer-events: none;
 }
-.book-cover-title--small { font-size: 1.25rem; letter-spacing: 0.32em; opacity: 0.9; }
+.book-cover-title--small { font-size: 1rem; letter-spacing: 0.3em; opacity: 0.9; }
 
 /* front board hinges on the spine; back board swings in from the fore-edge */
 .book-cover--front { transform-origin: left center;  transform: rotateY(0deg) translateZ(3px); }
@@ -3075,8 +3076,8 @@ body {
     repeating-linear-gradient(18deg, rgba(255,255,255,0.022) 0 3px, rgba(0,0,0,0.028) 3px 6px),
     radial-gradient(120% 90% at 22% 26%, #6B1B34 0%, #56142A 42%, #40101F 100%);
 }
-.book-cover--back .book-cover-frame { inset: 20px 40px 20px 22px; }
-.book-cover--back .book-cover-title { left: 22px; right: 40px; }
+.book-cover--back .book-cover-frame { inset: 18px 34px 18px 20px; }
+.book-cover--back .book-cover-title { left: 20px; right: 34px; }
 .hero-quotes.is-closed-back .book-block-edge { right: auto; left: 4px; box-shadow: inset 2px 0 4px -1px rgba(0,0,0,0.28); }
 .book-cover--back  { transform-origin: right center; transform: rotateY(180deg) translateZ(3px); }
 
@@ -3091,6 +3092,7 @@ body {
 /* while it is shut only the volume itself shows — no paper, no card */
 .hero-quotes.is-closed-front,
 .hero-quotes.is-closed-back {
+  width: min(100%, 280px);       /* shut, only one board wide */
   background: none;
   border-color: transparent;
   box-shadow: none;
@@ -3103,9 +3105,14 @@ body {
 .hero-quotes.is-closed-front, .hero-quotes.is-closed-back { cursor: pointer; }
 
 @media (max-width: 999px) {
-  .hero-quotes { width: min(100%, 420px); height: auto; min-height: 480px; margin-left: 0; }
-  .book-cover-title { font-size: 1.5rem; }
-  .book-cover-frame { inset: 14px 16px 14px 30px; }
+  .hero-quotes { width: min(100%, 560px); height: 448px; margin-left: 0; }
+}
+/* too narrow for a spread — the volume opens on a single page */
+@media (max-width: 640px) {
+  .hero-quote { padding: 38px 34px 50px; }
+  .hero-quote-cols { column-count: 1; }
+  .hero-quote::before { left: 34px; }
+  .hero-quote::after  { right: 34px; }
 }
 @media (prefers-reduced-motion: reduce) {
   .book-cover { transition: none; }
