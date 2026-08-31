@@ -341,12 +341,21 @@
         leaf.style.transform = `rotateY(${deg}deg)`;
         leaf.style.opacity = String(1 - Math.max(0, p - 0.75) * 3);
       };
+      // past the first page or the last one there is nothing left but a cover
+      const atCover = () => !loop && ((dir > 0 && index === slides.length - 1) || (dir < 0 && index === 0));
+
       const endDrag = (commit) => {
         leaf.style.transition = 'transform 0.42s cubic-bezier(0.22,0.61,0.36,1), opacity 0.42s ease';
         if (commit) {
           setLeaf(1);
+          const shutting = atCover();
           // swap underneath while the leaf covers the spread, so the turn is the only motion
           setTimeout(() => {
+            if (shutting) {
+              root.dispatchEvent(new CustomEvent('book:close', { bubbles: true, detail: { dir: dir } }));
+              reset();
+              return;
+            }
             const t = track.style.transition;
             track.style.transition = 'none';
             go(index + dir);
@@ -374,7 +383,6 @@
         if (e.target.closest('.carousel-dot, button')) return;
         const r = root.getBoundingClientRect();
         dir = (e.clientX - r.left) > r.width / 2 ? 1 : -1;
-        if (!loop && ((dir > 0 && index === slides.length - 1) || (dir < 0 && index === 0))) return;
         dragging = true; startX = e.clientX; progress = 0; travel = 0;
         leaf.className = 'book-leaf is-active ' + (dir > 0 ? 'book-leaf--fwd' : 'book-leaf--back');
         leaf.style.transition = 'none';
@@ -431,10 +439,12 @@
   });
 
   /* ==========================================================================
-     THE REVIEWS BOOK — closed on load, opened with a click, then leafed through
+     THE REVIEWS BOOK — opened with a click, leafed through, shut at either end
   ========================================================================== */
   const book = qs('.hero-quotes');
   if (book) {
+    const carousel = qs('[data-carousel]', book);
+
     const state = (s) => {
       book.classList.remove('is-closed-front', 'is-open', 'is-closed-back');
       book.classList.add(s);
@@ -459,6 +469,12 @@
         e.preventDefault();
         open();
       }
+    });
+
+    // turning back off the first page shows the front board, on past the last
+    // one the back board — the book shuts the way it was left
+    carousel && carousel.addEventListener('book:close', (e) => {
+      state(e.detail.dir > 0 ? 'is-closed-back' : 'is-closed-front');
     });
 
     state('is-closed-front');
