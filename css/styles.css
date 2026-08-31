@@ -3010,7 +3010,7 @@ body {
   border-radius: 3px 5px 5px 3px;
   backface-visibility: hidden;
   transition: transform 0.95s cubic-bezier(0.3, 0.02, 0.2, 1), opacity 0.95s ease;
-  background: #1A350E url('../images/book/cover-front.webp') center / 100% 100% no-repeat;
+  background: #2B5761 url('../images/book/cover-front.webp') center / 100% 100% no-repeat;
   box-shadow:
     0 28px 46px -22px rgba(0,0,0,0.55),
     inset 0 1px 0 rgba(255,255,255,0.06);
