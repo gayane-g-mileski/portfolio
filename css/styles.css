@@ -2906,12 +2906,12 @@ body {
 /* the gutter the leaves hinge on */
 .hero-quotes-spine {
   position: absolute;
-  left: 50%; top: 22px; bottom: 22px;
-  width: 16px; margin-left: -8px;
+  left: 50%; top: 0; bottom: 0;
+  width: 34px; margin-left: -17px;
   z-index: 5;
   pointer-events: none;
-  background: linear-gradient(90deg,
-    rgba(0,0,0,0) 0%, rgba(0,0,0,0.05) 40%, rgba(0,0,0,0.11) 50%, rgba(0,0,0,0.05) 60%, rgba(0,0,0,0) 100%);
+  background: #1A350E url('../images/book/spine.webp') center / auto 100% no-repeat;
+  box-shadow: 0 0 18px -2px rgba(0,0,0,0.45), inset 0 0 14px rgba(0,0,0,0.38);
 }
 /* stacked page edges on both outer sides */
 .hero-quotes::before,
@@ -3007,66 +3007,21 @@ body {
   top: 0; bottom: 0; right: 0;
   width: 280px; max-width: 100%;   /* one board = one page of the spread */
   z-index: 8;
-  border-radius: 4px var(--r-2xl) var(--r-2xl) 4px;
+  border-radius: 3px 5px 5px 3px;
   backface-visibility: hidden;
   transition: transform 0.95s cubic-bezier(0.3, 0.02, 0.2, 1), opacity 0.95s ease;
-  background:
-    /* raised bands down the spine */
-    linear-gradient(90deg,
-      #37101F 0 6px, #4A1628 6px 11px, #2E0C19 11px 15px, #4A1628 15px 21px, #3E1223 21px 27px, rgba(0,0,0,0) 27px),
-    /* leather grain */
-    repeating-linear-gradient(112deg, rgba(255,255,255,0.030) 0 2px, rgba(0,0,0,0.035) 2px 4px),
-    repeating-linear-gradient(18deg, rgba(255,255,255,0.022) 0 3px, rgba(0,0,0,0.028) 3px 6px),
-    radial-gradient(120% 90% at 78% 26%, #6B1B34 0%, #56142A 42%, #40101F 100%);
+  background: #1A350E url('../images/book/cover-front.webp') center / 100% 100% no-repeat;
   box-shadow:
     0 28px 46px -22px rgba(0,0,0,0.55),
-    inset -2px 0 0 rgba(255,255,255,0.05),
-    inset 0 1px 0 rgba(255,255,255,0.07);
+    inset 0 1px 0 rgba(255,255,255,0.06);
 }
-/* gilt rule set into the board */
-.book-cover-frame {
-  position: absolute;
-  inset: 18px 20px 18px 34px;
-  border: 1.5px solid rgba(206,168,106,0.62);
-  border-radius: 3px;
-  box-shadow: inset 0 0 0 4px rgba(0,0,0,0.14), 0 0 10px -3px rgba(206,168,106,0.30);
-  pointer-events: none;
-}
-.book-cover-frame::after {
-  content: '';
-  position: absolute; inset: 7px;
-  border: 1px solid rgba(206,168,106,0.32);
-  border-radius: 2px;
-}
-.book-cover-title {
-  position: absolute;
-  left: 34px; right: 20px; top: 50%;
-  transform: translateY(-50%);
-  text-align: center;
-  font-family: var(--font-display);
-  font-size: 1.75rem;
-  font-weight: 400;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: #E3C388;
-  text-shadow: 0 1px 0 rgba(0,0,0,0.55), 0 -1px 0 rgba(255,255,255,0.12);
-  pointer-events: none;
-}
-.book-cover-title--small { font-size: 1rem; letter-spacing: 0.3em; opacity: 0.9; }
 
 /* front board hinges on the spine; back board swings in from the fore-edge */
 .book-cover--front { transform-origin: left center;  transform: rotateY(0deg) translateZ(3px); }
 .book-cover--back {
-  border-radius: var(--r-2xl) 4px 4px var(--r-2xl);
-  background:
-    linear-gradient(270deg,
-      #37101F 0 6px, #4A1628 6px 11px, #2E0C19 11px 15px, #4A1628 15px 21px, #3E1223 21px 27px, rgba(0,0,0,0) 27px),
-    repeating-linear-gradient(112deg, rgba(255,255,255,0.030) 0 2px, rgba(0,0,0,0.035) 2px 4px),
-    repeating-linear-gradient(18deg, rgba(255,255,255,0.022) 0 3px, rgba(0,0,0,0.028) 3px 6px),
-    radial-gradient(120% 90% at 22% 26%, #6B1B34 0%, #56142A 42%, #40101F 100%);
+  border-radius: 5px 3px 3px 5px;
+  background-image: url('../images/book/cover-back.webp');
 }
-.book-cover--back .book-cover-frame { inset: 18px 34px 18px 20px; }
-.book-cover--back .book-cover-title { left: 20px; right: 34px; }
 .hero-quotes.is-closed-back .book-block-edge { right: auto; left: 4px; box-shadow: inset 2px 0 4px -1px rgba(0,0,0,0.28); }
 .book-cover--back  { transform-origin: right center; transform: rotateY(180deg) translateZ(3px); }
 
