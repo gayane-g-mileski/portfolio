@@ -1554,13 +1554,20 @@ input, textarea, select { font: inherit; }
   margin-bottom: var(--s-6);
 }
 
+/* fills down the left column first, so the first two cards sit on the left */
 .about-highlights {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-rows: repeat(2, auto);
+  grid-auto-flow: column;
   gap: var(--s-4);
 }
 @media (max-width: 767px) {
-  .about-highlights { grid-template-columns: 1fr; }
+  .about-highlights {
+    grid-template-columns: 1fr;
+    grid-template-rows: none;
+    grid-auto-flow: row;
+  }
 }
 
 .about-highlight {
