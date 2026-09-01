@@ -97,12 +97,12 @@
   --gray-600: #FFE0C5;
 }
 
-/* The AI, About and Experience sections share a teal accent theme: a white
-   background with the teal-family and dark-neutral tokens remapped in scope,
-   so labels, headings, icons, tags, timeline markers and card numbers all
-   resolve to teal without touching the global brand palette. (The AI panel
-   itself uses a deeper #2b5761 slate, set on its own classes.) */
-#ai-engineering,
+/* The Product Management, About and Experience sections share a teal accent
+   theme: a white background with the teal-family and dark-neutral tokens
+   remapped in scope, so labels, headings, icons, tags, timeline markers and
+   card numbers all resolve to teal without touching the global brand palette.
+   (The task panel itself uses a deeper #2b5761 slate, set on its own classes.) */
+#product-management,
 #about,
 #experience {
   background: var(--white);
@@ -534,7 +534,7 @@ input, textarea, select { font: inherit; }
    6. HERO SECTION
    ========================================================================== */
 .hero {
-  min-height: 100vh;
+  min-height: 84vh;
   display: flex;
   align-items: center;
   padding-top: var(--nav-height);
@@ -1321,18 +1321,23 @@ input, textarea, select { font: inherit; }
 .metrics-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 0;
-  background: var(--white);
-  border-radius: var(--r-2xl);
-  overflow: hidden;
+  gap: var(--s-5);
 }
 
+/* each metric is its own rounded card */
 .metric-cell {
   background: var(--white);
-  padding: var(--s-10) var(--s-8);
-  transition: background var(--t-base);
+  border: 1px solid var(--gray-200);
+  border-radius: var(--r-xl);
+  padding: var(--s-8) var(--s-7);
+  transition: background var(--t-base), border-color var(--t-base), box-shadow var(--t-base), transform var(--t-base);
 }
-.metric-cell:hover { background: var(--teal-50); }
+.metric-cell:hover {
+  background: var(--teal-50);
+  border-color: var(--teal-300);
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+}
 
 .metric-number {
   font-family: var(--font-display);
@@ -1449,13 +1454,6 @@ input, textarea, select { font: inherit; }
 /* ==========================================================================
    12. ABOUT SECTION
    ========================================================================== */
-.about-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: var(--s-16);
-  align-items: start;
-}
-
 .about-image {
   position: relative;
 }
@@ -1528,6 +1526,17 @@ input, textarea, select { font: inherit; }
 
 .about-content {}
 
+/* portrait, a 2 x 2 of cards and the button, sharing a left edge, centred */
+.about-stack {
+  max-width: 900px;
+  margin-inline: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--s-8);
+}
+.about-stack .about-highlights { width: 100%; }
+
 .about-photo {
   display: block;
   width: 150px;
@@ -1537,7 +1546,7 @@ input, textarea, select { font: inherit; }
   border-radius: 50%;
   object-fit: cover;
   object-position: center top;
-  margin: 0 auto var(--s-6);
+  margin: 0;
   transform: scaleX(-1);
 }
 
@@ -1550,7 +1559,11 @@ input, textarea, select { font: inherit; }
 
 .about-highlights {
   display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: var(--s-4);
+}
+@media (max-width: 767px) {
+  .about-highlights { grid-template-columns: 1fr; }
 }
 
 .about-highlight {
@@ -1590,24 +1603,34 @@ input, textarea, select { font: inherit; }
    ========================================================================== */
 .timeline {
   position: relative;
-  max-width: 760px;
+  max-width: 900px;
   margin: 0 auto;
 }
 
+/* dates and place run down the left, the role and the story to the right */
 .timeline-item {
+  display: grid;
+  grid-template-columns: 210px minmax(0, 1fr);
+  gap: var(--s-8);
+}
+.timeline-aside {
+  text-align: right;
+  padding-top: 3px;
+}
+.timeline-content {
   position: relative;
-  padding-left: var(--s-10);
+  padding-left: var(--s-8);
   padding-bottom: var(--s-16);
   border-left: 1px solid var(--gray-200);
 }
-.timeline-item:last-child {
+.timeline-item:last-child .timeline-content {
   padding-bottom: 0;
   border-left-color: transparent;
 }
 
 .timeline-marker {
   position: absolute;
-  top: 2px;
+  top: 6px;
   left: -8px;
   width: 16px;
   height: 16px;
@@ -1635,16 +1658,26 @@ input, textarea, select { font: inherit; }
   margin-bottom: var(--s-3);
 }
 .timeline-org-context {
+  display: block;
   font-weight: 400;
+  font-style: normal;
   color: var(--gray-500);
 }
 .timeline-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin-top: var(--s-3);
   font-size: 0.75rem;
   font-weight: 600;
   letter-spacing: 0.04em;
   text-transform: uppercase;
   color: var(--gray-400);
-  margin-bottom: var(--s-5);
+}
+@media (max-width: 767px) {
+  .timeline-item { grid-template-columns: 1fr; gap: var(--s-3); }
+  .timeline-aside { text-align: left; }
+  .timeline-content { padding-left: var(--s-7); padding-bottom: var(--s-10); }
 }
 .timeline-desc {
   max-width: 58ch;
@@ -2287,7 +2320,6 @@ input, textarea, select { font: inherit; }
   .metrics-grid { grid-template-columns: repeat(2, 1fr); }
   .testimonials-grid { grid-template-columns: 1fr 1fr; }
 
-  .about-grid { gap: var(--s-12); }
 
   .footer-grid { grid-template-columns: 1fr 1fr; }
 
@@ -2349,7 +2381,6 @@ input, textarea, select { font: inherit; }
 
   .testimonials-grid { grid-template-columns: 1fr; }
 
-  .about-grid { grid-template-columns: 1fr; }
   .about-image { max-width: 340px; margin-inline: auto; }
   .about-badge { right: 0; transform: none; }
 
@@ -2834,6 +2865,8 @@ body {
 .hero-quotes .carousel-btn { width: 34px; height: 34px; }
 .hero-quotes .carousel-btn svg { width: 16px; height: 16px; }
 
+#practice { padding-top: var(--s-12); }
+
 /* headline full width; text and testimonials centred against each other */
 .hero-head { grid-column: 1 / -1; }
 .hero-head .hero-title { max-width: none; }
@@ -2860,6 +2893,7 @@ body {
 .contact-info--centered .section-label { justify-content: center; }
 .contact-info--centered .contact-links {
   display: flex;
+  flex-direction: row;          /* email, LinkedIn and phone sit side by side */
   flex-wrap: wrap;
   justify-content: center;
   gap: var(--s-4);
