@@ -120,9 +120,9 @@
         <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
         Back to all work
       </a>
-      <div class="cs-hero-tag">iOS &amp; Android · Offline-First · AgriTech · EU Compliance</div>
+      <div class="cs-hero-tag">Mobile app · Works offline · Farming · EU rules</div>
       <h1 class="cs-hero-title">AMA Foto App —<br>Agricultural Field Documentation</h1>
-      <p class="cs-hero-subtitle">A new mobile service built alongside the AMA MFA web portal — giving 85,000+ Austrian farmers a dedicated tool to photograph and document their fields for EU subsidy compliance, with full offline capability for remote alpine locations.</p>
+      <p class="cs-hero-subtitle">A new phone app alongside the AMA web portal, so 85,000+ Austrian farmers can photograph and document their fields for EU subsidies — and it keeps working where there is no signal at all.</p>
 
       <div class="cs-hero-meta">
         <div class="cs-meta-item">
@@ -139,7 +139,7 @@
         </div>
         <div class="cs-meta-item">
           <div class="cs-meta-label">My Role</div>
-          <div class="cs-meta-value">Lead UX engineering &amp; service design</div>
+          <div class="cs-meta-value">Product lead, with the UX in my hands</div>
         </div>
       </div>
     </div>
@@ -171,14 +171,14 @@
       <div class="cs-narrative-grid">
         <div><span class="cs-sidebar-label">01 — Context</span></div>
         <div>
-          <p class="cs-lead" data-reveal>Austria's farmers are required by EU Common Agricultural Policy regulations to document their fields annually — and in 2021 there was no mobile way to do it in the field.</p>
+          <p class="cs-lead" data-reveal>EU rules say Austria's farmers must document their fields every year. In 2021 there was still no way to do that out in the field.</p>
           <div class="cs-body-text" data-reveal>
-            <p>Under the EU's ÖPUL agri-environmental programme and the Common Agricultural Policy (CAP), Austrian farmers must submit photo documentation of their field parcels each year to claim agricultural subsidies. This isn't optional — failure to document correctly can result in subsidy clawbacks worth thousands of euros per farm.</p>
-            <p>Until 2021, all documentation had to go through the AMA MFA web portal — a desktop-first platform designed for subsidy applications. Farmers would visit their fields, take photos on their phones, then manually upload them later at home or at the office. The process was disconnected, prone to errors, and wholly unsuited to fieldwork conditions.</p>
-            <p>AMA Foto was created as a dedicated mobile companion to the MFA portal — the first purpose-built tool for in-field documentation. There was no previous version to iterate on; we were designing for a workflow that had never had a proper technology solution. 23% of submitted photo packages had errors requiring manual AMA staff review, costing the authority an estimated €800,000 per year in staff hours and delaying subsidy payments.</p>
+            <p>To claim their subsidies, farmers have to send in photos of each parcel once a year. It is not optional — get it wrong and a farm can lose thousands of euros.</p>
+            <p>Until 2021 all of it went through the AMA web portal, built for desktop and for filling in applications. So farmers drove out, took photos on their phones, then uploaded them later at home. Two separate jobs, easy to get wrong, and no help at all while standing in the field.</p>
+            <p>AMA Foto was the answer to that: the first tool built for the job itself. There was nothing to iterate on — this workflow had never had proper software. Nearly a quarter of photo packages came in with mistakes that AMA staff had to sort out by hand, costing the authority around €800,000 a year and holding up payments to farmers.</p>
           </div>
           <div class="cs-highlight-block" data-reveal>
-            <p class="cs-body-text" style="color:var(--teal-900);"><strong>The core design challenge:</strong> An app used by farmers aged 25–75, often in fields with intermittent or zero mobile signal, wearing work gloves, under time pressure from seasonal work, in all weather conditions. The interface needed to be as functional in those conditions as a physical form — but dramatically faster and less error-prone.</p>
+            <p class="cs-body-text" style="color:var(--teal-900);">What we were up against: users from 25 to 75, standing in a field with little or no signal, often in work gloves, in a hurry because the season waits for nobody, in whatever weather. It had to work as reliably as a paper form and be far quicker to get right.</p>
           </div>
         </div>
       </div>
@@ -191,9 +191,9 @@
       <div class="cs-narrative-grid">
         <div><span class="cs-sidebar-label">02 — Research</span></div>
         <div>
-          <p class="cs-lead" data-reveal>We went to the fields. Literally.</p>
+          <p class="cs-lead" data-reveal>So we went out to the fields. Literally.</p>
           <div class="cs-body-text" data-reveal>
-            <p>To understand the real context of use, our research team spent three weeks conducting field visits to farms across Lower Austria, Burgenland, and Tyrol. This wasn't standard usability testing — it was contextual inquiry in the most literal sense: watching farmers try to use the app while standing in a field, sun in their eyes, trying to photograph a 40-hectare parcel.</p>
+            <p>Our researchers spent three weeks visiting farms in Lower Austria, Burgenland and Tyrol. Not usability testing in a room — watching farmers use the app while standing in the field, sun in their eyes, trying to photograph forty hectares.</p>
           </div>
 
           <div class="af-research-grid" style="display:grid; grid-template-columns:1fr 1fr; gap:var(--s-5); margin-top:var(--s-8);" data-reveal>
@@ -252,21 +252,21 @@
           <!-- Research artifact 1: Affinity map -->
           <div style="margin-top:var(--s-16);" data-reveal>
             <div style="font-size:0.75rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--teal-700);margin-bottom:var(--s-3);">User Research — Affinity Mapping</div>
-            <p style="font-size:0.9375rem;line-height:1.8;color:var(--gray-600);margin-bottom:var(--s-5);">Field sessions with five representative users — Hans (54, dairy farmer), Maria (42, crop farmer), Johann (38, organic producer), Elisabeth (61, livestock owner), and Thomas (29, livestock owner) — surfaced 60 distinct pain points. Each was captured as a raw observation and clustered by user before synthesis.</p>
+            <p style="font-size:0.9375rem;line-height:1.8;color:var(--gray-600);margin-bottom:var(--s-5);">Five farmers took us through their year — Hans (54, dairy), Maria (42, crops), Johann (38, organic), Elisabeth (61, livestock) and Thomas (29, livestock). Sixty separate frustrations came out of it.</p>
             <img src="../images/case-studies/ama-foto/research-affinity.webp" alt="Affinity map: 5 user columns with colour-coded pain point sticky notes" style="width:100%; display:block; border-radius:var(--r-xl);">
           </div>
 
           <!-- Research artifact 2: Problem synthesis -->
           <div style="margin-top:var(--s-16);" data-reveal>
             <div style="font-size:0.75rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--teal-700);margin-bottom:var(--s-3);">Synthesis — Three Root Problems</div>
-            <p style="font-size:0.9375rem;line-height:1.8;color:var(--gray-600);margin-bottom:var(--s-5);">Clustering the raw observations revealed three systemic failure modes rather than isolated UX complaints. Physical burdens forced farmers between field and home computer. Bandaid workarounds addressed symptoms without fixing the underlying accessibility gaps. And incomplete applications pushed farmers to call the AMA service centre — creating downstream problems at every level.</p>
+            <p style="font-size:0.9375rem;line-height:1.8;color:var(--gray-600);margin-bottom:var(--s-5);">Sorted, they were not sixty complaints but three recurring problems. Farmers were forced back and forth between the field and the computer at home. Workarounds patched the symptoms and left the cause. And half-finished applications sent people to the AMA phone line, which made trouble for everyone downstream.</p>
             <img src="../images/case-studies/ama-foto/research-synthesis.webp" alt="Problem synthesis: Physical Burdens, Bandaid Solutions, Incomplete Applications" style="width:100%; display:block; border-radius:var(--r-xl);">
           </div>
 
           <!-- Research artifact 3 & 4: Affinity iterations -->
           <div style="margin-top:var(--s-16);" data-reveal>
             <div style="font-size:0.75rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--teal-700);margin-bottom:var(--s-3);">Affinity Clustering — Two Iteration Passes</div>
-            <p style="font-size:0.9375rem;line-height:1.8;color:var(--gray-600);margin-bottom:var(--s-5);">Two rounds of affinity sorting produced ten actionable patterns across two theme clusters. The first pass grouped technology and access issues — desktop complexity, login friction, connectivity, physical interface barriers, and time/distance constraints. The second pass surfaced field-specific documentation problems: photo quality, field identification, GPS accuracy, offline capability, and real-time verification needs.</p>
+            <p style="font-size:0.9375rem;line-height:1.8;color:var(--gray-600);margin-bottom:var(--s-5);">Two rounds of sorting turned that into ten things we could act on — first the access problems, like desktop-only screens, fiddly logins, no signal and gloves; then the field problems, like photo quality, knowing which parcel you are on, GPS accuracy, working offline and checking a submission on the spot.</p>
             <div style="display:flex;flex-direction:column;gap:var(--s-6);">
               <img src="../images/case-studies/ama-foto/research-iteration1.webp" alt="Affinity iteration 1: Technology and Access Issues — 5 patterns" style="width:100%; display:block; border-radius:var(--r-xl);">
               <img src="../images/case-studies/ama-foto/research-iteration2.webp" alt="Affinity iteration 2: Field Work and Documentation — 5 patterns" style="width:100%; display:block; border-radius:var(--r-xl);">
@@ -330,7 +330,7 @@
   <section class="cs-section">
     <div class="container">
       <header class="section-header" data-reveal>
-        <span class="section-label">Core Design Decisions</span>
+        <span class="section-label">The Decisions That Mattered</span>
         <h2 class="section-title">Designed for the field,<br><em>from the ground up</em></h2>
       </header>
 
@@ -339,7 +339,7 @@
         <div>
           <div style="font-size:0.75rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--teal-700);margin-bottom:var(--s-4);">Decision 01</div>
           <h3 style="font-family:var(--font-display);font-size:1.75rem;font-weight:400;color:var(--gray-900);line-height:1.2;margin-bottom:var(--s-4);">Contextual Field Detail — map, obligations, and data in one view</h3>
-          <p style="font-size:0.9375rem;line-height:1.8;color:var(--gray-600);margin-bottom:var(--s-5);">Opening a parcel immediately shows its satellite GIS boundary, registered crop data, and any open obligations as actionable cards — like a missing Blühzeitpunkt date surfaced at the bottom of the screen. Farmers see exactly what still needs doing on this specific field without switching between separate lists or sections.</p>
+          <p style="font-size:0.9375rem;line-height:1.8;color:var(--gray-600);margin-bottom:var(--s-5);">Open a parcel and you see its boundary on the satellite map, the crop registered against it, and anything still outstanding as a card you can act on — a missing flowering date, say, sitting right at the bottom of the screen. Everything about this field, in one place.</p>
           <div style="display:flex;flex-direction:column;gap:var(--s-3);">
             <div style="display:flex;align-items:center;gap:var(--s-3);font-size:0.875rem;color:var(--gray-700);">
               <div style="width:8px;height:8px;border-radius:50%;background:var(--teal-600);flex-shrink:0;"></div>
@@ -368,7 +368,7 @@
         <div>
           <div style="font-size:0.75rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--teal-700);margin-bottom:var(--s-4);">Decision 02</div>
           <h3 style="font-family:var(--font-display);font-size:1.75rem;font-weight:400;color:var(--gray-900);line-height:1.2;margin-bottom:var(--s-4);">Structured Correction Flow — review changes before they're submitted</h3>
-          <p style="font-size:0.9375rem;line-height:1.8;color:var(--gray-600);margin-bottom:var(--s-5);">When field attributes need updating — crop type, Schlagcode, Begrünungsvariante — the Korrektur tab presents a precise from/to comparison. The farmer sees exactly what will change, with explicit confirm and discard actions before anything is sent to AMA. Corrections can be annotated with a comment, creating an auditable trail for every change.</p>
+          <p style="font-size:0.9375rem;line-height:1.8;color:var(--gray-600);margin-bottom:var(--s-5);">When something needs changing — crop type, parcel code, greening variant — the correction tab shows plainly what it was and what it will become. Confirm or discard, and nothing goes to AMA until you say so. A comment can be added, so there is always a record of why.</p>
           <div style="padding:var(--s-5) var(--s-6); background:var(--teal-50); border-radius:var(--r-xl); border:1px solid var(--teal-200);">
             <div style="font-size:0.8125rem;font-weight:600;color:var(--teal-800);margin-bottom:var(--s-2);">Impact</div>
             <div style="font-size:0.875rem;color:var(--teal-700);line-height:1.6;">The from/to structure replaced ambiguous free-form edits. Documentation errors dropped from 23% → 2.8%, reducing manual AMA review workload by 78% and saving €620,000 annually.</div>
@@ -381,7 +381,7 @@
         <div>
           <div style="font-size:0.75rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--teal-700);margin-bottom:var(--s-4);">Decision 03</div>
           <h3 style="font-family:var(--font-display);font-size:1.75rem;font-weight:400;color:var(--gray-900);line-height:1.2;margin-bottom:var(--s-4);">Priority-Driven Task Queue — deadlines visible before you set off</h3>
-          <p style="font-size:0.9375rem;line-height:1.8;color:var(--gray-600);margin-bottom:var(--s-5);">During peak inspection season, an inspector may manage hundreds of open assignments. The Auftragsliste groups urgent items separately, shows deadline countdowns alongside distance, and tags each card with the obligation type — SAT or Blühzeitpunkt. Sorting by Datum, Entfernung, or Typ lets users plan an efficient route without opening individual records.</p>
+          <p style="font-size:0.9375rem;line-height:1.8;color:var(--gray-600);margin-bottom:var(--s-5);">In peak season an inspector can be carrying hundreds of open jobs. The task list puts the urgent ones on their own, counts down the deadlines next to the distance, and labels what each one is for. Sort by date, distance or type and the day's route plans itself.</p>
           <div style="display:grid; grid-template-columns:1fr 1fr; gap:var(--s-4);">
             <div style="padding:var(--s-5);background:var(--gray-50);border-radius:var(--r-lg);border:1px solid var(--gray-200);">
               <div style="font-size:1.25rem;font-weight:700;color:var(--teal-700);margin-bottom:var(--s-1);">Urgent</div>
@@ -404,9 +404,9 @@
   <section class="cs-section cs-section--tinted">
     <div class="container">
       <header class="section-header" data-reveal>
-        <span class="section-label">Beyond Launch — 2025</span>
+        <span class="section-label">What Came After Launch</span>
         <h2 class="section-title">The app didn't stop at launch —<br><em>nineteen new features</em></h2>
-        <p class="section-description" style="max-width:64ch;">After the initial rollout, the IGL-FotoApp kept growing. A 2025 planning round mapped nineteen enhancements — built through the year for the 2026 application cycle — across five areas: task handling, in-field capture, compliance intelligence, notifications, and platform integration.</p>
+        <p class="section-description" style="max-width:64ch;">The app did not stop at launch. A 2025 planning round put nineteen improvements on the roadmap for the 2026 season, grouped into five areas: handling tasks, capturing in the field, spotting compliance problems early, notifications, and joining up with the rest of the system.</p>
       </header>
 
       <!-- Feature expansion strip — eama My Contribution style -->
@@ -446,7 +446,7 @@
 
         </div>
 
-        <p style="font-size:0.8125rem; color:var(--gray-500); margin-top:var(--s-4);">Feature planning map for the 2026 application cycle — nineteen enhancements across five themes.</p>
+        <p style="font-size:0.8125rem; color:var(--gray-500); margin-top:var(--s-4);">The plan for the 2026 season — nineteen improvements across five areas.</p>
       </div>
 
     </div>

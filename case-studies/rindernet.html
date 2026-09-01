@@ -108,9 +108,9 @@
         <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
         Back to all work
       </a>
-      <div class="cs-hero-tag">Mobile App · EU Compliance · Livestock Registry · Offline-First</div>
+      <div class="cs-hero-tag">Mobile app · EU rules · Cattle register · Works offline</div>
       <h1 class="cs-hero-title">Rindernet Meldeapp —<br>Livestock Registration</h1>
-      <p class="cs-hero-subtitle">Digitising Austria's cattle registration and movement reporting system — transforming a paper-heavy EU-regulated process into a mobile-first app for 18,000+ livestock farmers, with real-time VIS (Veterinärinformationssystem) synchronisation.</p>
+      <p class="cs-hero-subtitle">Getting Austria's cattle reporting off paper — an EU-regulated process rebuilt as a phone app for 18,000+ livestock farmers, talking to the national veterinary register in real time.</p>
 
       <div class="cs-hero-meta">
         <div class="cs-meta-item">
@@ -127,7 +127,7 @@
         </div>
         <div class="cs-meta-item">
           <div class="cs-meta-label">My Role</div>
-          <div class="cs-meta-value">Lead UX engineering &amp; service design</div>
+          <div class="cs-meta-value">Product lead, with the UX in my hands</div>
         </div>
         <div class="cs-meta-item">
           <div class="cs-meta-label">Part of</div>
@@ -163,14 +163,14 @@
       <div class="cs-narrative-grid">
         <div><span class="cs-sidebar-label">01 — Context</span></div>
         <div>
-          <p class="cs-lead" data-reveal>In Austria, every cattle movement — birth, death, farm transfer, import, export — must be reported to the national Veterinärinformationssystem (VIS) within 7 days. Non-compliance risks EU subsidy penalties and livestock disease tracing failures.</p>
+          <p class="cs-lead" data-reveal>In Austria every cattle movement — a birth, a death, a sale, a border crossing — has to be reported to the national veterinary register within seven days. Miss it and subsidies are at risk, and a disease outbreak becomes much harder to trace.</p>
           <div class="cs-body-text" data-reveal>
-            <p>Rindernet is Austria's official cattle registration network, managing the registration of approximately 2.0 million cattle across 18,000+ farms. Until 2023, the primary reporting mechanism was paper-based forms or a desktop-only web portal that was last redesigned in 2014.</p>
-            <p>The problems were systemic: farmers filled in paper forms in their barns, sometimes days after the reportable event, then posted or faxed them to regional offices. Data entry staff transcribed these manually into VIS, introducing a second layer of transcription errors. Average reporting lag was 4.2 days — well within the 7-day window but with peak-season lag (spring calving) frequently exceeding 6 days for high-volume farms.</p>
-            <p>EU Regulation (EU) 2019/2035 required Austria to demonstrate improved traceability by Q1 2025 — creating a hard deadline for the modernisation programme that Rinderzucht Austria and the Federal Ministry of Agriculture (BMLRT) commissioned us to lead.</p>
+            <p>Rindernet is the country's official cattle register: roughly two million animals across more than 18,000 farms. Until 2023 you reported either on paper or through a desktop-only website last touched in 2014.</p>
+            <p>In practice, farmers filled in forms in the barn — often days after the event — then posted or faxed them to a regional office, where somebody typed them in again. Two chances to get it wrong. Reports took 4.2 days on average, and in spring, when the calves arrive, the busiest farms were regularly past six.</p>
+            <p>Brussels had set a deadline: Austria had to show better traceability by early 2025. That gave the programme a fixed date to work back from, and Rinderzucht Austria and the agriculture ministry asked us to lead it.</p>
           </div>
           <div class="cs-highlight-block" data-reveal>
-            <p class="cs-body-text" style="color:var(--teal-900);"><strong>The design problem in one sentence:</strong> Create an app that a 65-year-old cattle farmer, standing in a dark barn with cold hands and no phone signal, can use to correctly report a calf birth in under 2 minutes — first time, without calling the helpline.</p>
+            <p class="cs-body-text" style="color:var(--teal-900);">The whole brief in one sentence: a 65-year-old farmer, standing in a dark barn with cold hands and no signal, should be able to report a calf's birth correctly in under two minutes, first time, without ringing the helpline.</p>
           </div>
         </div>
       </div>
@@ -183,10 +183,10 @@
       <div class="cs-narrative-grid">
         <div><span class="cs-sidebar-label">02 — Systems Mapping</span></div>
         <div>
-          <p class="cs-lead" data-reveal>Before designing a single screen, we had to understand — and document — a 14-party data ecosystem.</p>
+          <p class="cs-lead" data-reveal>Before we drew a single screen, we had to work out who all the players were — and there were fourteen of them.</p>
           <div class="cs-body-text" data-reveal>
-            <p>The Rindernet reporting system touches 14 distinct institutional actors: the farmer, regional cattle breeders' associations, AMA, the BMLRT, veterinary authorities across 9 provinces, border inspection posts, abattoirs, and the EU Commission's TRACES animal movement system.</p>
-            <p>A service blueprint spanning 3.2 metres of wall revealed the extraordinary complexity of back-office processes that the app needed to accommodate — while presenting the farmer with a deceptively simple interface.</p>
+            <p>A single report touches the farmer, the regional breeders' association, AMA, the ministry, vets in nine provinces, border posts, abattoirs and the EU's own animal movement system.</p>
+            <p>We mapped the whole thing across 3.2 metres of wall. The back office is genuinely complicated; the point was that the farmer should never have to know that.</p>
           </div>
 
           <!-- Simplified stakeholder diagram -->
@@ -220,9 +220,9 @@
   <section class="cs-section">
     <div class="container">
       <header class="section-header" data-reveal>
-        <span class="section-label">Key Screen Designs</span>
-        <h2 class="section-title">Three principles guided<br><em>every design decision</em></h2>
-        <p class="section-description">Simple enough for a 65-year-old in a barn. Accurate enough for EU regulatory compliance. Resilient enough to work offline.</p>
+        <span class="section-label">The Screens That Do the Work</span>
+        <h2 class="section-title">Three rules we did not break</h2>
+        <p class="section-description">Simple enough for a 65-year-old in a barn. Accurate enough for the regulator. Reliable enough to work with no signal.</p>
       </header>
 
       <!-- Real app screenshots -->
@@ -294,9 +294,9 @@
       <div class="cs-narrative-grid">
         <div><span class="cs-sidebar-label">03 — Accessibility</span></div>
         <div>
-          <p class="cs-lead" data-reveal>Designing for gloves, sunlight, older users, and intermittent connectivity isn't accessibility as compliance — it's accessibility as product strategy.</p>
+          <p class="cs-lead" data-reveal>Designing for gloves, glare, older eyes and patchy signal is not a compliance box. On this product it was the strategy.</p>
           <div class="cs-body-text" data-reveal>
-            <p>Standard WCAG 2.1 compliance was a baseline requirement, but the real accessibility challenge was the environmental context of use. We developed what we called "barn mode" design principles — a set of constraints applied to every UI decision:</p>
+            <p>Meeting the accessibility standard was the floor, not the goal. The harder problem was where the app gets used, so we set ourselves a few barn rules and held every screen to them:</p>
           </div>
           <div class="rn-access-grid" style="display:grid; grid-template-columns:1fr 1fr; gap:var(--s-4); margin-top:var(--s-8);" data-reveal>
             <div style="padding:var(--s-6);background:white;border-radius:var(--r-xl);border:1px solid var(--gray-200);">

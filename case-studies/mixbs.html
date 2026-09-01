@@ -106,13 +106,13 @@
         <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
         All case studies
       </a>
-      <div class="cs-hero-tag">Contact Centre SaaS · UX Consulting · 2022–2025</div>
+      <div class="cs-hero-tag">Contact centre software · Product &amp; UX · 2022–2025</div>
       <h1 class="cs-hero-title">MiXBS — BayCX Platform</h1>
-      <p class="cs-hero-subtitle">UX consulting for BayCX — MiXBS's proprietary remote working software powering contact centre operations for 4,000+ agents across 10 business directions.</p>
+      <p class="cs-hero-subtitle">Three years shaping BayCX, the software MiXBS runs its own contact centres on — about 4,000 agents across ten business lines, and a long queue of decisions about what to build next.</p>
       <div class="cs-hero-meta">
         <div class="cs-meta-item">
           <div class="cs-meta-label">Role</div>
-          <div class="cs-meta-value">UX &amp; product management consultant</div>
+          <div class="cs-meta-value">Product and UX consultant</div>
         </div>
         <div class="cs-meta-item">
           <div class="cs-meta-label">Client</div>
@@ -124,7 +124,7 @@
         </div>
         <div class="cs-meta-item">
           <div class="cs-meta-label">Scope</div>
-          <div class="cs-meta-value">Platform UX, design system, mobile</div>
+          <div class="cs-meta-value">What to build, how it works, design system</div>
         </div>
       </div>
     </div>
@@ -161,9 +161,9 @@
         <div><span class="cs-sidebar-label">01 — Brief</span></div>
         <div>
           <div class="cs-body-text" data-reveal>
-            <p>MiXBS is a US-based contact centre outsourcing company with 15 years of experience, recognised by DesignRush as one of the top 10 contact centres in Florida. The company builds and manages expert remote teams for customer service, marketing support, and business process outsourcing — training, managing, and delivering measurable results across industries including logistics, healthcare, retail, and events.</p>
-            <p>At the core of MiXBS operations is <strong>BayCX</strong> — the company's proprietary remote working software. BayCX is designed to increase customer engagement and boost sales by giving agents and operations teams a unified platform for managing interactions, workflows, and performance. The platform handles up to 14,000–16,000 daily interactions for clients such as CDEK, covering inbound and outbound calls across multiple channels and languages.</p>
-            <p>My engagement as UX Consultant ran from 2022 to 2025, covering platform architecture mapping, visual design exploration, design system definition, component development, and mobile authentication flows.</p>
+            <p>MiXBS runs outsourced contact centres out of the US, and has done for fifteen years — DesignRush puts them in Florida's top ten. They build remote teams for customer service, marketing support and back-office work, across logistics, healthcare, retail and events.</p>
+            <p>BayCX is their own software, and everything runs on it. Agents and team leads use it to handle calls, chats and workflows in one place — up to 16,000 conversations a day for clients like CDEK, in several languages.</p>
+            <p>I came in as a consultant from 2022 to 2025. My job was to work out what the platform needed and in what order, then see it designed: the module map, the visual direction, the design system, and signing in on mobile.</p>
           </div>
         </div>
       </div>
@@ -179,8 +179,8 @@
         <div><span class="cs-sidebar-label">02 — System Architecture</span></div>
         <div>
           <div class="cs-body-text" data-reveal>
-            <p>Before designing any screen, the platform's service architecture needed to be mapped. BayCX is built around a central <strong>Orchestrator</strong> layer that coordinates all platform modules: scheduling (Scheduler, Calendar), operational processing (Factory, PBX Gateway, Inquiries, Tickets), data services (PKI, Contacts, ChatDesk, GLAP), and infrastructure (SMS, Email, Notifications, Auth Server, Analytics).</p>
-            <p>Mapping these dependencies was the foundation for every interaction design decision — particularly for understanding which modules drove the authentication flow, how session state moved through the system, and where communication channel handoffs occurred. The user flow diagram covers the login and password recovery sequence: entry, forgotten credentials, verification via OTP, and setting a new password.</p>
+            <p>Nothing could be designed before we understood how the platform actually fits together. BayCX runs everything through one coordinating layer — scheduling, call handling, tickets, contacts and chat, plus the plumbing underneath for messages, sign-in and reporting.</p>
+            <p>That map settled a lot of arguments. It showed which parts drive signing in, how a session travels through the system, and where a conversation is handed from one channel to the next. Out of it came the sign-in flow: log in, forgot my password, one-time code, new password.</p>
           </div>
           <div class="cs-screen-item" data-reveal style="margin-top: var(--s-8);">
             <img src="../images/case-studies/mixbs/mb-research.png" alt="BayCX system architecture diagram showing Orchestrator with connected modules, and user authentication flow" loading="lazy" style="width:100%; height:auto; display:block; border-radius: var(--r-xl); border: 1px solid var(--gray-200);">
@@ -199,8 +199,8 @@
         <div><span class="cs-sidebar-label">03 — Visual Exploration</span></div>
         <div>
           <div class="cs-body-text" data-reveal>
-            <p>Before finalising the visual direction, multiple colour themes were explored systematically across identical interface layouts. Five distinct palettes — spanning the approved teal direction, purple, deep navy, maroon, and green — were applied to the same BayCX screens and compared side by side.</p>
-            <p>This approach made it straightforward to evaluate readability, brand alignment, and usability without the distraction of layout variation. The matrix format — same screens, different colour systems — was presented to stakeholders and became the basis for selecting and refining the final Poppy Glow teal direction.</p>
+            <p>Before committing to a look, we put five colour schemes on exactly the same screens — the teal we already favoured, plus purple, navy, maroon and green.</p>
+            <p>Same layout every time, so the only thing anyone was judging was the colour. Everyone could see the options side by side and choose; the teal won, and became the platform's.</p>
           </div>
           <div class="cs-screen-item" data-reveal style="margin-top: var(--s-8);">
             <img src="../images/case-studies/mixbs/mb-experiments.png" alt="Grid of BayCX interface screens with five different colour theme experiments" loading="lazy" style="width:100%; height:auto; display:block; border-radius: var(--r-xl); border: 1px solid var(--gray-200);">
@@ -219,8 +219,8 @@
         <div><span class="cs-sidebar-label">04 — Design System</span></div>
         <div>
           <div class="cs-body-text" data-reveal>
-            <p>The BayCX design system defines two primary colour families: <strong>Poppy Glow</strong> — a teal range across 5 steps from #E6EBEC to #2B5761 — and <strong>Kanz Orange</strong> — 5 steps from #E6EBEC to #2B5761. A 9-step neutral grey scale (#66868D to #E6EBEC) handles all UI surface and text states, alongside a two-tone black/white pair (#FFFFFF / #2B5761) for base contrast.</p>
-            <p>The button component covers all states across both brand colours: 5 sizes (extra small through extra large), 6 variants (filled, filled with icon, text-only, text with icon, outlined, outlined with icon), and full dark-background support — giving developers a complete, consistent token set across every context the platform uses.</p>
+            <p>The design system settles the colours once and for all: a teal family and an orange family, five steps each, a nine-step grey for surfaces and text, and plain black and white. After that nobody has to invent a shade.</p>
+            <p>The button covers everything anyone might need — five sizes, six variants, both colour families, light and dark backgrounds. Developers never have to guess, and the screens come out consistent.</p>
           </div>
           <div class="ds-grid" data-reveal>
             <div class="ds-panel">
