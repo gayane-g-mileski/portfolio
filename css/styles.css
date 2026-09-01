@@ -3222,14 +3222,42 @@ body {
 }
 
 
+/* the section label stands alone where there is no title under it */
+.section-label--heading { margin-bottom: 0; }
+#mini-work .section-header { margin-bottom: var(--s-10); }
+
 /* ==========================================================================
    MINI PROJECT CARDS — the short version of the work page, on the homepage
    ========================================================================== */
 .mini-work-slide { display: flex; justify-content: center; }
 
+/* quiet arrows sitting on the card itself */
+.mini-work-carousel .carousel-controls { display: none !important; }
+.mini-nav {
+  position: absolute;
+  top: 50%;
+  z-index: 3;
+  transform: translateY(-50%);
+  display: grid;
+  place-items: center;
+  width: 30px; height: 30px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: none;
+  color: rgba(0,0,0,0.32);
+  cursor: pointer;
+  transition: color var(--t-base), background var(--t-base);
+}
+.mini-nav svg { width: 17px; height: 17px; display: block; }
+.mini-nav:hover { color: rgba(0,0,0,0.62); background: rgba(255,255,255,0.5); }
+.mini-nav:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 2px; }
+.mini-nav--prev { left: max(var(--s-2), calc(50% - 292px)); }
+.mini-nav--next { right: max(var(--s-2), calc(50% - 292px)); }
+
 .mini-work {
   display: grid;
-  grid-template-columns: 200px minmax(0, 1fr);
+  grid-template-columns: 180px minmax(0, 1fr);
   width: 600px;
   max-width: 100%;
   height: 200px;
@@ -3262,15 +3290,15 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  gap: var(--s-3);
-  padding: var(--s-6) var(--s-7);
+  gap: var(--s-4);
+  padding: var(--s-6) var(--s-10) var(--s-6) var(--s-7);   /* room for the arrow */
   min-width: 0;
 }
 .mini-work-title {
   font-family: var(--font-display);
-  font-size: 1.25rem;
+  font-size: 1.1875rem;
   font-weight: 500;
-  line-height: 1.25;
+  line-height: 1.45;
   color: var(--gray-900);
 }
 .mini-work-tags { display: flex; flex-wrap: wrap; gap: 6px; }
@@ -3296,10 +3324,6 @@ body {
 }
 .mini-work:hover .mini-work-cta { gap: 11px; }
 .mini-work-cta svg { transition: transform var(--t-base); }
-
-.mini-work-all { margin-top: var(--s-6); text-align: center; font-size: 0.875rem; }
-.mini-work-all a { color: var(--gray-500); text-decoration: none; border-bottom: 1px solid var(--gray-300); }
-.mini-work-all a:hover { color: var(--color-accent); border-bottom-color: currentColor; }
 
 @media (max-width: 640px) {
   .mini-work { grid-template-columns: 120px minmax(0, 1fr); height: auto; min-height: 180px; }
