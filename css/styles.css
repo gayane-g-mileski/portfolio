@@ -559,7 +559,7 @@ input, textarea, select { font: inherit; }
   grid-template-columns: 1fr;
   gap: var(--s-16);
   align-items: center;
-  padding-block: var(--s-20);
+  padding-block: var(--s-20) var(--s-6);
 }
 
 .hero-eyebrow {
@@ -811,7 +811,6 @@ input, textarea, select { font: inherit; }
 .expertise-card:hover {
   border-color: var(--teal-300);
   box-shadow: var(--shadow-md), 0 0 0 1px var(--teal-100) inset;
-  transform: translateY(-2px);
 }
 
 .expertise-card-icon {
@@ -1336,7 +1335,6 @@ input, textarea, select { font: inherit; }
   background: var(--teal-50);
   border-color: var(--teal-300);
   box-shadow: var(--shadow-md);
-  transform: translateY(-2px);
 }
 
 .metric-number {
@@ -1960,7 +1958,7 @@ input, textarea, select { font: inherit; }
    17. CASE STUDY PAGE — SHARED
    ========================================================================== */
 .cs-hero {
-  min-height: 80vh;
+  height: 600px;
   display: flex;
   align-items: flex-end;
   position: relative;
@@ -1976,7 +1974,7 @@ input, textarea, select { font: inherit; }
 .cs-hero-content {
   position: relative;
   z-index: 2;
-  padding-block: var(--s-16) var(--s-20);
+  padding-block: var(--s-10) var(--s-12);
   width: 100%;
 }
 
@@ -1987,7 +1985,7 @@ input, textarea, select { font: inherit; }
   font-size: 0.8125rem;
   font-weight: 500;
   color: rgba(255,255,255,0.6);
-  margin-bottom: var(--s-8);
+  margin-bottom: var(--s-6);
   transition: color var(--t-fast);
   text-decoration: none;
 }
@@ -2005,32 +2003,32 @@ input, textarea, select { font: inherit; }
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: rgba(255,255,255,0.7);
-  margin-bottom: var(--s-6);
+  margin-bottom: var(--s-5);
 }
 
 .cs-hero-title {
   font-family: var(--font-display);
-  font-size: clamp(2.5rem, 6vw, 4.5rem);
+  font-size: clamp(2rem, 4.4vw, 3.25rem);
   font-weight: 300;
   color: var(--white);
-  line-height: 1.1;
-  margin-bottom: var(--s-6);
-  max-width: 800px;
+  line-height: 1.12;
+  margin-bottom: var(--s-5);
+  max-width: 900px;
 }
 
 .cs-hero-subtitle {
-  font-size: 1.125rem;
-  line-height: 1.75;
+  font-size: 1.0625rem;
+  line-height: 1.7;
   color: rgba(255,255,255,0.65);
-  max-width: 600px;
-  margin-bottom: var(--s-10);
+  max-width: 640px;
+  margin-bottom: var(--s-8);
 }
 
 .cs-hero-meta {
   display: flex;
   flex-wrap: wrap;
   gap: var(--s-8);
-  padding-top: var(--s-8);
+  padding-top: var(--s-6);
   border-top: 1px solid rgba(255,255,255,0.1);
 }
 
@@ -2564,7 +2562,6 @@ body {
 .mini-card:hover {
   border-color: var(--teal-300);
   box-shadow: var(--shadow-md);
-  transform: translateY(-2px);
 }
 
 .mini-card-top {
@@ -2810,8 +2807,8 @@ body {
 /* ==========================================================================
    MOTION — kept deliberately light
    ========================================================================== */
-.work-card { transition: transform var(--t-base), box-shadow var(--t-base); }
-.work-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); }
+.work-card { transition: box-shadow var(--t-base); }
+.work-card:hover { box-shadow: var(--shadow-md); }
 
 @media (prefers-reduced-motion: reduce) {
   .carousel-track.is-ready { transition: none; }
@@ -2865,7 +2862,7 @@ body {
 .hero-quotes .carousel-btn { width: 34px; height: 34px; }
 .hero-quotes .carousel-btn svg { width: 16px; height: 16px; }
 
-#practice { padding-top: var(--s-12); }
+#practice { padding-top: var(--s-6); }
 
 /* headline full width; text and testimonials centred against each other */
 .hero-head { grid-column: 1 / -1; }
