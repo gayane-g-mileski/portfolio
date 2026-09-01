@@ -11,6 +11,12 @@
   <link rel="icon" type="image/svg+xml" href="../favicon.svg">
   <link rel="stylesheet" href="../css/styles.css">
   <style>
+    /* hero live-app link */
+    .cs-hero-live { display: inline-flex; align-items: center; gap: 8px; margin-top: var(--s-5);
+      padding: 10px 20px; border-radius: var(--r-full); font-size: 0.875rem; font-weight: 600;
+      color: #FFFFFF; background: rgba(255,255,255,0.14); border: 1px solid rgba(255,255,255,0.3);
+      text-decoration: none; transition: background var(--t-fast), border-color var(--t-fast); }
+    .cs-hero-live:hover { background: rgba(255,255,255,0.24); border-color: rgba(255,255,255,0.55); }
     /* ---- page palette: #427C0C and its shades ---- */
     :root {
       --gray-50:#E8EFE2;--gray-100:#E8EFE2;--gray-200:#CEDDC0;--gray-300:#CEDDC0;--gray-400:#A0BE86;
@@ -270,6 +276,11 @@
       <div class="cs-hero-tag">Government portal · Farming · Built for everyone</div>
       <h1 class="cs-hero-title">eAMA.at — Farmer<br>Services Portal</h1>
       <p class="cs-hero-subtitle">A rebuild of the site Austria's 165,000 farming operations use to claim their EU subsidies, join environmental programmes and keep their livestock records — for people of every age, most of them nowhere near a desk.</p>
+
+      <a href="https://www.eama.at/" class="cs-hero-live" target="_blank" rel="noopener noreferrer">
+        Open eAMA.at
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="14" height="14" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><path d="M15 3h6v6"/><path d="M10 14 21 3"/></svg>
+      </a>
 
       <div class="cs-hero-meta">
         <div class="cs-meta-item">
@@ -992,26 +1003,29 @@
     </div>
   </section>
 
-  <!-- NAV to next case study -->
-  <section style="padding:var(--s-16) 0; background:var(--gray-50); border-top: 1px solid var(--gray-200);">
-    <div class="container" style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:var(--s-8);">
-      <div>
-        <div style="font-size:0.75rem; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:var(--gray-400); margin-bottom:var(--s-2);">Previous Case Study</div>
-        <a href="wien-miete.html" class="btn-arrow" style="font-size:1.125rem; font-weight:500;">
-          <span class="arrow-icon" style="transform:rotate(180deg);"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
-          Mietzins-Check
+
+
+  <!-- Previous / next case study -->
+  <nav class="cs-pager" aria-label="Case studies">
+    <div class="container">
+      <div class="cs-pager-row">
+        <a class="cs-pager-link cs-pager-link--prev" href="wien-miete.html">
+          <span class="cs-pager-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16" aria-hidden="true"><path d="M19 12H5M12 19l-7-7 7-7"/></svg></span>
+          <span class="cs-pager-text">
+            <span class="cs-pager-label">Previous</span>
+            <span class="cs-pager-title">Mietzins-Check</span>
+          </span>
+        </a>
+        <a class="cs-pager-link cs-pager-link--next" href="ama-foto.html">
+          <span class="cs-pager-text">
+            <span class="cs-pager-label">Next</span>
+            <span class="cs-pager-title">AMA Foto App</span>
+          </span>
+          <span class="cs-pager-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
         </a>
       </div>
-      <div>
-        <div style="font-size:0.75rem; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:var(--gray-400); margin-bottom:var(--s-2);">Next Case Study</div>
-        <a href="ama-foto.html" class="btn-arrow" style="font-size:1.125rem; font-weight:500;">
-          AMA Foto App
-          <span class="arrow-icon"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
-        </a>
-      </div>
-      <a href="../work.html" class="btn btn-outline">All case studies</a>
     </div>
-  </section>
+  </nav>
 
   <!-- =====================================================================
        CONTACT

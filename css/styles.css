@@ -1526,8 +1526,7 @@ input, textarea, select { font: inherit; }
 
 /* portrait, a 2 x 2 of cards and the button, sharing a left edge, centred */
 .about-stack {
-  max-width: 900px;
-  margin-inline: auto;
+  max-width: none;              /* the block runs the full container width */
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -3096,3 +3095,114 @@ body {
 .hero-quotes .carousel-viewport { height: 100%; }
 .hero-quotes .carousel-track { height: 100%; }
 .hero-quotes .carousel-track.is-ready.is-fade > * { height: 100%; }
+
+
+/* ==========================================================================
+   GET THE APP — both stores on desktop, a redirect on a phone
+   ========================================================================== */
+.ga-stack { max-width: 720px; margin-inline: auto; }
+.ga-stack .section-header { text-align: center; }
+.ga-stack .section-label { justify-content: center; }
+.ga-stack .section-description { margin-inline: auto; }
+
+.ga-choices {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--s-5);
+  margin-top: var(--s-10);
+}
+.ga-choice {
+  display: flex;
+  align-items: center;
+  gap: var(--s-5);
+  padding: var(--s-6) var(--s-7);
+  border: 1px solid var(--gray-200);
+  border-radius: var(--r-xl);
+  background: var(--white);
+  text-decoration: none;
+  transition: border-color var(--t-base), box-shadow var(--t-base);
+}
+.ga-choice:hover { border-color: var(--teal-300); box-shadow: var(--shadow-md); }
+.ga-choice-icon {
+  flex: none;
+  width: 48px; height: 48px;
+  display: grid; place-items: center;
+  border-radius: var(--r-lg, 12px);
+  background: var(--teal-50);
+  color: var(--teal-700);
+}
+.ga-choice-text { display: flex; flex-direction: column; gap: 2px; }
+.ga-choice-label { font-size: 0.75rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--gray-500); }
+.ga-choice-value { font-size: 1.0625rem; font-weight: 600; color: var(--gray-900); }
+
+.ga-note {
+  margin-top: var(--s-8);
+  text-align: center;
+  font-size: 0.875rem;
+  color: var(--gray-500);
+}
+.ga-back { margin-left: var(--s-2); color: var(--color-accent); text-decoration: none; border-bottom: 1px solid currentColor; }
+
+@media (max-width: 640px) {
+  .ga-choices { grid-template-columns: 1fr; }
+}
+
+
+/* ==========================================================================
+   CASE STUDY PAGER — previous / next along the bottom
+   ========================================================================== */
+.cs-pager {
+  padding-block: var(--s-12);
+  background: var(--gray-50);
+  border-top: 1px solid var(--gray-200);
+}
+.cs-pager-row {
+  display: flex;
+  align-items: stretch;
+  justify-content: space-between;
+  gap: var(--s-6);
+  flex-wrap: wrap;
+}
+/* with only one link, it keeps its own side of the row */
+.cs-pager--single-next .cs-pager-row { justify-content: flex-end; }
+.cs-pager--single-prev .cs-pager-row { justify-content: flex-start; }
+
+.cs-pager-link {
+  display: flex;
+  align-items: center;
+  gap: var(--s-4);
+  flex: 0 1 auto;
+  min-width: 0;
+  padding: var(--s-5) var(--s-6);
+  border: 1px solid var(--gray-200);
+  border-radius: var(--r-xl);
+  background: var(--white);
+  text-decoration: none;
+  transition: border-color var(--t-base), box-shadow var(--t-base);
+}
+.cs-pager-link:hover { border-color: var(--teal-300); box-shadow: var(--shadow-md); }
+.cs-pager-link--next { text-align: right; }
+
+.cs-pager-arrow {
+  flex: none;
+  display: grid; place-items: center;
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  background: var(--teal-50);
+  color: var(--teal-700);
+}
+.cs-pager-text { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.cs-pager-label {
+  font-size: 0.6875rem; font-weight: 700; letter-spacing: 0.1em;
+  text-transform: uppercase; color: var(--gray-400);
+}
+.cs-pager-title {
+  font-size: 1rem; font-weight: 600; color: var(--gray-900);
+  overflow-wrap: anywhere;
+}
+
+@media (max-width: 640px) {
+  .cs-pager-row { flex-direction: column; }
+  .cs-pager-link { width: 100%; }
+  .cs-pager-link--next { flex-direction: row-reverse; text-align: left; }
+}

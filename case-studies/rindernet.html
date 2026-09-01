@@ -11,6 +11,12 @@
   <link rel="icon" type="image/svg+xml" href="../favicon.svg">
   <link rel="stylesheet" href="../css/styles.css">
   <style>
+    /* hero live-app link */
+    .cs-hero-live { display: inline-flex; align-items: center; gap: 8px; margin-top: var(--s-5);
+      padding: 10px 20px; border-radius: var(--r-full); font-size: 0.875rem; font-weight: 600;
+      color: #FFFFFF; background: rgba(255,255,255,0.14); border: 1px solid rgba(255,255,255,0.3);
+      text-decoration: none; transition: background var(--t-fast), border-color var(--t-fast); }
+    .cs-hero-live:hover { background: rgba(255,255,255,0.24); border-color: rgba(255,255,255,0.55); }
     /* ---- page palette: #1A3712 and its shades ---- */
     :root {
       --gray-50:#E4E7E3;--gray-100:#E4E7E3;--gray-200:#C3CBC1;--gray-300:#C3CBC1;--gray-400:#8C9B88;
@@ -111,6 +117,11 @@
       <div class="cs-hero-tag">Mobile app · EU rules · Cattle register · Works offline</div>
       <h1 class="cs-hero-title">Rindernet Meldeapp —<br>Livestock Registration</h1>
       <p class="cs-hero-subtitle">Getting Austria's cattle reporting off paper — an EU-regulated process rebuilt as a phone app for 18,000+ livestock farmers, talking to the national veterinary register in real time.</p>
+
+      <a href="../get-app.html?app=rindernet" class="cs-hero-live">
+        Get the app
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="14" height="14" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><path d="M15 3h6v6"/><path d="M10 14 21 3"/></svg>
+      </a>
 
       <div class="cs-hero-meta">
         <div class="cs-meta-item">
@@ -346,6 +357,29 @@
       <a href="../work.html" class="btn btn-outline">All case studies</a>
     </div>
   </section>
+
+
+  <!-- Previous / next case study -->
+  <nav class="cs-pager" aria-label="Case studies">
+    <div class="container">
+      <div class="cs-pager-row">
+        <a class="cs-pager-link cs-pager-link--prev" href="ama-foto.html">
+          <span class="cs-pager-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16" aria-hidden="true"><path d="M19 12H5M12 19l-7-7 7-7"/></svg></span>
+          <span class="cs-pager-text">
+            <span class="cs-pager-label">Previous</span>
+            <span class="cs-pager-title">AMA Foto App</span>
+          </span>
+        </a>
+        <a class="cs-pager-link cs-pager-link--next" href="mixbs.html">
+          <span class="cs-pager-text">
+            <span class="cs-pager-label">Next</span>
+            <span class="cs-pager-title">MiXBS — BayCX Platform</span>
+          </span>
+          <span class="cs-pager-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg></span>
+        </a>
+      </div>
+    </div>
+  </nav>
 
   <!-- =====================================================================
        CONTACT
