@@ -3263,7 +3263,7 @@ body {
   height: 200px;
   border-radius: var(--r-xl);
   overflow: hidden;
-  background: var(--mini-bg, var(--gray-100));
+  background: #E2E2E2;
   text-decoration: none;
   transition: box-shadow var(--t-base);
 }
@@ -3295,11 +3295,11 @@ body {
   min-width: 0;
 }
 .mini-work-title {
-  font-family: var(--font-display);
+  font-family: var(--font-body);
   font-size: 1.1875rem;
-  font-weight: 500;
+  font-weight: 600;
   line-height: 1.45;
-  color: var(--gray-900);
+  color: rgba(0,0,0,0.62);
 }
 .mini-work-tags { display: flex; flex-wrap: wrap; gap: 6px; }
 .mini-work-tags span {
@@ -3318,9 +3318,10 @@ body {
   align-items: center;
   gap: 7px;
   margin-top: var(--s-1);
+  font-family: var(--font-body);
   font-size: 0.875rem;
   font-weight: 600;
-  color: var(--color-accent);
+  color: rgba(0,0,0,0.62);
 }
 .mini-work:hover .mini-work-cta { gap: 11px; }
 .mini-work-cta svg { transition: transform var(--t-base); }
