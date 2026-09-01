@@ -3180,14 +3180,10 @@ body {
   gap: var(--s-4);
   flex: 0 1 auto;
   min-width: 0;
-  padding: var(--s-5) var(--s-6);
-  border: 1px solid var(--gray-200);
-  border-radius: var(--r-xl);
-  background: var(--white);
   text-decoration: none;
-  transition: border-color var(--t-base), box-shadow var(--t-base);
 }
-.cs-pager-link:hover { border-color: var(--teal-300); box-shadow: var(--shadow-md); }
+.cs-pager-link:hover .cs-pager-arrow { background: var(--teal-100); }
+.cs-pager-link:hover .cs-pager-title { color: var(--color-accent); }
 .cs-pager-link--next { text-align: right; }
 
 .cs-pager-arrow {
@@ -3197,6 +3193,7 @@ body {
   border-radius: 50%;
   background: var(--teal-50);
   color: var(--teal-700);
+  transition: background var(--t-base);
 }
 .cs-pager-text { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
 .cs-pager-label {
@@ -3206,6 +3203,7 @@ body {
 .cs-pager-title {
   font-size: 1rem; font-weight: 600; color: var(--gray-900);
   overflow-wrap: anywhere;
+  transition: color var(--t-base);
 }
 
 @media (max-width: 640px) {
