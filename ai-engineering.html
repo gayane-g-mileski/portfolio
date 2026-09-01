@@ -25,8 +25,24 @@
     .aipe-task-illus { margin:20px 20px 0; border-radius:14px; padding:22px 24px; display:flex; align-items:center; justify-content:center; background:#eaf2f3; }
     .aipe-task-illus svg { display:block; width:100%; max-width:230px; height:auto; }
     .aipe-task-body { display:flex; flex-direction:column; flex:1; padding:20px 24px 24px; }
-    .aipe-task-title { font-size:1.1875rem; font-weight:700; color:#fff; line-height:1.25; margin:0 0 var(--s-2); }
-    .aipe-task-copy { font-size:0.9375rem; line-height:1.6; color:rgba(255,255,255,0.82); margin:0 0 var(--s-4); }
+    .aipe-task-title { font-size:1.1875rem; font-weight:700; color:#fff; line-height:1.25; margin:0; }
+    .aipe-task-copy { font-size:0.9375rem; line-height:1.6; color:rgba(255,255,255,0.82); margin:var(--s-3) 0 0; }
+
+    /* collapsed by default: illustration, title and tags only */
+    .aipe-task-more { margin-bottom:var(--s-4); }
+    .aipe-task-summary { display:flex; align-items:center; justify-content:space-between; gap:14px; cursor:pointer; list-style:none; padding:2px 0; }
+    .aipe-task-summary::-webkit-details-marker { display:none; }
+    .aipe-task-summary:focus-visible { outline:2px solid rgba(255,255,255,0.85); outline-offset:5px; border-radius:8px; }
+    .aipe-task-chevron { flex:none; display:grid; place-items:center; width:26px; height:26px; border-radius:50%; color:#fff; background:rgba(255,255,255,0.14); border:1px solid rgba(255,255,255,0.26); transition:transform var(--t-base), background var(--t-base); }
+    .aipe-task-chevron svg { width:13px; height:13px; display:block; }
+    .aipe-task:hover .aipe-task-chevron { background:rgba(255,255,255,0.26); }
+    .aipe-task-more[open] .aipe-task-chevron { transform:rotate(180deg); }
+    .aipe-task-more[open] .aipe-task-copy { animation:aipe-reveal 0.28s ease both; }
+    @keyframes aipe-reveal { from { opacity:0; transform:translateY(-4px); } to { opacity:1; transform:none; } }
+    @media (prefers-reduced-motion: reduce) {
+      .aipe-task-more[open] .aipe-task-copy { animation:none; }
+      .aipe-task-chevron { transition:none; }
+    }
     .aipe-task-tags { display:flex; flex-wrap:wrap; gap:6px; margin-top:auto; }
     .aipe-task-tags span { font-size:0.6875rem; font-weight:500; color:rgba(255,255,255,0.92); background:rgba(255,255,255,0.15); border:1px solid rgba(255,255,255,0.25); padding:3px 9px; border-radius:999px; }
     @media (max-width:1024px) { .aipe-tasks { grid-template-columns:repeat(2,1fr); } }
@@ -62,7 +78,7 @@
         <div class="aipe-panel-head">
           <div class="aipe-panel-heading">
             <span class="aipe-panel-eyebrow">Product Management</span>
-            <h2 class="aipe-panel-title" id="ai-engineering-heading">What running a product involves</h2>
+            <h2 class="aipe-panel-title" id="ai-engineering-heading">Running a product</h2>
             <p class="aipe-panel-sub">The parts of the job I own on every engagement — deciding what gets built and why, keeping a team aligned around it, and holding the release bar.</p>
           </div>
         </div>
@@ -84,8 +100,13 @@
               <rect x="124" y="72" width="30" height="6" rx="2" fill="#c2dadf"/>
               <rect x="124" y="84" width="42" height="6" rx="2" fill="#5b8893"/></g></svg></div>
           <div class="aipe-task-body">
-            <h3 class="aipe-task-title">Requirements into Backlog</h3>
-            <p class="aipe-task-copy">Read the specifications, the legal texts and the stakeholder input, and turn them into a backlog the team can size and commit to. AI takes the first pass through the long documents; the call on what matters stays mine.</p>
+            <details class="aipe-task-more">
+              <summary class="aipe-task-summary">
+                <h3 class="aipe-task-title">Requirements into Backlog</h3>
+                <span class="aipe-task-chevron" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></span>
+              </summary>
+              <p class="aipe-task-copy">Read the specifications, the legal texts and the stakeholder input, and turn them into a backlog the team can size and commit to. AI takes the first pass through the long documents; the call on what matters stays mine.</p>
+            </details>
             <div class="aipe-task-tags"><span>Requirements</span><span>Backlog</span><span>AI-assisted</span></div>
           </div>
         </article>
@@ -103,8 +124,13 @@
               <rect x="132" y="48" width="46" height="8" rx="3" fill="#c2dadf"/>
               <rect x="132" y="63" width="28" height="8" rx="3" fill="#c2dadf"/></g></svg></div>
           <div class="aipe-task-body">
-            <h3 class="aipe-task-title">Deciding Before Building</h3>
-            <p class="aipe-task-copy">Get the decision while it is still cheap to change. A clickable concept in days rather than a slide deck, so a steering group approves or rejects something real before the budget is committed.</p>
+            <details class="aipe-task-more">
+              <summary class="aipe-task-summary">
+                <h3 class="aipe-task-title">Deciding Before Building</h3>
+                <span class="aipe-task-chevron" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></span>
+              </summary>
+              <p class="aipe-task-copy">Get the decision while it is still cheap to change. A clickable concept in days rather than a slide deck, so a steering group approves or rejects something real before the budget is committed.</p>
+            </details>
             <div class="aipe-task-tags"><span>Concept</span><span>Stakeholders</span><span>Go / No-Go</span></div>
           </div>
         </article>
@@ -112,8 +138,13 @@
         <article class="aipe-task">
           <div class="aipe-task-illus"><svg viewBox="0 0 220 100" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><g><rect x="116" y="24" width="80" height="66" rx="8" stroke="#c2dadf" stroke-width="1.5" fill="white"/><rect x="30" y="14" width="84" height="72" rx="8" stroke="#2b5761" stroke-width="2" fill="white"/><circle cx="54" cy="40" r="12" fill="#5b8893"/><path d="M38 64 a16 14 0 0 1 32 0 Z" fill="#c2dadf"/><rect x="78" y="32" width="28" height="5" rx="2" fill="#2b5761"/><rect x="78" y="42" width="22" height="4" rx="2" fill="#c2dadf"/><rect x="78" y="50" width="26" height="4" rx="2" fill="#c2dadf"/><rect x="40" y="72" width="22" height="7" rx="3" fill="#c2dadf"/><rect x="66" y="72" width="30" height="7" rx="3" fill="#5b8893"/></g></svg></div>
           <div class="aipe-task-body">
-            <h3 class="aipe-task-title">Evidence for Prioritisation</h3>
-            <p class="aipe-task-copy">What goes to the top of the backlog rests on evidence — survey data, usability testing, support volumes and drop-off rates — rather than on who argued hardest in the room.</p>
+            <details class="aipe-task-more">
+              <summary class="aipe-task-summary">
+                <h3 class="aipe-task-title">Evidence for Prioritisation</h3>
+                <span class="aipe-task-chevron" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></span>
+              </summary>
+              <p class="aipe-task-copy">What goes to the top of the backlog rests on evidence — survey data, usability testing, support volumes and drop-off rates — rather than on who argued hardest in the room.</p>
+            </details>
             <div class="aipe-task-tags"><span>Evidence</span><span>Prioritisation</span><span>Metrics</span></div>
           </div>
         </article>
@@ -132,8 +163,13 @@
               <rect x="62" y="74" width="8" height="5" rx="2" fill="#2b5761"/>
               <rect x="74" y="74" width="36" height="5" rx="2" fill="#c2dadf"/></g></svg></div>
           <div class="aipe-task-body">
-            <h3 class="aipe-task-title">Scale Assumptions</h3>
-            <p class="aipe-task-copy">Specify for the range the product will actually meet — a single farmer against a large retailer. Volumes and peak loads settled while they are still cheap, not discovered at go-live.</p>
+            <details class="aipe-task-more">
+              <summary class="aipe-task-summary">
+                <h3 class="aipe-task-title">Scale Assumptions</h3>
+                <span class="aipe-task-chevron" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></span>
+              </summary>
+              <p class="aipe-task-copy">Specify for the range the product will actually meet — a single farmer against a large retailer. Volumes and peak loads settled while they are still cheap, not discovered at go-live.</p>
+            </details>
             <div class="aipe-task-tags"><span>Volumes</span><span>Specification</span></div>
           </div>
         </article>
@@ -169,8 +205,13 @@
               <line x1="178" y1="76" x2="178" y2="82" stroke="#c2dadf" stroke-width="1"/>
               <rect x="168" y="82" width="20" height="6" rx="1.5" fill="#c2dadf"/></g></svg></div>
           <div class="aipe-task-body">
-            <h3 class="aipe-task-title">Scope and Dependencies</h3>
-            <p class="aipe-task-copy">Map the whole product as a hierarchy of use cases, so scope, dependencies and the gaps between teams are visible and arguable before anything is committed to a release date.</p>
+            <details class="aipe-task-more">
+              <summary class="aipe-task-summary">
+                <h3 class="aipe-task-title">Scope and Dependencies</h3>
+                <span class="aipe-task-chevron" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></span>
+              </summary>
+              <p class="aipe-task-copy">Map the whole product as a hierarchy of use cases, so scope, dependencies and the gaps between teams are visible and arguable before anything is committed to a release date.</p>
+            </details>
             <div class="aipe-task-tags"><span>Scope</span><span>Dependencies</span><span>Planning</span></div>
           </div>
         </article>
@@ -178,8 +219,13 @@
         <article class="aipe-task">
           <div class="aipe-task-illus"><svg viewBox="0 0 220 100" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><g><rect x="12" y="22" width="80" height="62" rx="7" stroke="#2b5761" stroke-width="2" fill="white"/><rect x="20" y="30" width="64" height="11" rx="2" fill="#5b8893"/><rect x="20" y="47" width="42" height="6" rx="2" fill="#c2dadf"/><rect x="20" y="59" width="54" height="6" rx="2" fill="#c2dadf"/><rect x="20" y="71" width="30" height="6" rx="2" fill="#c2dadf"/><path d="M98 46 l14 0 M106 41 l5 5 l-5 5" stroke="#2b5761" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/><path d="M122 62 l-14 0 M114 57 l-5 5 l5 5" stroke="#5b8893" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/><rect x="128" y="22" width="80" height="62" rx="7" stroke="#5b8893" stroke-width="1.5" fill="white"/><rect x="136" y="30" width="64" height="11" rx="2" fill="#c2dadf"/><rect x="136" y="47" width="42" height="6" rx="2" fill="#c2dadf"/><rect x="136" y="59" width="54" height="6" rx="2" fill="#c2dadf"/><rect x="136" y="71" width="30" height="6" rx="2" fill="#c2dadf"/></g></svg></div>
           <div class="aipe-task-body">
-            <h3 class="aipe-task-title">Built Against Agreed</h3>
-            <p class="aipe-task-copy">Check what was built against what was agreed while the sprint is still open — the UI against the spec, the behaviour against the acceptance criteria — so gaps are a conversation with the team, not a finding at acceptance.</p>
+            <details class="aipe-task-more">
+              <summary class="aipe-task-summary">
+                <h3 class="aipe-task-title">Built Against Agreed</h3>
+                <span class="aipe-task-chevron" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></span>
+              </summary>
+              <p class="aipe-task-copy">Check what was built against what was agreed while the sprint is still open — the UI against the spec, the behaviour against the acceptance criteria — so gaps are a conversation with the team, not a finding at acceptance.</p>
+            </details>
             <div class="aipe-task-tags"><span>Acceptance</span><span>Delivery</span><span>Team</span></div>
           </div>
         </article>
@@ -204,8 +250,13 @@
               <rect x="135" y="74" width="28" height="4" rx="2" fill="#2b5761" fill-opacity="0.4"/>
               <rect x="135" y="81" width="20" height="3" rx="1.5" fill="#c2dadf"/></g></svg></div>
           <div class="aipe-task-body">
-            <h3 class="aipe-task-title">Edge Cases and Risk</h3>
-            <p class="aipe-task-copy">Enumerate every state, edge case and failure a workflow can reach — AI is good at the exhaustive list — so each one is costed and decided on deliberately, instead of found by a user in production.</p>
+            <details class="aipe-task-more">
+              <summary class="aipe-task-summary">
+                <h3 class="aipe-task-title">Edge Cases and Risk</h3>
+                <span class="aipe-task-chevron" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></span>
+              </summary>
+              <p class="aipe-task-copy">Enumerate every state, edge case and failure a workflow can reach — AI is good at the exhaustive list — so each one is costed and decided on deliberately, instead of found by a user in production.</p>
+            </details>
             <div class="aipe-task-tags"><span>Edge Cases</span><span>Risk</span><span>AI-assisted</span></div>
           </div>
         </article>
@@ -226,8 +277,13 @@
               <circle cx="162" cy="74" r="5" fill="#5b8893"/>
               <circle cx="176" cy="74" r="5" fill="#c2dadf"/></g></svg></div>
           <div class="aipe-task-body">
-            <h3 class="aipe-task-title">One Standard Across the Portfolio</h3>
-            <p class="aipe-task-copy">Hold several products in one family to a single standard: shared components, the same accessibility bar, one definition of done — and push a change through all of them at once.</p>
+            <details class="aipe-task-more">
+              <summary class="aipe-task-summary">
+                <h3 class="aipe-task-title">One Standard Across the Portfolio</h3>
+                <span class="aipe-task-chevron" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></span>
+              </summary>
+              <p class="aipe-task-copy">Hold several products in one family to a single standard: shared components, the same accessibility bar, one definition of done — and push a change through all of them at once.</p>
+            </details>
             <div class="aipe-task-tags"><span>Portfolio</span><span>Standards</span><span>Accessibility</span></div>
           </div>
         </article>
@@ -250,8 +306,13 @@
               <rect x="36" y="64" width="28" height="4" rx="2" fill="#c2dadf"/>
               <circle cx="168" cy="16" r="13" fill="white" stroke="#2b5761" stroke-width="2"/><circle cx="168" cy="16" r="4.5" fill="#5b8893"/></g></svg></div>
           <div class="aipe-task-body">
-            <h3 class="aipe-task-title">The Decision Record</h3>
-            <p class="aipe-task-copy">Keep the decisions, their rationale and the open questions written down and current, so a new team member — or an auditor — can trace why the product is the way it is.</p>
+            <details class="aipe-task-more">
+              <summary class="aipe-task-summary">
+                <h3 class="aipe-task-title">The Decision Record</h3>
+                <span class="aipe-task-chevron" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></span>
+              </summary>
+              <p class="aipe-task-copy">Keep the decisions, their rationale and the open questions written down and current, so a new team member — or an auditor — can trace why the product is the way it is.</p>
+            </details>
             <div class="aipe-task-tags"><span>Decisions</span><span>Traceability</span><span>Governance</span></div>
           </div>
         </article>
