@@ -305,6 +305,15 @@ input, textarea, select { font: inherit; }
   max-width: 600px;
 }
 .section--dark .section-description { color: var(--gray-400); }
+/* a display-italic standfirst, matching the emphasis inside a section title */
+.section-description--display {
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 2.4vw, 2rem);
+  font-style: italic;
+  font-weight: 400;
+  line-height: 1.2;
+  color: var(--teal-700);
+}
 
 /* ==========================================================================
    4. NAVIGATION
@@ -3210,4 +3219,90 @@ body {
   .cs-pager-row { flex-direction: column; }
   .cs-pager-link { width: 100%; }
   .cs-pager-link--next { flex-direction: row-reverse; text-align: left; }
+}
+
+
+/* ==========================================================================
+   MINI PROJECT CARDS — the short version of the work page, on the homepage
+   ========================================================================== */
+.mini-work-slide { display: flex; justify-content: center; }
+
+.mini-work {
+  display: grid;
+  grid-template-columns: 200px minmax(0, 1fr);
+  width: 600px;
+  max-width: 100%;
+  height: 200px;
+  border-radius: var(--r-xl);
+  overflow: hidden;
+  background: var(--mini-bg, var(--gray-100));
+  text-decoration: none;
+  transition: box-shadow var(--t-base);
+}
+.mini-work:hover { box-shadow: var(--shadow-md); }
+.mini-work:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 3px; }
+
+.mini-work-shot {
+  display: grid;
+  place-items: center;
+  padding: var(--s-4);
+  overflow: hidden;
+}
+.mini-work-shot img {
+  max-width: 100%;
+  max-height: 100%;
+  display: block;
+  border-radius: 6px;
+  box-shadow: 0 6px 20px -6px rgba(0,0,0,0.35);
+}
+.mini-work-ph { color: rgba(0,0,0,0.22); }
+.mini-work-ph svg { width: 40px; height: 40px; display: block; }
+
+.mini-work-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: var(--s-3);
+  padding: var(--s-6) var(--s-7);
+  min-width: 0;
+}
+.mini-work-title {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  font-weight: 500;
+  line-height: 1.25;
+  color: var(--gray-900);
+}
+.mini-work-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+.mini-work-tags span {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: rgba(0,0,0,0.62);
+  background: rgba(255,255,255,0.55);
+  border: 1px solid rgba(0,0,0,0.08);
+  padding: 3px 9px;
+  border-radius: var(--r-full);
+}
+.mini-work-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  margin-top: var(--s-1);
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--color-accent);
+}
+.mini-work:hover .mini-work-cta { gap: 11px; }
+.mini-work-cta svg { transition: transform var(--t-base); }
+
+.mini-work-all { margin-top: var(--s-6); text-align: center; font-size: 0.875rem; }
+.mini-work-all a { color: var(--gray-500); text-decoration: none; border-bottom: 1px solid var(--gray-300); }
+.mini-work-all a:hover { color: var(--color-accent); border-bottom-color: currentColor; }
+
+@media (max-width: 640px) {
+  .mini-work { grid-template-columns: 120px minmax(0, 1fr); height: auto; min-height: 180px; }
+  .mini-work-body { padding: var(--s-5); }
+  .mini-work-title { font-size: 1.0625rem; }
 }
