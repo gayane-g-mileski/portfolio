@@ -3263,7 +3263,7 @@ body {
   height: 200px;
   border-radius: var(--r-xl);
   overflow: hidden;
-  background: #F2F2F2;
+  background: #F9F9F9;
   text-decoration: none;
   transition: box-shadow var(--t-base);
 }
