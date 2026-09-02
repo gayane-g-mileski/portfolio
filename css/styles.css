@@ -3229,6 +3229,31 @@ body {
 /* ==========================================================================
    MINI PROJECT CARDS — the short version of the work page, on the homepage
    ========================================================================== */
+/* the carousel on the left, the note on taste on the right */
+.mini-work-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 640px) minmax(0, 1fr);
+  gap: var(--s-12);
+  align-items: center;
+}
+.taste-title {
+  font-family: var(--font-display);
+  font-size: 1.75rem;
+  font-weight: 400;
+  color: var(--gray-900);
+  margin-bottom: var(--s-4);
+}
+.taste p {
+  font-size: 0.9375rem;
+  line-height: 1.8;
+  color: var(--gray-600);
+}
+.taste p + p { margin-top: var(--s-4); }
+
+@media (max-width: 1023px) {
+  .mini-work-grid { grid-template-columns: minmax(0, 1fr); gap: var(--s-10); }
+}
+
 .mini-work-slide { display: flex; justify-content: center; }
 
 /* quiet arrows sitting on the card itself */
