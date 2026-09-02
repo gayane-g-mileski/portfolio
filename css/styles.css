@@ -3245,12 +3245,12 @@ body {
   border: 0;
   border-radius: 50%;
   background: none;
-  color: rgba(0,0,0,0.32);
+  color: rgba(43,87,97,0.4);
   cursor: pointer;
   transition: color var(--t-base), background var(--t-base);
 }
 .mini-nav svg { width: 17px; height: 17px; display: block; }
-.mini-nav:hover { color: rgba(0,0,0,0.62); background: rgba(255,255,255,0.5); }
+.mini-nav:hover { color: rgb(43, 87, 97); background: rgba(255,255,255,0.6); }
 .mini-nav:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 2px; }
 .mini-nav--prev { left: max(var(--s-2), calc(50% - 292px)); }
 .mini-nav--next { right: max(var(--s-2), calc(50% - 292px)); }
@@ -3263,7 +3263,7 @@ body {
   height: 200px;
   border-radius: var(--r-xl);
   overflow: hidden;
-  background: #E2E2E2;
+  background: #F2F2F2;
   text-decoration: none;
   transition: box-shadow var(--t-base);
 }
@@ -3271,19 +3271,27 @@ body {
 .mini-work:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 3px; }
 
 .mini-work-shot {
-  display: grid;
-  place-items: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;            /* a definite height, so max-height on the shot resolves */
+  min-height: 0;
   padding: var(--s-4);
   overflow: hidden;
 }
 .mini-work-shot img {
   max-width: 100%;
   max-height: 100%;
+  width: auto;
+  height: auto;
+  object-fit: contain;
   display: block;
   border-radius: 6px;
   box-shadow: 0 6px 20px -6px rgba(0,0,0,0.35);
 }
-.mini-work-ph { color: rgba(0,0,0,0.22); }
+/* the phone mock-ups are cut out, so they carry no board of their own */
+.mini-work-shot img[src$="-mobile.png"] { border-radius: 0; box-shadow: none; }
+.mini-work-ph { color: rgba(43,87,97,0.28); }
 .mini-work-ph svg { width: 40px; height: 40px; display: block; }
 
 .mini-work-body {
@@ -3299,7 +3307,7 @@ body {
   font-size: 1.1875rem;
   font-weight: 600;
   line-height: 1.45;
-  color: rgba(0,0,0,0.62);
+  color: rgb(43, 87, 97);
 }
 .mini-work-tags { display: flex; flex-wrap: wrap; gap: 6px; }
 .mini-work-tags span {
@@ -3307,9 +3315,9 @@ body {
   font-weight: 600;
   letter-spacing: 0.04em;
   text-transform: uppercase;
-  color: rgba(0,0,0,0.62);
-  background: rgba(255,255,255,0.55);
-  border: 1px solid rgba(0,0,0,0.08);
+  color: rgb(43, 87, 97);
+  background: rgba(255,255,255,0.7);
+  border: 1px solid rgba(43,87,97,0.16);
   padding: 3px 9px;
   border-radius: var(--r-full);
 }
@@ -3321,7 +3329,7 @@ body {
   font-family: var(--font-body);
   font-size: 0.875rem;
   font-weight: 600;
-  color: rgba(0,0,0,0.62);
+  color: rgb(43, 87, 97);
 }
 .mini-work:hover .mini-work-cta { gap: 11px; }
 .mini-work-cta svg { transition: transform var(--t-base); }
