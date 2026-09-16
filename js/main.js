@@ -327,10 +327,63 @@
     if (root.hasAttribute('data-carousel-book')) {
       const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       const bookable = () => window.innerWidth >= 1000;   // phones keep the plain carousel
+      // the leaf carries the page it is turning on one side and the page it
+      // is turning to on the other, over the arriving page underneath
       const leaf = document.createElement('div');
       leaf.className = 'book-leaf';
       leaf.setAttribute('aria-hidden', 'true');
+      leaf.innerHTML =
+        '<div class="book-leaf-face book-leaf-face--front">' +
+          '<div class="book-leaf-inner"></div><span class="book-leaf-shade"></span></div>' +
+        '<div class="book-leaf-face book-leaf-face--back">' +
+          '<div class="book-leaf-inner"></div><span class="book-leaf-shade"></span></div>';
       root.appendChild(leaf);
+
+      const under = document.createElement('div');
+      under.className = 'book-under';
+      under.setAttribute('aria-hidden', 'true');
+      under.innerHTML = '<div class="book-under-inner"></div>';
+      root.appendChild(under);
+
+      const frontInner = qs('.book-leaf-face--front .book-leaf-inner', leaf);
+      const backInner  = qs('.book-leaf-face--back  .book-leaf-inner', leaf);
+      const underInner = qs('.book-under-inner', under);
+
+      // a spread copied into a half-width window, with no ids or focus stops
+      const fill = (host, slide, half) => {
+        host.textContent = '';
+        host.className = host.className.replace(/ --(left|right)/g, '')
+          .replace(/(book-(?:leaf|under)-inner)(--(?:left|right))?/, '$1');
+        host.classList.add(host.classList.contains('book-under-inner')
+          ? 'book-under-inner--' + half : 'book-leaf-inner--' + half);
+        if (!slide) return;
+        const copy = slide.cloneNode(true);
+        copy.removeAttribute('id');
+        copy.setAttribute('aria-hidden', 'true');
+        copy.style.opacity = '1';
+        copy.style.height = '100%';
+        qsa('[id]', copy).forEach(el => el.removeAttribute('id'));
+        qsa('a, button, input, select, textarea', copy).forEach(el => { el.tabIndex = -1; });
+        host.appendChild(copy);
+      };
+
+      const at = (i) => (loop ? slides[((i % slides.length) + slides.length) % slides.length] : slides[i]);
+
+      const dress = () => {
+        const next = at(index + dir);
+        if (dir > 0) {
+          fill(frontInner, slides[index], 'right');   // the page you lifted
+          fill(backInner,  next,          'left');    // its reverse, coming over
+          fill(underInner, next,          'right');   // what waits beneath it
+          under.className = 'book-under is-active book-under--fwd';
+        } else {
+          fill(frontInner, slides[index], 'left');
+          fill(backInner,  next,          'right');
+          fill(underInner, next,          'left');
+          under.className = 'book-under is-active book-under--back';
+        }
+        if (!next) under.className = 'book-under';
+      };
 
       let dragging = false, dir = 0, startX = 0, progress = 0, travel = 0;
       const width = () => root.getBoundingClientRect().width / 2;
@@ -339,13 +392,16 @@
         // p runs 0 -> 1; forward turns the right page left, back turns the left page right
         const deg = dir > 0 ? -180 * p : 180 * p;
         leaf.style.transform = `rotateY(${deg}deg)`;
-        leaf.style.opacity = String(1 - Math.max(0, p - 0.75) * 3);
+        leaf.style.setProperty('--p', String(p));
+        under.style.setProperty('--p', String(p));
+        // the sheet is darkest edge-on, halfway through the turn
+        leaf.style.setProperty('--shade', String(0.18 + 0.72 * (1 - Math.abs(1 - 2 * p))));
       };
       // past the first page or the last one there is nothing left but a cover
       const atCover = () => !loop && ((dir > 0 && index === slides.length - 1) || (dir < 0 && index === 0));
 
       const endDrag = (commit) => {
-        leaf.style.transition = 'transform 0.42s cubic-bezier(0.22,0.61,0.36,1), opacity 0.42s ease';
+        leaf.style.transition = 'transform 0.58s cubic-bezier(0.32,0.02,0.18,1)';
         if (commit) {
           setLeaf(1);
           const shutting = atCover();
@@ -362,17 +418,21 @@
             requestAnimationFrame(() => { track.style.transition = t; });
             reset();
             root.dispatchEvent(new CustomEvent('book:turn', { bubbles: true, detail: { dir: dir, index: index } }));
-          }, 380);
+          }, 540);
         } else {
           setLeaf(0);
-          setTimeout(reset, 380);
+          setTimeout(reset, 540);
         }
       };
       const reset = () => {
         leaf.classList.remove('is-active');
+        under.classList.remove('is-active');
         leaf.style.transition = 'none';
         leaf.style.transform = '';
-        leaf.style.opacity = '';
+        leaf.style.removeProperty('--p');
+        leaf.style.removeProperty('--shade');
+        under.style.removeProperty('--p');
+        frontInner.textContent = ''; backInner.textContent = ''; underInner.textContent = '';
         root.classList.remove('is-turning');
         dragging = false; progress = 0;
       };
@@ -385,6 +445,7 @@
         dir = (e.clientX - r.left) > r.width / 2 ? 1 : -1;
         dragging = true; startX = e.clientX; progress = 0; travel = 0;
         leaf.className = 'book-leaf is-active ' + (dir > 0 ? 'book-leaf--fwd' : 'book-leaf--back');
+        dress();
         leaf.style.transition = 'none';
         setLeaf(0);
         root.classList.add('is-turning');
@@ -426,7 +487,8 @@
           if (dragging) return;
           dir = 1;
           leaf.className = 'book-leaf is-active book-leaf--fwd';
-          leaf.style.transition = 'transform 1.15s cubic-bezier(0.42,0,0.22,1), opacity 1.15s ease';
+          dress();
+          leaf.style.transition = 'transform 1.15s cubic-bezier(0.42,0,0.22,1)';
           requestAnimationFrame(() => setLeaf(1));
           setTimeout(reset, 1250);
         }, 900);
