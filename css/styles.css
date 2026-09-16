@@ -2992,7 +2992,7 @@ body {
 /* the quote runs across both pages */
 .hero-quote {
   display: grid;
-  align-content: start;           /* every review starts at the same height */
+  align-content: center;          /* the block sits in the middle; the text stays ranged left */
   box-sizing: border-box;
   position: relative;
   margin: 0;
@@ -3022,102 +3022,47 @@ body {
 .hero-quote-name { font-size: 0.875rem; font-weight: 700; color: var(--gray-900); }
 .hero-quote-org  { font-size: 0.75rem; color: var(--gray-500); }
 
-/* ---- the turning leaf ------------------------------------------------
-   One leaf is one page, hinged on the spine. It carries the real page on
-   its front and the page that follows on its back, so what you see coming
-   over is what you are turning to — the way an e-reader does it.
-   --p runs 0 -> 1 through the turn and drives the lighting.            */
-.book-leaf {
-  position: absolute;
-  top: 0; bottom: 0;
-  width: 50%;
-  z-index: 6;
-  display: none;
-  transform-style: preserve-3d;
-  pointer-events: none;
-  --p: 0;
-}
-.book-leaf.is-active { display: block; }
-.book-leaf--fwd  { right: 0; transform-origin: left center; }
-.book-leaf--back { left: 0;  transform-origin: right center; }
-
-.book-leaf-face {
-  position: absolute;
-  inset: 0;
-  overflow: hidden;
-  /* both faces need a transform of their own, or the one turned away
-     keeps painting through the one facing us */
-  transform: rotateY(0deg);
-  backface-visibility: hidden;
-  -webkit-backface-visibility: hidden;
-  background: var(--white);
-  box-shadow: 0 0 40px -12px rgba(0,0,0,0.45);
-}
-.book-leaf--fwd  .book-leaf-face { border-radius: 0 var(--r-2xl) var(--r-2xl) 0; }
-.book-leaf--back .book-leaf-face { border-radius: var(--r-2xl) 0 0 var(--r-2xl); }
-.book-leaf-face--back { transform: rotateY(180deg); }
-/* the reverse of a sheet is a shade cooler and never quite as bright */
-.book-leaf-face--back .book-leaf-inner { opacity: 0.92; }
-
-/* a full spread inside a half-width window — shifted to show the right half */
-.book-leaf-inner {
-  position: absolute;
-  top: 0; bottom: 0;
-  width: 200%;
-}
-.book-leaf-inner--right { left: -100%; }
-.book-leaf-inner--left  { left: 0; }
-
-/* lighting: the sheet darkens towards the fold and catches the light as it
-   comes over, both strongest through the middle of the turn */
-.book-leaf-shade {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  opacity: var(--shade, 0.3);
-  transition: opacity 0.1s linear;
-}
-.book-leaf--fwd .book-leaf-face--front .book-leaf-shade,
-.book-leaf--back .book-leaf-face--back .book-leaf-shade {
-  background: linear-gradient(to left, rgba(0,0,0,0) 55%, rgba(0,0,0,0.05) 78%, rgba(0,0,0,0.22) 100%);
-}
-.book-leaf--fwd .book-leaf-face--back .book-leaf-shade,
-.book-leaf--back .book-leaf-face--front .book-leaf-shade {
-  background: linear-gradient(to right, rgba(0,0,0,0) 55%, rgba(0,0,0,0.05) 78%, rgba(0,0,0,0.22) 100%);
-}
-
-/* the page arriving underneath, revealed as the leaf lifts off it */
+/* ---- the turning page -------------------------------------------------
+   A flat sheet, the way a reader does it: the page lifts, leans a few
+   degrees and slides off, with the page it uncovers waiting underneath.
+   No foreshortening — the text stays the size it was all the way out. */
+.book-sheet,
 .book-under {
   position: absolute;
-  top: 0; bottom: 0;
-  width: 50%;
-  z-index: 3;
-  overflow: hidden;
+  inset: 0;
   display: none;
+  overflow: hidden;
   background: var(--white);
-  --p: 0;
+  border-radius: inherit;
+  pointer-events: none;
 }
+.book-sheet.is-active,
 .book-under.is-active { display: block; }
-.book-under--fwd  { right: 0; }
-.book-under--back { left: 0; }
-.book-under-inner { position: absolute; top: 0; bottom: 0; width: 200%; }
-.book-under-inner--right { left: -100%; }
-.book-under-inner--left  { left: 0; }
 
-/* the shadow the lifted page casts on the one below it */
+.book-under { z-index: 3; }
+.book-sheet {
+  z-index: 8;
+  will-change: transform;
+  box-shadow: 0 18px 40px -12px rgba(0,0,0,0.45), 0 2px 10px -4px rgba(0,0,0,0.25);
+}
+.book-sheet-inner,
+.book-under-inner { position: absolute; inset: 0; }
+
+/* the shadow the lifted sheet throws on the page below it, gone once it is away */
 .book-under::after {
   content: '';
   position: absolute;
   inset: 0;
   pointer-events: none;
-  opacity: calc(1 - var(--p));
-}
-.book-under--fwd::after {
-  background: linear-gradient(to right, rgba(0,0,0,0.28) 0%, rgba(0,0,0,0.10) 18%, rgba(0,0,0,0) 46%);
+  background: linear-gradient(to right, rgba(0,0,0,0) 0%, rgba(0,0,0,0.10) 80%, rgba(0,0,0,0.20) 100%);
+  opacity: calc(1 - var(--p, 0));
 }
 .book-under--back::after {
-  background: linear-gradient(to left, rgba(0,0,0,0.28) 0%, rgba(0,0,0,0.10) 18%, rgba(0,0,0,0) 46%);
+  background: linear-gradient(to left, rgba(0,0,0,0) 0%, rgba(0,0,0,0.10) 80%, rgba(0,0,0,0.20) 100%);
 }
+
+/* while a page is in flight the card clips it, so it slides off the edge */
+.carousel.is-turning { overflow: hidden; border-radius: var(--r-2xl); }
 
 .hero-quotes .carousel-controls { justify-content: center; margin: 0 0 var(--s-7); }
 
@@ -3125,7 +3070,7 @@ body {
     .hero-quotes-spine { display: none; }
 }
 @media (prefers-reduced-motion: reduce) {
-  .book-leaf { display: none !important; }
+  .book-sheet, .book-under { display: none !important; }
 }
 
 

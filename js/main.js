@@ -327,17 +327,13 @@
     if (root.hasAttribute('data-carousel-book')) {
       const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       const bookable = () => window.innerWidth >= 1000;   // phones keep the plain carousel
-      // the leaf carries the page it is turning on one side and the page it
-      // is turning to on the other, over the arriving page underneath
-      const leaf = document.createElement('div');
-      leaf.className = 'book-leaf';
-      leaf.setAttribute('aria-hidden', 'true');
-      leaf.innerHTML =
-        '<div class="book-leaf-face book-leaf-face--front">' +
-          '<div class="book-leaf-inner"></div><span class="book-leaf-shade"></span></div>' +
-        '<div class="book-leaf-face book-leaf-face--back">' +
-          '<div class="book-leaf-inner"></div><span class="book-leaf-shade"></span></div>';
-      root.appendChild(leaf);
+      // a page turn the way a reader does it: the sheet lifts, leans and
+      // slides off, uncovering the page that was waiting underneath
+      const sheet = document.createElement('div');
+      sheet.className = 'book-sheet';
+      sheet.setAttribute('aria-hidden', 'true');
+      sheet.innerHTML = '<div class="book-sheet-inner"></div>';
+      root.appendChild(sheet);
 
       const under = document.createElement('div');
       under.className = 'book-under';
@@ -345,17 +341,12 @@
       under.innerHTML = '<div class="book-under-inner"></div>';
       root.appendChild(under);
 
-      const frontInner = qs('.book-leaf-face--front .book-leaf-inner', leaf);
-      const backInner  = qs('.book-leaf-face--back  .book-leaf-inner', leaf);
+      const sheetInner = qs('.book-sheet-inner', sheet);
       const underInner = qs('.book-under-inner', under);
 
-      // a spread copied into a half-width window, with no ids or focus stops
-      const fill = (host, slide, half) => {
+      // a spread copied in, with no ids and nothing focusable
+      const fill = (host, slide) => {
         host.textContent = '';
-        host.className = host.className.replace(/ --(left|right)/g, '')
-          .replace(/(book-(?:leaf|under)-inner)(--(?:left|right))?/, '$1');
-        host.classList.add(host.classList.contains('book-under-inner')
-          ? 'book-under-inner--' + half : 'book-leaf-inner--' + half);
         if (!slide) return;
         const copy = slide.cloneNode(true);
         copy.removeAttribute('id');
@@ -371,41 +362,31 @@
 
       const dress = () => {
         const next = at(index + dir);
-        if (dir > 0) {
-          fill(frontInner, slides[index], 'right');   // the page you lifted
-          fill(backInner,  next,          'left');    // its reverse, coming over
-          fill(underInner, next,          'right');   // what waits beneath it
-          under.className = 'book-under is-active book-under--fwd';
-        } else {
-          fill(frontInner, slides[index], 'left');
-          fill(backInner,  next,          'right');
-          fill(underInner, next,          'left');
-          under.className = 'book-under is-active book-under--back';
-        }
-        if (!next) under.className = 'book-under';
+        fill(sheetInner, slides[index]);   // the page you are moving
+        fill(underInner, next);            // the one it uncovers
+        under.className = 'book-under' + (next ? ' is-active' : '') + (dir > 0 ? '' : ' book-under--back');
       };
 
       let dragging = false, dir = 0, startX = 0, progress = 0, travel = 0;
       const width = () => root.getBoundingClientRect().width / 2;
 
+      const LEAN = 6;   // degrees, at its most askew halfway across
       const setLeaf = (p) => {
-        // p runs 0 -> 1; forward turns the right page left, back turns the left page right
-        const deg = dir > 0 ? -180 * p : 180 * p;
-        leaf.style.transform = `rotateY(${deg}deg)`;
-        leaf.style.setProperty('--p', String(p));
+        // p runs 0 -> 1; forward slides the page off to the left, back to the right
+        const x = (dir > 0 ? -1 : 1) * p * 108;
+        const lean = (dir > 0 ? 1 : -1) * LEAN * Math.sin(Math.PI * Math.min(1, p));
+        sheet.style.transform = `translateX(${x}%) rotate(${lean}deg)`;
         under.style.setProperty('--p', String(p));
-        // the sheet is darkest edge-on, halfway through the turn
-        leaf.style.setProperty('--shade', String(0.18 + 0.72 * (1 - Math.abs(1 - 2 * p))));
       };
       // past the first page or the last one there is nothing left but a cover
       const atCover = () => !loop && ((dir > 0 && index === slides.length - 1) || (dir < 0 && index === 0));
 
       const endDrag = (commit) => {
-        leaf.style.transition = 'transform 0.58s cubic-bezier(0.32,0.02,0.18,1)';
+        sheet.style.transition = 'transform 0.52s cubic-bezier(0.33,0.01,0.28,1)';
         if (commit) {
           setLeaf(1);
           const shutting = atCover();
-          // swap underneath while the leaf covers the spread, so the turn is the only motion
+          // swap underneath while the sheet still covers the spread, so the slide is the only motion
           setTimeout(() => {
             if (shutting) {
               root.dispatchEvent(new CustomEvent('book:close', { bubbles: true, detail: { dir: dir } }));
@@ -425,14 +406,12 @@
         }
       };
       const reset = () => {
-        leaf.classList.remove('is-active');
+        sheet.classList.remove('is-active');
         under.classList.remove('is-active');
-        leaf.style.transition = 'none';
-        leaf.style.transform = '';
-        leaf.style.removeProperty('--p');
-        leaf.style.removeProperty('--shade');
+        sheet.style.transition = 'none';
+        sheet.style.transform = '';
         under.style.removeProperty('--p');
-        frontInner.textContent = ''; backInner.textContent = ''; underInner.textContent = '';
+        sheetInner.textContent = ''; underInner.textContent = '';
         root.classList.remove('is-turning');
         dragging = false; progress = 0;
       };
@@ -444,9 +423,9 @@
         const r = root.getBoundingClientRect();
         dir = (e.clientX - r.left) > r.width / 2 ? 1 : -1;
         dragging = true; startX = e.clientX; progress = 0; travel = 0;
-        leaf.className = 'book-leaf is-active ' + (dir > 0 ? 'book-leaf--fwd' : 'book-leaf--back');
+        sheet.className = 'book-sheet is-active';
         dress();
-        leaf.style.transition = 'none';
+        sheet.style.transition = 'none';
         setLeaf(0);
         root.classList.add('is-turning');
         window.addEventListener('pointermove', onMove);
@@ -486,9 +465,9 @@
         setTimeout(() => {
           if (dragging) return;
           dir = 1;
-          leaf.className = 'book-leaf is-active book-leaf--fwd';
+          sheet.className = 'book-sheet is-active';
           dress();
-          leaf.style.transition = 'transform 1.15s cubic-bezier(0.42,0,0.22,1)';
+          sheet.style.transition = 'transform 1.05s cubic-bezier(0.42,0,0.22,1)';
           requestAnimationFrame(() => setLeaf(1));
           setTimeout(reset, 1250);
         }, 900);
