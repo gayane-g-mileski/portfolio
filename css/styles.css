@@ -2986,6 +2986,18 @@ body {
   column-fill: balance;
 }
 .hero-quote-mark { display: none; }
+/* the running head, as a book has */
+.hero-quote-head {
+  position: absolute;
+  top: var(--s-4); left: 0; right: 0;
+  text-align: center;
+  font-size: 0.625rem;
+  font-weight: 700;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--gray-400);
+  pointer-events: none;
+}
 .hero-quote-text { margin: 0 0 var(--s-5); font-size: 0.9375rem; line-height: 1.85; color: var(--gray-700); font-style: italic; }
 .hero-quote-by   { break-inside: avoid; display: flex; flex-direction: column; gap: 2px; }
 .hero-quote-name { font-size: 0.875rem; font-weight: 700; color: var(--gray-900); }
@@ -3104,12 +3116,21 @@ body {
 @media (max-width: 640px) {
   .hero-quote-cols { column-count: 1; }
 
-  /* the cover runs the full width and stands in as the carousel's cover */
+  /* no covers on a phone — the reviews sit open, full width */
   .hero-quotes,
   .hero-quotes.is-closed-front,
   .hero-quotes.is-closed-back { width: 100%; }
-  .book-cover { width: 100%; }
-  .hero-quote { padding-block: 32px; }
+  .book-cover, .book-block-edge { display: none; }
+  .hero-quotes.is-closed-front,
+  .hero-quotes.is-closed-back {
+    background: var(--white);
+    border-color: var(--gray-200);
+    box-shadow: var(--shadow-sm);
+    cursor: default;
+  }
+  .hero-quotes.is-closed-front .carousel,
+  .hero-quotes.is-closed-back  .carousel { visibility: visible; }
+  .hero-quote { padding-block: 32px 16px; }
 
   /* no arrows here — the dots are only a hint that there is more inside */
   .hero-quotes .carousel.is-ready .carousel-controls {

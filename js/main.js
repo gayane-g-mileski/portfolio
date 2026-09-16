@@ -477,7 +477,9 @@
       state(e.detail.dir > 0 ? 'is-closed-back' : 'is-closed-front');
     });
 
-    state('is-closed-front');
+    // a phone gets no covers at all — the reviews are simply there
+    const coverless = () => window.matchMedia('(max-width: 640px)').matches;
+    state(coverless() ? 'is-open' : 'is-closed-front');
   }
 
   /* ==========================================================================
