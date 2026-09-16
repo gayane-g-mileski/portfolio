@@ -3097,9 +3097,29 @@ body {
 @media (max-width: 999px) {
   .hero-quotes { width: min(100%, 560px); height: 400px; margin-left: 0; }
 }
+/* the book keeps its controls hidden on a desktop — the pages are dragged */
+.hero-quotes .carousel.is-ready .carousel-controls { display: none; }
+
 /* too narrow for a spread — the volume opens on a single page */
 @media (max-width: 640px) {
   .hero-quote-cols { column-count: 1; }
+
+  /* the cover runs the full width and stands in as the carousel's cover */
+  .hero-quotes,
+  .hero-quotes.is-closed-front,
+  .hero-quotes.is-closed-back { width: 100%; }
+  .book-cover { width: 100%; }
+  .hero-quote { padding-block: 32px; }
+
+  /* no arrows here — the dots are only a hint that there is more inside */
+  .hero-quotes .carousel.is-ready .carousel-controls {
+    display: flex;
+    position: absolute;
+    left: 0; right: 0; top: 100%;
+    margin: var(--s-3) 0 0;
+    visibility: visible;
+  }
+  .hero-quotes .carousel-btn { display: none; }
 }
 @media (prefers-reduced-motion: reduce) {
   .book-cover { transition: none; }
