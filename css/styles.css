@@ -2940,7 +2940,7 @@ body {
   perspective: 2200px;
   padding: 0;
   width: min(100%, 560px);       /* the open spread: two 280px pages */
-  height: 400px;
+  height: 360px;
   margin-left: auto;
   transition: width 0.95s cubic-bezier(0.3, 0.02, 0.2, 1);
   touch-action: pan-y;
@@ -2973,7 +2973,7 @@ body {
 /* the quote runs across both pages */
 .hero-quote {
   display: grid;
-  align-content: center;          /* the text block sits on the page, not at its top */
+  align-content: start;           /* every review starts at the same height */
   box-sizing: border-box;
   position: relative;
   margin: 0;
@@ -2989,7 +2989,7 @@ body {
 /* the running head, as a book has */
 .hero-quote-head {
   position: absolute;
-  top: var(--s-4); left: 0; right: 0;
+  top: 12px; left: 0; right: 0;
   text-align: center;
   font-size: 0.625rem;
   font-weight: 700;
@@ -3107,7 +3107,7 @@ body {
 .hero-quotes.is-closed-front, .hero-quotes.is-closed-back { cursor: pointer; }
 
 @media (max-width: 999px) {
-  .hero-quotes { width: min(100%, 560px); height: 400px; margin-left: 0; }
+  .hero-quotes { width: min(100%, 560px); height: 360px; margin-left: 0; }
 }
 /* the book keeps its controls hidden on a desktop — the pages are dragged */
 .hero-quotes .carousel.is-ready .carousel-controls { display: none; }
@@ -3136,8 +3136,8 @@ body {
   .hero-quotes .carousel.is-ready .carousel-controls {
     display: flex;
     position: absolute;
-    left: 0; right: 0; top: 100%;
-    margin: var(--s-3) 0 0;
+    left: 0; right: 0; top: auto; bottom: 14px;
+    margin: 0;
     visibility: visible;
   }
   .hero-quotes .carousel-btn { display: none; }
