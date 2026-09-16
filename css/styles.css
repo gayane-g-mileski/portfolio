@@ -543,7 +543,6 @@ input, textarea, select { font: inherit; }
    6. HERO SECTION
    ========================================================================== */
 .hero {
-  min-height: 84vh;
   display: flex;
   align-items: center;
   padding-top: var(--nav-height);
@@ -3363,30 +3362,25 @@ body {
 .practice-coda {
   margin-top: var(--s-5);
   padding: var(--s-7);
-  background: var(--white);
-  border: 1px solid var(--gray-200);
+  background: #2b5761;            /* inverted: the teal carries the card */
+  border: 0;
   border-radius: var(--r-xl);
-  transition: border-color var(--t-base), box-shadow var(--t-base);
   display: grid;
   grid-template-columns: minmax(0, 300px) minmax(0, 1fr);
   gap: var(--s-10);
   align-items: start;
-}
-.practice-coda:hover {
-  border-color: var(--teal-300);
-  box-shadow: var(--shadow-md), 0 0 0 1px var(--teal-100) inset;
 }
 .practice-coda-title {
   font-family: var(--font-display);
   font-size: clamp(1.5rem, 2.2vw, 1.875rem);
   font-weight: 400;
   line-height: 1.2;
-  color: #2b5761;                 /* the teal of the logo disc */
+  color: #FFFFFF;
 }
 .practice-coda-body p {
   font-size: 0.9375rem;
   line-height: 1.8;
-  color: #2b5761;
+  color: rgba(255,255,255,0.86);
 }
 .practice-coda-body p + p { margin-top: var(--s-4); }
 @media (min-width: 1000px) {
@@ -3404,7 +3398,31 @@ body {
 /* ==========================================================================
    MINI PROJECT CARDS — the short version of the work page, on the homepage
    ========================================================================== */
-.mini-work-slide { display: flex; justify-content: center; }
+/* the projects sit in one pile, fanned so every card shows an edge */
+.mini-work-carousel .carousel-viewport { overflow: visible; }
+.mini-work-carousel .carousel-track,
+.mini-work-carousel .carousel-track.is-ready {
+  display: grid;
+  gap: 0;
+  transform: none !important;
+  transition: none;
+}
+.mini-work-carousel .carousel-track.is-ready > * {
+  grid-area: 1 / 1;
+  opacity: 1;
+  pointer-events: auto;
+}
+.mini-work-slide {
+  display: flex;
+  justify-content: center;
+  transform-origin: 50% 50%;
+  transform:
+    translate(calc(var(--off, 0) * 9px), calc(var(--off, 0) * 13px))
+    rotate(calc(var(--off, 0) * 0.55deg));
+  z-index: calc(20 - var(--off, 0));
+  transition: transform 0.55s cubic-bezier(0.22, 0.61, 0.36, 1), filter 0.55s ease;
+}
+.mini-work-slide:not(.is-active) { filter: brightness(0.99); }
 
 /* quiet arrows sitting on the card itself */
 .mini-work-carousel .carousel-controls { display: none !important; }
@@ -3427,15 +3445,14 @@ body {
 .mini-nav svg { width: 17px; height: 17px; display: block; }
 .mini-nav:hover { color: rgb(43, 87, 97); background: rgba(255,255,255,0.6); }
 .mini-nav:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 2px; }
-.mini-nav--prev { left: max(var(--s-2), calc(50% - 292px)); }
-.mini-nav--next { right: max(var(--s-2), calc(50% - 292px)); }
+.mini-nav--prev { left: var(--s-5); }
+.mini-nav--next { right: var(--s-5); }
 
 .mini-work {
   display: grid;
-  grid-template-columns: 180px minmax(0, 1fr);
-  width: 600px;
-  max-width: 100%;
-  height: 200px;
+  grid-template-columns: minmax(0, 360px) minmax(0, 1fr);
+  width: 100%;
+  height: 400px;
   border-radius: var(--r-xl);
   overflow: hidden;
   background: #F9F9F9;
@@ -3510,7 +3527,7 @@ body {
 .mini-work-cta svg { transition: transform var(--t-base); }
 
 @media (max-width: 640px) {
-  .mini-work { grid-template-columns: 120px minmax(0, 1fr); height: auto; min-height: 180px; }
+  .mini-work { grid-template-columns: 120px minmax(0, 1fr); height: auto; min-height: 260px; }
   .mini-work-body { padding: var(--s-5); }
   .mini-work-title { font-size: 1.0625rem; }
 }

@@ -286,6 +286,8 @@
       if (!fade) track.style.transform = `translateX(-${index * 100}%)`;
       slides.forEach((s, n) => {
         const on = n === index;
+        // how far this slide sits from the one on top, for a fanned stack
+        s.style.setProperty('--off', String(((n - index) % slides.length + slides.length) % slides.length));
         s.classList.toggle('is-active', on);
         // keep off-screen cards out of the tab order
         s.querySelectorAll('a, button').forEach(el => el.tabIndex = on ? 0 : -1);
@@ -388,7 +390,7 @@
       let dragging = false, dir = 0, startX = 0, progress = 0, travel = 0;
       const width = () => root.getBoundingClientRect().width / 2;
 
-      const TILT = 0.09;  // how far the hinge leans off vertical
+      const TILT = 0.035; // a whisper off vertical — more and the page tears off the fold
       const setLeaf = (p) => {
         // p runs 0 -> 1; forward turns the right page left, back turns the left page right
         const deg = dir > 0 ? -180 * p : 180 * p;
