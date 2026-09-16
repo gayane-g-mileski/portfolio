@@ -3265,6 +3265,37 @@ body {
 }
 
 
+/* the coda under the four cards — the one thing they do not cover */
+.practice-coda {
+  margin-top: var(--s-12);
+  padding-top: var(--s-10);
+  border-top: 1px solid var(--gray-200);
+  display: grid;
+  grid-template-columns: minmax(0, 300px) minmax(0, 1fr);
+  gap: var(--s-10);
+  align-items: start;
+}
+.practice-coda-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 2.2vw, 1.875rem);
+  font-weight: 400;
+  line-height: 1.2;
+  color: var(--gray-900);
+}
+.practice-coda-body p {
+  font-size: 0.9375rem;
+  line-height: 1.8;
+  color: var(--gray-600);
+}
+.practice-coda-body p + p { margin-top: var(--s-4); }
+@media (min-width: 1000px) {
+  .practice-coda-body { column-count: 2; column-gap: var(--s-10); }
+  .practice-coda-body p + p { margin-top: var(--s-4); }
+}
+@media (max-width: 767px) {
+  .practice-coda { grid-template-columns: minmax(0, 1fr); gap: var(--s-5); }
+}
+
 /* the section label stands alone where there is no title under it */
 .section-label--heading { margin-bottom: 0; }
 #mini-work .section-header { margin-bottom: var(--s-10); }
@@ -3272,31 +3303,6 @@ body {
 /* ==========================================================================
    MINI PROJECT CARDS — the short version of the work page, on the homepage
    ========================================================================== */
-/* the carousel on the left, the note on taste on the right */
-.mini-work-grid {
-  display: grid;
-  grid-template-columns: minmax(0, 640px) minmax(0, 1fr);
-  gap: var(--s-12);
-  align-items: center;
-}
-.taste-title {
-  font-family: var(--font-display);
-  font-size: 1.75rem;
-  font-weight: 400;
-  color: var(--gray-900);
-  margin-bottom: var(--s-4);
-}
-.taste p {
-  font-size: 0.9375rem;
-  line-height: 1.8;
-  color: var(--gray-600);
-}
-.taste p + p { margin-top: var(--s-4); }
-
-@media (max-width: 1023px) {
-  .mini-work-grid { grid-template-columns: minmax(0, 1fr); gap: var(--s-10); }
-}
-
 .mini-work-slide { display: flex; justify-content: center; }
 
 /* quiet arrows sitting on the card itself */
