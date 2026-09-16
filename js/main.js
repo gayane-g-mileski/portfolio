@@ -286,8 +286,21 @@
       if (!fade) track.style.transform = `translateX(-${index * 100}%)`;
       slides.forEach((s, n) => {
         const on = n === index;
-        // how far this slide sits from the one on top, for a fanned stack
-        s.style.setProperty('--off', String(((n - index) % slides.length + slides.length) % slides.length));
+        // how far back this slide sits in the pile
+        // the pile only fans two deep, so it stays inside the page
+        const raw = ((n - index) % slides.length + slides.length) % slides.length;
+        const off = Math.min(raw, 2);
+        const was = s.dataset.off;
+        if (on && was !== undefined && was !== '0') {
+          // it was underneath a moment ago: draw it out and lay it on top
+          s.style.setProperty('--from', was * 36 + 'px');
+          s.classList.remove('is-drawing');
+          void s.offsetWidth;
+          s.classList.add('is-drawing');
+          s.addEventListener('animationend', () => s.classList.remove('is-drawing'), { once: true });
+        }
+        s.dataset.off = String(off);
+        s.style.setProperty('--off', String(off));
         s.classList.toggle('is-active', on);
         // keep off-screen cards out of the tab order
         s.querySelectorAll('a, button').forEach(el => el.tabIndex = on ? 0 : -1);
