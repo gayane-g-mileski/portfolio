@@ -2044,7 +2044,6 @@ input, textarea, select { font: inherit; }
   flex-wrap: wrap;
   gap: var(--s-8);
   padding-top: var(--s-6);
-  border-top: 1px solid rgba(255,255,255,0.1);
 }
 
 .cs-meta-item {}
@@ -3305,13 +3304,20 @@ body {
 
 /* the coda under the four cards — the one thing they do not cover */
 .practice-coda {
-  margin-top: var(--s-12);
-  padding-top: var(--s-10);
-  border-top: 1px solid var(--gray-200);
+  margin-top: var(--s-5);
+  padding: var(--s-7);
+  background: var(--white);
+  border: 1px solid var(--gray-200);
+  border-radius: var(--r-xl);
+  transition: border-color var(--t-base), box-shadow var(--t-base);
   display: grid;
   grid-template-columns: minmax(0, 300px) minmax(0, 1fr);
   gap: var(--s-10);
   align-items: start;
+}
+.practice-coda:hover {
+  border-color: var(--teal-300);
+  box-shadow: var(--shadow-md), 0 0 0 1px var(--teal-100) inset;
 }
 .practice-coda-title {
   font-family: var(--font-display);
