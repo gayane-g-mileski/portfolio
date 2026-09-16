@@ -2977,7 +2977,7 @@ body {
   box-sizing: border-box;
   position: relative;
   margin: 0;
-  padding: 40px;                  /* 40 at the fore-edges, 80 across the gutter */
+  padding: 32px 40px 40px;        /* 32 above the running head, 80 across the gutter */
   height: 100%;
 }
 .hero-quote-cols {
@@ -2988,8 +2988,8 @@ body {
 .hero-quote-mark { display: none; }
 /* the running head, as a book has */
 .hero-quote-head {
-  position: absolute;
-  top: 12px; left: 0; right: 0;
+  display: block;
+  margin-bottom: var(--s-5);
   text-align: center;
   font-size: 0.625rem;
   font-weight: 700;
@@ -3131,6 +3131,8 @@ body {
   .hero-quotes.is-closed-front .carousel,
   .hero-quotes.is-closed-back  .carousel { visibility: visible; }
   .hero-quote { padding-block: 32px 16px; }
+  .hero-quote-head { margin-bottom: var(--s-4); }
+  .hero-quote-text { font-size: 0.875rem; line-height: 1.75; }
 
   /* no arrows here — the dots are only a hint that there is more inside */
   .hero-quotes .carousel.is-ready .carousel-controls {
