@@ -30,8 +30,11 @@
     .aipe-task-more { margin:0; }
 
     .aipe-task-summary {
-      display:grid; grid-template-columns:var(--illus-w) minmax(0,1fr) auto auto;
-      align-items:center; gap:var(--row-gap);
+      display:grid;
+      /* the title takes only what it needs, so the chips sit right beside it
+         and the slack falls between them and the chevron */
+      grid-template-columns:calc(var(--illus-w) + var(--row-gap) - 14px) auto minmax(0,1fr) auto;
+      align-items:center; column-gap:14px; row-gap:8px;
       padding:14px var(--row-pad); cursor:pointer; list-style:none;
     }
     .aipe-task-summary::-webkit-details-marker { display:none; }
@@ -42,7 +45,7 @@
     .aipe-task-illus svg { display:block; width:var(--illus-w); height:auto; }
 
     .aipe-task-title { font-size:1.0625rem; font-weight:700; color:#fff; line-height:1.3; margin:0; }
-    .aipe-task-tags { display:flex; flex-wrap:wrap; justify-content:flex-end; gap:6px; }
+    .aipe-task-tags { display:flex; flex-wrap:wrap; justify-content:flex-start; gap:6px; }
     .aipe-task-tags span { font-size:0.6875rem; font-weight:500; color:rgba(255,255,255,0.92); background:rgba(255,255,255,0.15); border:1px solid rgba(255,255,255,0.25); padding:3px 9px; border-radius:999px; white-space:nowrap; }
     .aipe-task-chevron { display:grid; place-items:center; width:22px; height:22px; color:rgba(255,255,255,0.72); transition:transform var(--t-base), color var(--t-base); }
     .aipe-task-chevron svg { width:16px; height:16px; display:block; }
