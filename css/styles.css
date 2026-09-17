@@ -3161,8 +3161,19 @@ body {
   border-radius: 3px 5px 5px 3px;
   backface-visibility: hidden;
   transition: transform 0.95s cubic-bezier(0.3, 0.02, 0.2, 1), opacity 0.95s ease;
-  background: #E9E6DF url('../images/book/cover-art.svg') center / cover no-repeat;
-  box-shadow: inset 0 1px 0 rgba(255,255,255,0.06);
+  background:
+    /* light falling across the board, and the corner it falls away from */
+    linear-gradient(142deg, rgba(255,255,255,0.30) 0%, rgba(255,255,255,0.05) 38%,
+                            rgba(0,0,0,0.02) 68%, rgba(0,0,0,0.07) 100%) 0 0 / 100% 100% no-repeat,
+    /* the hinge: the board creases where it leaves the spine */
+    linear-gradient(90deg, rgba(0,0,0,0.14) 0 1px, rgba(0,0,0,0.07) 1px 6px,
+                           rgba(255,255,255,0.30) 8px 13px, rgba(0,0,0,0) 22px) 0 0 / 100% 100% no-repeat,
+    #E9E6DF url('../images/book/cover-art.svg') center / cover no-repeat;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.60),
+    inset 0 -1px 0 rgba(0,0,0,0.13),
+    inset -1px 0 0 rgba(0,0,0,0.09),
+    inset 1px 0 0 rgba(0,0,0,0.06);
 }
 
 .book-cover-word {
@@ -3174,7 +3185,12 @@ body {
   font-size: 1.875rem;
   font-weight: 500;
   letter-spacing: -0.01em;
-  color: #1B1D1C;
+  color: #222624;
+  /* letterpress: a dark bite above the stroke, paper catching light below */
+  text-shadow:
+    0 -1px 0 rgba(0,0,0,0.22),
+    0 1px 0 rgba(255,255,255,0.80),
+    0 2px 2px rgba(0,0,0,0.06);
   pointer-events: none;
 }
 
@@ -3182,7 +3198,13 @@ body {
 .book-cover--front { transform-origin: left center;  transform: rotateY(0deg) translateZ(3px); }
 .book-cover--back {
   border-radius: 5px 3px 3px 5px;
-  /* the back board is the pattern alone — no word */
+  /* the pattern alone, and the hinge on its own side */
+  background:
+    linear-gradient(218deg, rgba(255,255,255,0.30) 0%, rgba(255,255,255,0.05) 38%,
+                            rgba(0,0,0,0.02) 68%, rgba(0,0,0,0.07) 100%) 0 0 / 100% 100% no-repeat,
+    linear-gradient(270deg, rgba(0,0,0,0.14) 0 1px, rgba(0,0,0,0.07) 1px 6px,
+                            rgba(255,255,255,0.30) 8px 13px, rgba(0,0,0,0) 22px) 0 0 / 100% 100% no-repeat,
+    #E9E6DF url('../images/book/cover-art.svg') center / cover no-repeat;
 }
 .hero-quotes.is-closed-back .book-block-edge { right: auto; left: 4px; box-shadow: inset 2px 0 4px -1px rgba(0,0,0,0.28); }
 .book-cover--back  { transform-origin: right center; transform: rotateY(180deg) translateZ(3px); }
