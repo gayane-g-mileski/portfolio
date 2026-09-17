@@ -11,18 +11,18 @@
   </defs>
 
   <g clip-path="url(#board)">
-    <rect width="280" height="320" fill="#E9E6DF"/>
+    <rect width="280" height="320" fill="#FFF0E4"/>
 
-    <!-- sand, running off the top-left corner -->
-    <circle cx="20" cy="6" r="96" fill="#BFAF94"/>
+    <!-- peach, running off the top-left corner -->
+    <circle cx="20" cy="6" r="96" fill="#FFE0C5"/>
 
-    <!-- the dark sweep in the bottom-right -->
+    <!-- the burgundy sweep in the bottom-right -->
     <path d="M280 182 C 246 196 222 232 206 268 C 196 292 190 308 187 320 L 280 320 Z"
-          fill="#2F3A36"/>
+          fill="#760031"/>
 
-    <!-- one gold line, following it at a distance -->
+    <!-- one crimson line, following it at a distance -->
     <path d="M18 320 C 66 296 100 268 140 236 C 184 200 232 176 280 162"
-          fill="none" stroke="#C0A26A" stroke-width="1.6" stroke-linecap="round"/>
+          fill="none" stroke="#D51C39" stroke-width="1.6" stroke-linecap="round"/>
 
     <rect width="280" height="320" filter="url(#grain)" opacity="0.55"/>
   </g>
