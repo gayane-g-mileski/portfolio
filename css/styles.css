@@ -3390,15 +3390,11 @@ body {
 
 /* the coda under the four cards — the one thing they do not cover */
 .practice-coda {
-  margin-top: var(--s-5);
-  padding: var(--s-7);
+  margin-top: var(--s-12);
+  padding: var(--s-12) var(--s-10);
   background: #2b5761;            /* inverted: the teal carries the card */
   border: 0;
   border-radius: var(--r-xl);
-  display: grid;
-  grid-template-columns: minmax(0, 300px) minmax(0, 1fr);
-  gap: var(--s-10);
-  align-items: start;
 }
 .practice-coda-title {
   font-family: var(--font-display);
@@ -3406,6 +3402,7 @@ body {
   font-weight: 400;
   line-height: 1.2;
   color: #FFFFFF;
+  margin-bottom: var(--s-6);
 }
 .practice-coda-body p {
   font-size: 0.9375rem;
@@ -3413,12 +3410,10 @@ body {
   color: rgba(255,255,255,0.86);
 }
 .practice-coda-body p + p { margin-top: var(--s-4); }
-@media (min-width: 1000px) {
-  .practice-coda-body { column-count: 2; column-gap: var(--s-10); }
-  .practice-coda-body p + p { margin-top: var(--s-4); }
-}
+/* one column, set to a measure that can still be read across a wide card */
+.practice-coda-body { max-width: 80ch; }
 @media (max-width: 767px) {
-  .practice-coda { grid-template-columns: minmax(0, 1fr); gap: var(--s-5); }
+  .practice-coda { padding: var(--s-8) var(--s-6); }
 }
 
 /* the section label stands alone where there is no title under it */
