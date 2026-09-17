@@ -3444,10 +3444,7 @@ body {
   object-fit: contain;
   display: block;
 }
-.proj-shot img:not([src$="-mobile.png"]) {
-  border-radius: 6px;
-  box-shadow: 0 8px 22px -8px rgba(0,0,0,0.35);
-}
+/* the mock-ups carry their own bezel, so they take no frame from us */
 .proj-ph { color: rgba(43,87,97,0.26); }
 .proj-ph svg { width: 44px; height: 44px; display: block; }
 
