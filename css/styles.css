@@ -3163,9 +3163,7 @@ body {
   transition: transform 0.95s cubic-bezier(0.3, 0.02, 0.2, 1), opacity 0.95s ease;
   /* contain, not stretch — the boards are 280 x 320, the artwork is taller */
   background: #2B5761 url('../images/book/cover-front.webp') center / contain no-repeat;
-  box-shadow:
-    0 28px 46px -22px rgba(0,0,0,0.55),
-    inset 0 1px 0 rgba(255,255,255,0.06);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.06);
 }
 
 /* front board hinges on the spine; back board swings in from the fore-edge */
