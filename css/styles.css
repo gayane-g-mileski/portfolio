@@ -3394,154 +3394,101 @@ body {
 #mini-work .section-header { margin-bottom: var(--s-10); }
 
 /* ==========================================================================
-   MINI PROJECT CARDS — the short version of the work page, on the homepage
+   SELECTED PROJECTS — a plain rail: three and a bit on a desktop, one on a phone
    ========================================================================== */
-/* the projects sit in one pile, fanned so every card shows an edge */
-#mini-work { overflow: hidden; }
-.mini-work-carousel .carousel-viewport { overflow: visible; }
-.mini-work-carousel .carousel-track,
-.mini-work-carousel .carousel-track.is-ready {
-  display: grid;
-  gap: 0;
-  transform: none !important;
-  transition: none;
-}
-.mini-work-carousel .carousel-track.is-ready > * {
-  grid-area: 1 / 1;
-  opacity: 1;
-  pointer-events: auto;
-}
-.mini-work-slide {
-  --step: 36px;
+.proj-rail { position: relative; }
+
+.proj-track {
+  --proj-gap: var(--s-5);
   display: flex;
-  justify-content: center;
-  transform: translateX(calc(var(--off, 0) * var(--step)));
-  z-index: calc(20 - var(--off, 0));
-  transition: transform 0.55s cubic-bezier(0.22, 0.61, 0.36, 1);
+  gap: var(--proj-gap);
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  padding-bottom: 2px;
 }
+.proj-track::-webkit-scrollbar { display: none; }
+.proj-track:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 6px; border-radius: var(--r-xl); }
 
-/* taking the next card out from under the pile and laying it on top */
-.mini-work-slide.is-drawing {
-  animation: mini-draw 0.72s cubic-bezier(0.34, 0.03, 0.22, 1) both;
-}
-@keyframes mini-draw {
-  0%   { transform: translateX(var(--from, 36px)); z-index: 4; }
-  42%  { transform: translateX(calc(var(--from, 36px) + 50px)); z-index: 4; }
-  50%  { z-index: 30; }
-  100% { transform: translateX(0); z-index: 30; }
-}
-
-/* quiet arrows sitting on the card itself */
-.mini-work-carousel .carousel-controls { display: none !important; }
-.mini-nav {
-  position: absolute;
-  top: 50%;
-  z-index: 3;
-  transform: translateY(-50%);
-  display: grid;
-  place-items: center;
-  width: 30px; height: 30px;
-  padding: 0;
-  border: 0;
-  border-radius: 50%;
-  background: none;
-  color: rgba(43,87,97,0.4);
-  cursor: pointer;
-  transition: color var(--t-base), background var(--t-base);
-}
-.mini-nav svg { width: 17px; height: 17px; display: block; }
-.mini-nav:hover { color: rgb(43, 87, 97); background: rgba(255,255,255,0.6); }
-.mini-nav:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 2px; }
-.mini-nav {
-  z-index: 26;                       /* above the pile, so they stay reachable */
-}
-.mini-nav--prev { right: -33px; top: calc(50% - 24px); }
-.mini-nav--next { right: -33px; top: calc(50% + 24px); }
-
-.mini-work {
-  display: grid;
-  grid-template-columns: minmax(0, 360px) minmax(0, 1fr);
-  width: 100%;
+.proj-card {
+  /* three across, with the fourth showing enough to say there is more */
+  flex: 0 0 calc((100% - 3 * var(--proj-gap)) / 3.3);
+  scroll-snap-align: start;
   height: 400px;
+  display: grid;
+  grid-template-rows: minmax(0, 1fr) auto;
+  padding: var(--s-6) var(--s-6) var(--s-5);
   border-radius: var(--r-xl);
-  overflow: hidden;
-  background: var(--mini-bg, #F9F9F9);
+  background: #D7DFE1;
   text-decoration: none;
-  /* a hairline and a soft edge, so a card in the pile reads as its own card */
-  box-shadow:
-    inset -1px 0 0 rgba(43,87,97,0.14),
-    14px 0 24px -16px rgba(0,0,0,0.40);
   transition: box-shadow var(--t-base);
 }
-.mini-work:hover { box-shadow: inset -1px 0 0 rgba(43,87,97,0.14), 16px 0 28px -14px rgba(0,0,0,0.46); }
-.mini-work:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 3px; }
+.proj-card:hover { box-shadow: var(--shadow-md); }
+.proj-card:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 3px; }
 
-.mini-work-shot {
+.proj-shot {
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 100%;            /* a definite height, so max-height on the shot resolves */
   min-height: 0;
-  padding: var(--s-4);
   overflow: hidden;
 }
-.mini-work-shot img {
+.proj-shot img {
   max-width: 100%;
   max-height: 100%;
   width: auto;
   height: auto;
   object-fit: contain;
   display: block;
+}
+.proj-shot img:not([src$="-mobile.png"]) {
   border-radius: 6px;
-  box-shadow: 0 6px 20px -6px rgba(0,0,0,0.35);
+  box-shadow: 0 8px 22px -8px rgba(0,0,0,0.35);
 }
-/* the phone mock-ups are cut out, so they carry no board of their own */
-.mini-work-shot img[src$="-mobile.png"] { border-radius: 0; box-shadow: none; }
-.mini-work-ph { color: rgba(43,87,97,0.28); }
-.mini-work-ph svg { width: 40px; height: 40px; display: block; }
+.proj-ph { color: rgba(43,87,97,0.26); }
+.proj-ph svg { width: 44px; height: 44px; display: block; }
 
-.mini-work-body {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: var(--s-4);
-  padding: var(--s-6) var(--s-10) var(--s-6) var(--s-7);   /* room for the arrow */
-  min-width: 0;
-}
-.mini-work-title {
-  font-family: var(--font-body);
-  font-size: 1.1875rem;
-  font-weight: 600;
-  line-height: 1.45;
-  color: rgb(43, 87, 97);
-}
-.mini-work-tags { display: flex; flex-wrap: wrap; gap: 6px; }
-.mini-work-tags span {
-  font-size: 0.6875rem;
-  font-weight: 600;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-  color: rgb(43, 87, 97);
-  background: rgba(255,255,255,0.7);
-  border: 1px solid rgba(43,87,97,0.16);
-  padding: 3px 9px;
-  border-radius: var(--r-full);
-}
-.mini-work-cta {
+.proj-cta {
   display: inline-flex;
   align-items: center;
   gap: 7px;
-  margin-top: var(--s-1);
-  font-family: var(--font-body);
+  margin-top: var(--s-5);
   font-size: 0.875rem;
   font-weight: 600;
   color: rgb(43, 87, 97);
 }
-.mini-work:hover .mini-work-cta { gap: 11px; }
-.mini-work-cta svg { transition: transform var(--t-base); }
+.proj-card:hover .proj-cta { gap: 11px; }
+.proj-cta svg { transition: transform var(--t-base); }
 
-@media (max-width: 640px) {
-  .mini-work { grid-template-columns: 120px minmax(0, 1fr); height: auto; min-height: 260px; }
-  .mini-work-body { padding: var(--s-5); }
-  .mini-work-title { font-size: 1.0625rem; }
+/* the arrows stand clear of the cards, in the page gutter */
+.proj-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 3;
+  display: grid;
+  place-items: center;
+  width: 40px; height: 40px;
+  padding: 0;
+  border: 1px solid var(--gray-200);
+  border-radius: 50%;
+  background: var(--white);
+  color: rgba(43,87,97,0.65);
+  cursor: pointer;
+  transition: color var(--t-base), border-color var(--t-base), opacity var(--t-base);
+}
+.proj-nav svg { width: 18px; height: 18px; display: block; }
+.proj-nav:hover { color: rgb(43, 87, 97); border-color: rgba(43,87,97,0.35); }
+.proj-nav:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 3px; }
+.proj-nav[disabled] { opacity: 0.3; cursor: default; }
+.proj-nav--prev { left: -20px; }
+.proj-nav--next { right: -20px; }
+
+@media (max-width: 767px) {
+  /* one card at a time, the next reached by scrolling */
+  .proj-card { flex-basis: 100%; height: 360px; }
+  .proj-nav { display: none; }
 }

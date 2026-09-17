@@ -286,21 +286,6 @@
       if (!fade) track.style.transform = `translateX(-${index * 100}%)`;
       slides.forEach((s, n) => {
         const on = n === index;
-        // how far back this slide sits in the pile
-        // the pile only fans two deep, so it stays inside the page
-        const raw = ((n - index) % slides.length + slides.length) % slides.length;
-        const off = Math.min(raw, 2);
-        const was = s.dataset.off;
-        if (on && was !== undefined && was !== '0') {
-          // it was underneath a moment ago: draw it out and lay it on top
-          s.style.setProperty('--from', was * 36 + 'px');
-          s.classList.remove('is-drawing');
-          void s.offsetWidth;
-          s.classList.add('is-drawing');
-          s.addEventListener('animationend', () => s.classList.remove('is-drawing'), { once: true });
-        }
-        s.dataset.off = String(off);
-        s.style.setProperty('--off', String(off));
         s.classList.toggle('is-active', on);
         // keep off-screen cards out of the tab order
         s.querySelectorAll('a, button').forEach(el => el.tabIndex = on ? 0 : -1);
@@ -561,6 +546,35 @@
     const coverless = () => window.matchMedia('(max-width: 640px)').matches;
     state(coverless() ? 'is-open' : 'is-closed-front');
   }
+
+  /* ==========================================================================
+     PROJECT RAIL — scroll-snapped cards, arrows page by one
+  ========================================================================== */
+  qsa('[data-proj-rail]').forEach(rail => {
+    const track = qs('.proj-track', rail);
+    const prev  = qs('.proj-nav--prev', rail);
+    const next  = qs('.proj-nav--next', rail);
+    if (!track) return;
+
+    const step = () => {
+      const card = qs('.proj-card', track);
+      if (!card) return track.clientWidth;
+      const gap = parseFloat(getComputedStyle(track).columnGap || '0') || 0;
+      return card.getBoundingClientRect().width + gap;
+    };
+
+    const sync = () => {
+      const max = track.scrollWidth - track.clientWidth - 1;
+      if (prev) prev.disabled = track.scrollLeft <= 0;
+      if (next) next.disabled = track.scrollLeft >= max;
+    };
+
+    prev && prev.addEventListener('click', () => track.scrollBy({ left: -step(), behavior: 'smooth' }));
+    next && next.addEventListener('click', () => track.scrollBy({ left:  step(), behavior: 'smooth' }));
+    track.addEventListener('scroll', sync, { passive: true });
+    window.addEventListener('resize', sync);
+    sync();
+  });
 
   /* ==========================================================================
      WORK FILTER TABS
