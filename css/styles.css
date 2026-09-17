@@ -228,7 +228,7 @@ input, textarea, select { font: inherit; }
 }
 
 .section {
-  padding-block: var(--s-24);
+  padding-block: var(--s-32);
 }
 
 .section--dark {
@@ -567,7 +567,7 @@ input, textarea, select { font: inherit; }
   grid-template-columns: 1fr;
   gap: var(--s-16);
   align-items: center;
-  padding-block: var(--s-20) var(--s-6);
+  padding-block: var(--s-20) var(--s-16);
 }
 
 .hero-eyebrow {
@@ -2874,8 +2874,6 @@ body {
 .hero-quotes .carousel-btn { width: 34px; height: 34px; }
 .hero-quotes .carousel-btn svg { width: 16px; height: 16px; }
 
-#practice { padding-top: var(--s-6); }
-
 /* headline full width; text and testimonials centred against each other */
 .hero-head { grid-column: 1 / -1; }
 .hero-head .hero-title { max-width: none; }
@@ -3425,6 +3423,8 @@ body {
 
 /* the section label stands alone where there is no title under it */
 .section-label--heading { margin-bottom: 0; }
+#mini-work .section-label--heading { color: #2b5761; }
+#mini-work .section-label--heading::before { background: #2b5761; }
 #mini-work .section-header { margin-bottom: var(--s-10); }
 
 /* ==========================================================================
