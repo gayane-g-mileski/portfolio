@@ -3414,15 +3414,15 @@ body {
 .proj-track:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 6px; border-radius: var(--r-xl); }
 
 .proj-card {
-  /* three across, with the fourth showing enough to say there is more */
-  flex: 0 0 calc((100% - 3 * var(--proj-gap)) / 3.3);
+  /* exactly three across — three cards and the two gaps between them */
+  flex: 0 0 calc((100% - 2 * var(--proj-gap)) / 3);
   scroll-snap-align: start;
   height: 400px;
   display: grid;
   grid-template-rows: minmax(0, 1fr) auto;
   padding: var(--s-6) var(--s-6) var(--s-5);
   border-radius: var(--r-xl);
-  background: #D7DFE1;
+  background: var(--proj-bg, #D7DFE1);
   text-decoration: none;
   transition: box-shadow var(--t-base);
 }
@@ -3453,6 +3453,7 @@ body {
 
 .proj-cta {
   display: inline-flex;
+  justify-self: center;
   align-items: center;
   gap: 7px;
   margin-top: var(--s-5);
