@@ -3465,7 +3465,7 @@ body {
   height: 400px;
   border-radius: var(--r-xl);
   overflow: hidden;
-  background: #F9F9F9;
+  background: var(--mini-bg, #F9F9F9);
   text-decoration: none;
   /* a hairline and a soft edge, so a card in the pile reads as its own card */
   box-shadow:
