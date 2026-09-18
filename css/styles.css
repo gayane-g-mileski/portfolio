@@ -3545,15 +3545,64 @@ body {
   scroll-snap-align: start;
   height: 400px;
   display: grid;
-  grid-template-rows: minmax(0, 1fr) auto;
-  padding: var(--s-6) var(--s-6) var(--s-5);
+  grid-template-rows: minmax(0, 1fr);
+  padding: var(--s-6);
   border-radius: var(--r-xl);
   background: var(--proj-bg, #D7DFE1);
   text-decoration: none;
   transition: box-shadow var(--t-base);
+  position: relative;
+  overflow: hidden;               /* the shapes are cut by the card's own edge */
+  isolation: isolate;             /* and stay under the screenshot */
 }
 .proj-card:hover { box-shadow: var(--shadow-md); }
 .proj-card:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 3px; }
+
+/* two filled circles and one drawn arc per card, in a darker relative of the
+   card's own tint. no two cards are arranged alike, and each one puts at least
+   one shape over an edge. */
+.proj-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background-repeat: no-repeat;
+  background-image:
+    radial-gradient(circle var(--pa-r) at var(--pa-x) var(--pa-y),
+      transparent 0 calc(100% - 1.5px),
+      rgb(var(--proj-ink, 43 87 97) / 0.42) calc(100% - 1.5px) 100%, transparent 100%),
+    radial-gradient(circle var(--ps-r) at var(--ps-x) var(--ps-y),
+      rgb(var(--proj-ink, 43 87 97) / 0.28) 0 98%, transparent 100%),
+    radial-gradient(circle var(--pb-r) at var(--pb-x) var(--pb-y),
+      rgb(var(--proj-ink, 43 87 97) / 0.15) 0 98%, transparent 100%);
+}
+/* arc, small disc, big disc */
+.proj-card:nth-child(1) {
+  --pa-r: 210px; --pa-x: 106%; --pa-y: -8%;
+  --ps-r:  62px; --ps-x:  78%; --ps-y:  30%;
+  --pb-r: 150px; --pb-x: -12%; --pb-y:  84%;
+}
+.proj-card:nth-child(2) {
+  --pa-r: 170px; --pa-x: -14%; --pa-y: 108%;
+  --ps-r:  54px; --ps-x:  22%; --ps-y:  78%;
+  --pb-r: 138px; --pb-x: 104%; --pb-y:  18%;
+}
+.proj-card:nth-child(3) {
+  --pa-r: 230px; --pa-x:  50%; --pa-y: 118%;
+  --ps-r:  70px; --ps-x:  92%; --ps-y:  62%;
+  --pb-r: 120px; --pb-x:   8%; --pb-y:   8%;
+}
+.proj-card:nth-child(4) {
+  --pa-r: 190px; --pa-x: 112%; --pa-y:  92%;
+  --ps-r:  48px; --ps-x:  12%; --ps-y:  66%;
+  --pb-r: 160px; --pb-x:  30%; --pb-y: -14%;
+}
+.proj-card:nth-child(5) {
+  --pa-r: 150px; --pa-x:  18%; --pa-y: -10%;
+  --ps-r:  58px; --ps-x:  62%; --ps-y:  22%;
+  --pb-r: 132px; --pb-x:  92%; --pb-y:  96%;
+}
 
 .proj-shot {
   display: flex;
@@ -3573,19 +3622,6 @@ body {
 /* the mock-ups carry their own bezel, so they take no frame from us */
 .proj-ph { color: rgba(43,87,97,0.26); }
 .proj-ph svg { width: 44px; height: 44px; display: block; }
-
-.proj-cta {
-  display: inline-flex;
-  justify-self: center;
-  align-items: center;
-  gap: 7px;
-  margin-top: var(--s-5);
-  font-size: 0.875rem;
-  font-weight: 600;
-  color: rgb(43, 87, 97);
-}
-.proj-card:hover .proj-cta { gap: 11px; }
-.proj-cta svg { transition: transform var(--t-base); }
 
 /* the arrows stand clear of the cards, in the page gutter */
 .proj-nav {
