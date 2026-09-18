@@ -3480,11 +3480,17 @@ body {
    differently. nothing here answers the other side. */
 .practice-coda::after {
   right: calc(50% - 50vw);
+  /* this panel reaches further in than the left one, only so the burgundy can
+     sit that much closer to the text. everything else here is measured from the
+     right edge, so nothing else moves with it. */
+  --reach: 100px;
+  width: calc(var(--w) + var(--reach));
   --rb: min(calc(var(--w) * 1.50), 360px);
   --rm: min(calc(var(--w) * 0.62), 172px);
   --rs: min(calc(var(--w) * 0.20),  58px);
   --xb: min(calc(var(--w) * 0.25), calc(var(--w) - var(--rb) - 10px));
-  --xm: min(calc(var(--w) * 0.78), calc(var(--w) - var(--rm) - 12px));
+  --xm: min(calc(var(--w) * 0.78 + var(--reach)),
+            calc(var(--w) + var(--reach) - var(--rm) - 12px));
   --xs: min(calc(var(--w) * 0.46), calc(var(--w) - var(--rs) - 12px));
   background-image:
     url('../images/coda/line-right.svg'),
