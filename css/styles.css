@@ -3411,12 +3411,20 @@ body {
 
 /* the coda under the four cards — the one thing they do not cover.
    the book cover's palette scattered across both gutters: three circles a side,
-   massed low on the left and high on the right, with the thin crimson line
-   climbing away from each. the column down the middle stays clear.
+   massed low on the left and high on the right. the two sides do not answer each
+   other — different sizes, different heights, different reach — and only the
+   right one carries the crimson line. the column down the middle stays clear.
 
    the circles are drawn as gradients rather than as a fitted drawing: the
    gutter changes shape a great deal between a laptop and a wide monitor, and a
    circle sized from the panel's own width stays a circle through all of it. */
+#practice {
+  overflow-x: clip;                /* the art sits against the page edges */
+  /* from the page edge to roughly 200px short of the 66ch column —
+     less on narrower screens, where there is not 200px to give away */
+  --coda-art-gap: clamp(96px, 14vw, 200px);
+  --w: calc(50vw - 33ch - var(--coda-art-gap));
+}
 .practice-coda {
   position: relative;
   z-index: 0;                      /* its own context, so the art stays behind the words */
@@ -3433,14 +3441,16 @@ body {
   z-index: -1;
   top: 0;
   bottom: 0;                      /* the whole height of the block */
-  /* from the page edge to roughly 200px short of the 66ch column —
-     less on narrower screens, where there is not 200px to give away */
-  --coda-art-gap: clamp(96px, 14vw, 200px);
-  --w: calc(50vw - 33ch - var(--coda-art-gap));
   width: var(--w);
 
-  /* three sizes, far enough apart that no two of them read as a pair. the caps
-     keep each one inside the block's height once the gutter goes wide */
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  pointer-events: none;
+}
+/* left: a tall peach arc down the edge, a pale weight low, one small mark high.
+   no line on this side. */
+.practice-coda::before {
+  left: calc(50% - 50vw);         /* the left edge of the page */
   --rb: min(calc(var(--w) * 1.45), 230px);   /* mostly off the page: an arc, not a blob */
   --rm: min(calc(var(--w) * 0.38), 112px);
   --rs: min(calc(var(--w) * 0.22),  66px);
@@ -3448,32 +3458,32 @@ body {
   --xb: min(calc(var(--w) * 0.18), calc(var(--w) - var(--rb) - 10px));
   --xm: min(calc(var(--w) * 0.62), calc(var(--w) - var(--rm) - 12px));
   --xs: min(calc(var(--w) * 0.86), calc(var(--w) - var(--rs) - 12px));
-
-  background-repeat: no-repeat;
-  background-size: 100% 100%;
-  pointer-events: none;
-}
-.practice-coda::before {
-  left: calc(50% - 50vw);         /* the left edge of the page */
-  /* massed low, per the wedge: the arc down the edge, a pale weight at the
-     bottom, one small mark high and well inside */
   background-image:
-    url('../images/coda/line-left.svg'),
     radial-gradient(circle var(--rs) at var(--xs) 18%, #FFE0C5 0 98%, #FFE0C500 100%),
     radial-gradient(circle var(--rm) at var(--xm) 78%, #FFF0E4 0 98%, #FFF0E400 100%),
     radial-gradient(circle var(--rb) at var(--xb) 52%, #FFE0C5 0 98%, #FFE0C500 100%);
 }
+/* right: shallower arc, a much heavier burgundy reaching in, a smaller mark than
+   the left's and sitting lower. nothing here answers the other side.
+   this panel runs on past the block, down to where the contact block starts, so
+   the crimson line can climb straight out of the footer. */
 .practice-coda::after {
   right: calc(50% - 50vw);
-  /* massed high, mirrored: the burgundy takes the top, the small mark the floor */
+  bottom: calc(-1 * var(--s-32));
+  --rb: min(calc(var(--w) * 1.12), 188px);
+  --rm: min(calc(var(--w) * 0.50), 142px);
+  --rs: min(calc(var(--w) * 0.15),  44px);
+  --xb: min(calc(var(--w) * 0.14), calc(var(--w) - var(--rb) - 10px));
+  --xm: min(calc(var(--w) * 0.72), calc(var(--w) - var(--rm) - 12px));
+  --xs: min(calc(var(--w) * 0.42), calc(var(--w) - var(--rs) - 12px));
   background-image:
     url('../images/coda/line-right.svg'),
-    radial-gradient(circle var(--rs) at calc(100% - var(--xs)) 78%, #FFE0C5 0 98%, #FFE0C500 100%),
-    radial-gradient(circle var(--rm) at calc(100% - var(--xm)) 22%, #760031 0 98%, #76003100 100%),
-    radial-gradient(circle var(--rb) at calc(100% - var(--xb)) 46%, #FFF0E4 0 98%, #FFF0E400 100%);
+    radial-gradient(circle var(--rs) at calc(100% - var(--xs)) 68%, #FFE0C5 0 98%, #FFE0C500 100%),
+    radial-gradient(circle var(--rm) at calc(100% - var(--xm)) 26%, #760031 0 98%, #76003100 100%),
+    radial-gradient(circle var(--rb) at calc(100% - var(--xb)) 36%, #FFF0E4 0 98%, #FFF0E400 100%);
 }
-/* the art sits against the page edges — clip sideways, nothing spills down */
-#practice { overflow-x: clip; }
+/* and the contact block paints over the tail that belongs to it */
+#contact { position: relative; z-index: 1; }
 /* below this there are no sides to speak of */
 @media (max-width: 1023px) {
   .practice-coda::before, .practice-coda::after { display: none; }
