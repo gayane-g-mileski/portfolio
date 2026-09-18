@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 480" width="300" height="480"
+     role="presentation" aria-hidden="true">
+  <defs>
+    <!-- the cover's tooth, kept inside the shapes so the page around them stays clean -->
+    <filter id="l-tooth" x="-10%" y="-10%" width="120%" height="120%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="3" seed="7" result="n"/>
+      <feColorMatrix in="n" type="saturate" values="0"/>
+      <feComponentTransfer result="grain"><feFuncA type="linear" slope="0.10"/></feComponentTransfer>
+      <feComposite in="grain" in2="SourceAlpha" operator="in" result="inside"/>
+      <feMerge><feMergeNode in="SourceGraphic"/><feMergeNode in="inside"/></feMerge>
+    </filter>
+  </defs>
+
+  <!-- everything runs off the left edge and stops short of the other three -->
+  <g filter="url(#l-tooth)">
+    <!-- peach, off the page edge, as on the cover -->
+    <circle cx="-14" cy="198" r="176" fill="#FFE0C5"/>
+
+    <!-- a paler echo low down -->
+    <circle cx="34" cy="394" r="82" fill="#FFF0E4"/>
+
+    <!-- one crimson line, climbing away towards the text -->
+    <path d="M0 450 C 58 418 108 366 150 308 C 188 256 224 200 256 140"
+          fill="none" stroke="#D51C39" stroke-width="1.6" stroke-linecap="round"/>
+  </g>
+</svg>

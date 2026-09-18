@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 480" width="300" height="480"
+     role="presentation" aria-hidden="true">
+  <defs>
+    <filter id="r-tooth" x="-10%" y="-10%" width="120%" height="120%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="3" seed="11" result="n"/>
+      <feColorMatrix in="n" type="saturate" values="0"/>
+      <feComponentTransfer result="grain"><feFuncA type="linear" slope="0.10"/></feComponentTransfer>
+      <feComposite in="grain" in2="SourceAlpha" operator="in" result="inside"/>
+      <feMerge><feMergeNode in="SourceGraphic"/><feMergeNode in="inside"/></feMerge>
+    </filter>
+  </defs>
+
+  <!-- everything runs off the right edge and stops short of the other three -->
+  <g filter="url(#r-tooth)">
+    <!-- a paler mass up top -->
+    <circle cx="312" cy="158" r="138" fill="#FFF0E4"/>
+
+    <!-- the burgundy sweep, as on the cover -->
+    <path d="M300 172 C 250 204 216 262 198 322 C 180 382 204 442 262 464
+             C 275 469 289 470 300 470 Z"
+          fill="#760031"/>
+
+    <!-- the same crimson line, arriving -->
+    <path d="M44 432 C 94 382 138 320 174 256 C 206 198 250 122 300 58"
+          fill="none" stroke="#D51C39" stroke-width="1.6" stroke-linecap="round"/>
+  </g>
+</svg>

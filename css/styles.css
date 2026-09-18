@@ -3389,13 +3389,47 @@ body {
 
 
 /* the coda under the four cards — the one thing they do not cover.
-   no shape behind it any more: the words stand on the page, set in the teal. */
+   the book cover's own vocabulary is split across the two gutters: the peach
+   circle off one corner, the burgundy sweep off the opposite one, the thin
+   crimson line running between them. the column down the middle stays clear. */
 .practice-coda {
+  position: relative;
+  z-index: 0;                      /* its own context, so the art stays behind the words */
   margin-top: var(--s-20);
   padding: clamp(140px, 17vw, 250px) var(--s-10) var(--s-12);
   background: none;
   border: 0;
   border-radius: 0;
+}
+.practice-coda::before,
+.practice-coda::after {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  top: 50%;
+  /* from the page edge to a hand's width short of the 66ch column */
+  width: calc(50vw - 33ch - 28px);
+  height: min(88%, 480px);
+  transform: translateY(-50%);
+  background-repeat: no-repeat;
+  background-size: contain;       /* the art is drawn to its box — nothing is cut */
+  pointer-events: none;
+}
+.practice-coda::before {
+  left: calc(50% - 50vw);         /* the left edge of the page */
+  background-image: url('../images/coda/shape-left.svg');
+  background-position: left center;
+}
+.practice-coda::after {
+  right: calc(50% - 50vw);
+  background-image: url('../images/coda/shape-right.svg');
+  background-position: right center;
+}
+/* the art sits against the page edges — clip sideways, nothing spills down */
+#practice { overflow-x: clip; }
+/* below this there are no sides to speak of */
+@media (max-width: 1023px) {
+  .practice-coda::before, .practice-coda::after { display: none; }
 }
 
 .practice-coda-inner { max-width: 66ch; margin-inline: auto; }
