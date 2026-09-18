@@ -806,6 +806,9 @@ input, textarea, select { font: inherit; }
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
   gap: var(--s-5);
+  /* the coda's art runs up behind these — it passes under them, not over */
+  position: relative;
+  z-index: 1;
 }
 
 .expertise-card {
@@ -3428,8 +3431,9 @@ body {
 .practice-coda {
   position: relative;
   z-index: 0;                      /* its own context, so the art stays behind the words */
-  margin-top: var(--s-20);
-  padding: clamp(140px, 17vw, 250px) var(--s-10) var(--s-12);
+  margin-top: 0;
+  /* 200px of air between the cards above and the first line of text */
+  padding: 200px var(--s-10) var(--s-12);
   background: none;
   border: 0;
   border-radius: 0;
@@ -3439,9 +3443,10 @@ body {
   content: '';
   position: absolute;
   z-index: -1;
-  top: 0;
-  /* both panels run on past the block, down to where the contact block starts —
-     so the biggest circles are cut off by the footer and sink into it */
+  /* up behind the cards at one end, down past the contact block's edge at the
+     other — so the art runs under the cards and the biggest circles sink into
+     the footer */
+  top: -160px;
   bottom: calc(-1 * var(--s-32));
   width: var(--w);
 
@@ -3510,7 +3515,7 @@ body {
 /* one column, centred on the page */
 .practice-coda-body { max-width: none; }
 @media (max-width: 768px) {
-  .practice-coda { padding: clamp(110px, 30vw, 170px) var(--s-6) var(--s-8); }
+  .practice-coda { padding: clamp(110px, 30vw, 170px) var(--s-6) var(--s-8); margin-top: var(--s-10); }
 }
 
 /* the section label stands alone where there is no title under it */
