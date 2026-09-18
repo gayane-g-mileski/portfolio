@@ -3559,7 +3559,7 @@ body {
 .proj-card:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 3px; }
 
 /* two filled circles and one drawn arc per card, in a darker relative of the
-   card's own tint. the circles are near-solid, the arc stays a thin mark. no two
+   card's own tint, the circles barely there and the arc a thin mark. no two
    cards are arranged alike, and each one puts at least one shape over an edge. */
 .proj-card::before {
   content: '';
@@ -3573,9 +3573,9 @@ body {
       transparent 0 calc(100% - 1.5px),
       rgb(var(--proj-ink, 43 87 97) / 0.42) calc(100% - 1.5px) 100%, transparent 100%),
     radial-gradient(circle var(--ps-r) at var(--ps-x) var(--ps-y),
-      rgb(var(--proj-ink, 43 87 97) / 0.9) 0 98%, transparent 100%),
+      rgb(var(--proj-ink, 43 87 97) / 0.1) 0 98%, transparent 100%),
     radial-gradient(circle var(--pb-r) at var(--pb-x) var(--pb-y),
-      rgb(var(--proj-ink, 43 87 97) / 0.9) 0 98%, transparent 100%);
+      rgb(var(--proj-ink, 43 87 97) / 0.1) 0 98%, transparent 100%);
 }
 /* arc, small disc, big disc */
 .proj-card:nth-child(1) {
