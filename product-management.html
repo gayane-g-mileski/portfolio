@@ -20,9 +20,9 @@
     .aipe-panel-sub { font-size:0.9375rem; color:#2c5560; margin-top:var(--s-3); max-width:48ch; }
 
     /* one expansion panel per line: illustration, title, chips, chevron */
-    .aipe-tasks { display:grid; grid-template-columns:1fr; gap:14px; }
+    .aipe-tasks { display:grid; grid-template-columns:1fr; gap:36px; }
     .aipe-task {
-      --illus-w:104px; --row-gap:clamp(16px,2.2vw,30px); --row-pad:clamp(18px,2.2vw,28px);
+      --illus-w:104px; --row-gap:clamp(16px,2.2vw,30px); --row-pad:32px;
       border-radius:16px; background:#e8f1f3; border:1px solid #cfe2e6;
       transition:background var(--t-base), border-color var(--t-base);
     }
@@ -35,7 +35,7 @@
          and the slack falls between them and the chevron */
       grid-template-columns:calc(var(--illus-w) + var(--row-gap) - 14px) auto minmax(0,1fr) auto;
       align-items:center; column-gap:14px; row-gap:8px;
-      padding:14px var(--row-pad); cursor:pointer; list-style:none;
+      padding:var(--row-pad); cursor:pointer; list-style:none;
     }
     .aipe-task-summary::-webkit-details-marker { display:none; }
     .aipe-task-summary:focus-visible { outline:2px solid rgba(43,87,97,0.85); outline-offset:-3px; border-radius:16px; }
@@ -46,7 +46,7 @@
 
     .aipe-task-title { font-size:1.0625rem; font-weight:700; color:#173138; line-height:1.3; margin:0; }
     .aipe-task-tags { display:flex; flex-wrap:wrap; justify-content:flex-start; gap:6px; }
-    .aipe-task-tags span { font-size:0.6875rem; font-weight:500; color:#2b5761; background:rgba(43,87,97,0.07); border:1px solid rgba(43,87,97,0.22); padding:3px 9px; border-radius:999px; white-space:nowrap; }
+    .aipe-task-tags span { font-size:0.875rem; font-weight:500; color:#2b5761; background:rgba(43,87,97,0.07); border:1px solid rgba(43,87,97,0.22); padding:3px 9px; border-radius:999px; white-space:nowrap; }
     .aipe-task-chevron { display:grid; place-items:center; width:22px; height:22px; color:rgba(43,87,97,0.6); transition:transform var(--t-base), color var(--t-base); }
     .aipe-task-chevron svg { width:16px; height:16px; display:block; }
     .aipe-task:hover .aipe-task-chevron { color:#2b5761; }
@@ -54,7 +54,7 @@
 
     .aipe-task-copy {
       font-size:0.9375rem; line-height:1.65; color:#33606b; max-width:88ch;
-      margin:0; padding:0 var(--row-pad) 20px calc(var(--row-pad) + var(--illus-w) + var(--row-gap));
+      margin:0; padding:0 var(--row-pad) var(--row-pad) calc(var(--row-pad) + var(--illus-w) + var(--row-gap));
     }
     .aipe-task-more[open] .aipe-task-copy { animation:aipe-reveal 0.28s ease both; }
     @keyframes aipe-reveal { from { opacity:0; transform:translateY(-4px); } to { opacity:1; transform:none; } }
