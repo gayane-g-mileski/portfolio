@@ -3407,9 +3407,11 @@ body {
   position: absolute;
   z-index: -1;
   top: 50%;
-  /* from the page edge to a hand's width short of the 66ch column */
-  width: calc(50vw - 33ch - 28px);
-  height: min(88%, 480px);
+  /* from the page edge to roughly 200px short of the 66ch column —
+     less on narrower screens, where there is not 200px to give away */
+  --coda-art-gap: clamp(96px, 14vw, 200px);
+  width: calc(50vw - 33ch - var(--coda-art-gap));
+  height: min(100%, 520px);
   transform: translateY(-50%);
   background-repeat: no-repeat;
   background-size: contain;       /* the art is drawn to its box — nothing is cut */
