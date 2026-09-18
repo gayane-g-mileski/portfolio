@@ -3440,47 +3440,50 @@ body {
   position: absolute;
   z-index: -1;
   top: 0;
-  bottom: 0;                      /* the whole height of the block */
+  /* both panels run on past the block, down to where the contact block starts —
+     so the biggest circles are cut off by the footer and sink into it */
+  bottom: calc(-1 * var(--s-32));
   width: var(--w);
 
   background-repeat: no-repeat;
   background-size: 100% 100%;
   pointer-events: none;
 }
-/* left: a tall peach arc down the edge, a pale weight low, one small mark high.
+/* left: a huge peach circle sitting on the footer line, so the contact block
+   takes exactly half of it. a pale weight up top, one small mark inside.
    no line on this side. */
 .practice-coda::before {
   left: calc(50% - 50vw);         /* the left edge of the page */
-  --rb: min(calc(var(--w) * 1.45), 230px);   /* mostly off the page: an arc, not a blob */
-  --rm: min(calc(var(--w) * 0.38), 112px);
-  --rs: min(calc(var(--w) * 0.22),  66px);
+  --rb: min(calc(var(--w) * 1.85), 400px);
+  --rm: min(calc(var(--w) * 0.55), 150px);
+  --rs: min(calc(var(--w) * 0.28),  86px);
   /* each one drifts further in than the last, stopping clear of the inner edge */
-  --xb: min(calc(var(--w) * 0.18), calc(var(--w) - var(--rb) - 10px));
-  --xm: min(calc(var(--w) * 0.62), calc(var(--w) - var(--rm) - 12px));
-  --xs: min(calc(var(--w) * 0.86), calc(var(--w) - var(--rs) - 12px));
+  --xb: min(calc(var(--w) * 0.30), calc(var(--w) - var(--rb) - 10px));
+  --xm: min(calc(var(--w) * 0.55), calc(var(--w) - var(--rm) - 12px));
+  --xs: min(calc(var(--w) * 0.88), calc(var(--w) - var(--rs) - 12px));
   background-image:
-    radial-gradient(circle var(--rs) at var(--xs) 18%, #FFE0C5 0 98%, #FFE0C500 100%),
-    radial-gradient(circle var(--rm) at var(--xm) 78%, #FFF0E4 0 98%, #FFF0E400 100%),
-    radial-gradient(circle var(--rb) at var(--xb) 52%, #FFE0C5 0 98%, #FFE0C500 100%);
+    radial-gradient(circle var(--rs) at var(--xs) 14%, #FFE0C5 0 98%, #FFE0C500 100%),
+    radial-gradient(circle var(--rm) at var(--xm) 30%, #FFF0E4 0 98%, #FFF0E400 100%),
+    /* centred on the footer line: half above it, half under the contact block */
+    radial-gradient(circle var(--rb) at var(--xb) 100%, #FFE0C5 0 98%, #FFE0C500 100%);
 }
-/* right: shallower arc, a much heavier burgundy reaching in, a smaller mark than
-   the left's and sitting lower. nothing here answers the other side.
-   this panel runs on past the block, down to where the contact block starts, so
-   the crimson line can climb straight out of the footer. */
+/* right: a larger circle still, but sunk deeper — its centre sits half a radius
+   below the footer line, so only the top quarter of it is left on the page.
+   a much heavier burgundy up top, a smaller mark than the left's, placed
+   differently. nothing here answers the other side. */
 .practice-coda::after {
   right: calc(50% - 50vw);
-  bottom: calc(-1 * var(--s-32));
-  --rb: min(calc(var(--w) * 1.12), 188px);
-  --rm: min(calc(var(--w) * 0.50), 142px);
-  --rs: min(calc(var(--w) * 0.15),  44px);
-  --xb: min(calc(var(--w) * 0.14), calc(var(--w) - var(--rb) - 10px));
-  --xm: min(calc(var(--w) * 0.72), calc(var(--w) - var(--rm) - 12px));
-  --xs: min(calc(var(--w) * 0.42), calc(var(--w) - var(--rs) - 12px));
+  --rb: min(calc(var(--w) * 1.50), 360px);
+  --rm: min(calc(var(--w) * 0.62), 172px);
+  --rs: min(calc(var(--w) * 0.20),  58px);
+  --xb: min(calc(var(--w) * 0.25), calc(var(--w) - var(--rb) - 10px));
+  --xm: min(calc(var(--w) * 0.78), calc(var(--w) - var(--rm) - 12px));
+  --xs: min(calc(var(--w) * 0.46), calc(var(--w) - var(--rs) - 12px));
   background-image:
     url('../images/coda/line-right.svg'),
-    radial-gradient(circle var(--rs) at calc(100% - var(--xs)) 68%, #FFE0C5 0 98%, #FFE0C500 100%),
+    radial-gradient(circle var(--rs) at calc(100% - var(--xs)) 60%, #FFF0E4 0 98%, #FFF0E400 100%),
     radial-gradient(circle var(--rm) at calc(100% - var(--xm)) 26%, #760031 0 98%, #76003100 100%),
-    radial-gradient(circle var(--rb) at calc(100% - var(--xb)) 36%, #FFF0E4 0 98%, #FFF0E400 100%);
+    radial-gradient(circle var(--rb) at calc(100% - var(--xb)) calc(100% + var(--rb) * 0.5), #FFE0C5 0 98%, #FFE0C500 100%);
 }
 /* and the contact block paints over the tail that belongs to it */
 #contact { position: relative; z-index: 1; }
