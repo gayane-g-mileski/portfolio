@@ -492,15 +492,16 @@ input, textarea, select { font: inherit; }
   background: var(--gray-50);
 }
 
+/* the contact form's submit — dark wine, not the crimson accent */
 .btn-teal {
-  background: var(--teal-700);
+  background: #760031;
   color: var(--white);
-  border-color: var(--teal-700);
+  border-color: #760031;
 }
 .btn-teal:hover {
-  background: var(--teal-800);
-  border-color: var(--teal-800);
-  box-shadow: 0 4px 16px rgba(213,28,57,0.3);
+  background: #4D0020;
+  border-color: #4D0020;
+  box-shadow: 0 4px 16px rgba(118,0,49,0.3);
 }
 
 .btn-ghost {
@@ -948,7 +949,7 @@ input, textarea, select { font: inherit; }
 .tag {
   padding: var(--s-1) var(--s-3);
   border-radius: var(--r-full);
-  font-size: 0.6875rem;
+  font-size: 0.875rem;
   font-weight: 600;
   letter-spacing: 0.05em;
   text-transform: uppercase;
@@ -1282,7 +1283,7 @@ input, textarea, select { font: inherit; }
 }
 
 .process-step-desc {
-  font-size: 0.8125rem;
+  font-size: 1rem;
   line-height: 1.6;
   color: var(--gray-500);
 }
@@ -1318,7 +1319,7 @@ input, textarea, select { font: inherit; }
 .process-phase-tag {
   padding: var(--s-1) var(--s-3);
   border-radius: var(--r-full);
-  font-size: 0.8125rem;
+  font-size: 0.875rem;
   font-weight: 500;
   background: var(--gray-100);
   color: var(--gray-700);
@@ -1368,7 +1369,7 @@ input, textarea, select { font: inherit; }
 }
 
 .metric-context {
-  font-size: 0.875rem;
+  font-size: 1rem;
   color: var(--gray-500);
   line-height: 1.6;
 }
@@ -1422,7 +1423,7 @@ input, textarea, select { font: inherit; }
 }
 
 .testimonial-text {
-  font-size: 0.9375rem;
+  font-size: 1rem;
   line-height: 1.8;
   color: var(--gray-700);
   font-style: italic;
@@ -1498,7 +1499,7 @@ input, textarea, select { font: inherit; }
   display: flex;
   align-items: center;
   gap: var(--s-3);
-  font-size: 0.8125rem;
+  font-size: 0.875rem;
   font-weight: 500;
   color: var(--gray-700);
   white-space: nowrap;
@@ -1608,7 +1609,7 @@ input, textarea, select { font: inherit; }
   margin-bottom: var(--s-1);
 }
 .about-highlight-desc {
-  font-size: 0.875rem;
+  font-size: 1rem;
   color: var(--gray-500);
   line-height: 1.6;
 }
@@ -1696,7 +1697,7 @@ input, textarea, select { font: inherit; }
 }
 .timeline-desc {
   max-width: 58ch;
-  font-size: 0.9375rem;
+  font-size: 1rem;
   line-height: 1.75;
   color: var(--gray-600);
 }
@@ -1822,7 +1823,7 @@ input, textarea, select { font: inherit; }
   background: var(--gray-50);
   border: 1.5px solid var(--gray-200);
   border-radius: var(--r-lg);
-  font-size: 0.9375rem;
+  font-size: 1rem;
   color: var(--gray-900);
   transition: border-color var(--t-fast), background var(--t-fast), box-shadow var(--t-fast);
   outline: none;
@@ -1830,12 +1831,13 @@ input, textarea, select { font: inherit; }
 .form-input:focus,
 .form-textarea:focus,
 .form-select:focus {
-  border-color: var(--teal-600);
+  border-color: #760031;
   background: var(--white);
-  box-shadow: 0 0 0 3px rgba(213,28,57,0.1);
+  box-shadow: 0 0 0 3px rgba(118,0,49,0.12);
 }
+/* wine, held back so a hint still reads as a hint */
 .form-input::placeholder,
-.form-textarea::placeholder { color: var(--gray-400); }
+.form-textarea::placeholder { color: rgba(118,0,49,0.58); }
 
 .form-textarea {
   min-height: 120px;
@@ -1849,8 +1851,8 @@ input, textarea, select { font: inherit; }
 }
 
 .form-note {
-  font-size: 0.8125rem;
-  color: var(--gray-400);
+  font-size: 1rem;
+  color: rgba(118,0,49,0.72);
   margin-top: var(--s-3);
   text-align: center;
 }
@@ -2036,7 +2038,7 @@ input, textarea, select { font: inherit; }
   padding: var(--s-2) var(--s-4);
   border: 1px solid rgba(255,255,255,0.2);
   border-radius: var(--r-full);
-  font-size: 0.75rem;
+  font-size: 0.875rem;
   font-weight: 600;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -2278,7 +2280,7 @@ input, textarea, select { font: inherit; }
 .ba-badge {
   padding: var(--s-1) var(--s-3);
   border-radius: var(--r-full);
-  font-size: 0.75rem;
+  font-size: 0.875rem;
   font-weight: 700;
   letter-spacing: 0.06em;
   text-transform: uppercase;
@@ -2314,7 +2316,7 @@ input, textarea, select { font: inherit; }
   border-radius: 50%;
   background: var(--teal-700);
   color: var(--white);
-  font-size: 0.75rem;
+  font-size: 0.875rem;
   font-weight: 700;
   display: grid;
   place-items: center;
@@ -2328,7 +2330,7 @@ input, textarea, select { font: inherit; }
   margin-bottom: var(--s-1);
 }
 .finding-desc {
-  font-size: 0.875rem;
+  font-size: 1rem;
   line-height: 1.65;
   color: var(--gray-500);
 }
@@ -3344,7 +3346,7 @@ body {
 .ga-note {
   margin-top: var(--s-8);
   text-align: center;
-  font-size: 0.875rem;
+  font-size: 1rem;
   color: var(--gray-500);
 }
 .ga-back { margin-left: var(--s-2); color: var(--color-accent); text-decoration: none; border-bottom: 1px solid currentColor; }
@@ -3507,7 +3509,7 @@ body {
   margin-bottom: var(--s-6);
 }
 .practice-coda-body p {
-  font-size: 0.9375rem;
+  font-size: 1rem;
   line-height: 1.8;
   color: #33606b;
 }
