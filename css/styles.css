@@ -1770,6 +1770,27 @@ input, textarea, select { font: inherit; }
   color: var(--white);
 }
 
+/* the contact block closes every page, and it closes it in the MiXBS tint.
+   the copyright strip underneath keeps its own burgundy. */
+#contact.section--dark {
+  background: #D7DFE1;
+  color: #173138;
+}
+#contact .section-label { color: #2b5761; }
+#contact .section-label::before { background: #2b5761; }
+#contact .section-title { color: #173138; }
+#contact .section-description { color: #33606b; }
+#contact .contact-link-item { border-color: rgba(43,87,97,0.22); }
+#contact .contact-link-item:hover {
+  border-color: #2b5761;
+  background: rgba(43,87,97,0.07);
+}
+#contact .contact-link-icon {
+  background: rgba(43,87,97,0.10);
+  color: #2b5761;
+}
+#contact .contact-link-value { color: #173138; }
+
 /* Contact form */
 .contact-form-card {
   background: var(--white);
@@ -3389,9 +3410,13 @@ body {
 
 
 /* the coda under the four cards — the one thing they do not cover.
-   the book cover's own vocabulary is split across the two gutters: the peach
-   circle off one corner, the burgundy sweep off the opposite one, the thin
-   crimson line running between them. the column down the middle stays clear. */
+   the book cover's palette scattered across both gutters: three circles a side,
+   massed low on the left and high on the right, with the thin crimson line
+   climbing away from each. the column down the middle stays clear.
+
+   the circles are drawn as gradients rather than as a fitted drawing: the
+   gutter changes shape a great deal between a laptop and a wide monitor, and a
+   circle sized from the panel's own width stays a circle through all of it. */
 .practice-coda {
   position: relative;
   z-index: 0;                      /* its own context, so the art stays behind the words */
@@ -3406,26 +3431,46 @@ body {
   content: '';
   position: absolute;
   z-index: -1;
-  top: 50%;
+  top: 0;
+  bottom: 0;                      /* the whole height of the block */
   /* from the page edge to roughly 200px short of the 66ch column —
      less on narrower screens, where there is not 200px to give away */
   --coda-art-gap: clamp(96px, 14vw, 200px);
-  width: calc(50vw - 33ch - var(--coda-art-gap));
-  height: min(100%, 520px);
-  transform: translateY(-50%);
+  --w: calc(50vw - 33ch - var(--coda-art-gap));
+  width: var(--w);
+
+  /* three sizes, far enough apart that no two of them read as a pair. the caps
+     keep each one inside the block's height once the gutter goes wide */
+  --rb: min(calc(var(--w) * 1.45), 230px);   /* mostly off the page: an arc, not a blob */
+  --rm: min(calc(var(--w) * 0.38), 112px);
+  --rs: min(calc(var(--w) * 0.22),  66px);
+  /* each one drifts further in than the last, stopping clear of the inner edge */
+  --xb: min(calc(var(--w) * 0.18), calc(var(--w) - var(--rb) - 10px));
+  --xm: min(calc(var(--w) * 0.62), calc(var(--w) - var(--rm) - 12px));
+  --xs: min(calc(var(--w) * 0.86), calc(var(--w) - var(--rs) - 12px));
+
   background-repeat: no-repeat;
-  background-size: contain;       /* the art is drawn to its box — nothing is cut */
+  background-size: 100% 100%;
   pointer-events: none;
 }
 .practice-coda::before {
   left: calc(50% - 50vw);         /* the left edge of the page */
-  background-image: url('../images/coda/shape-left.svg');
-  background-position: left center;
+  /* massed low, per the wedge: the arc down the edge, a pale weight at the
+     bottom, one small mark high and well inside */
+  background-image:
+    url('../images/coda/line-left.svg'),
+    radial-gradient(circle var(--rs) at var(--xs) 18%, #FFE0C5 0 98%, #FFE0C500 100%),
+    radial-gradient(circle var(--rm) at var(--xm) 78%, #FFF0E4 0 98%, #FFF0E400 100%),
+    radial-gradient(circle var(--rb) at var(--xb) 52%, #FFE0C5 0 98%, #FFE0C500 100%);
 }
 .practice-coda::after {
   right: calc(50% - 50vw);
-  background-image: url('../images/coda/shape-right.svg');
-  background-position: right center;
+  /* massed high, mirrored: the burgundy takes the top, the small mark the floor */
+  background-image:
+    url('../images/coda/line-right.svg'),
+    radial-gradient(circle var(--rs) at calc(100% - var(--xs)) 78%, #FFE0C5 0 98%, #FFE0C500 100%),
+    radial-gradient(circle var(--rm) at calc(100% - var(--xm)) 22%, #760031 0 98%, #76003100 100%),
+    radial-gradient(circle var(--rb) at calc(100% - var(--xb)) 46%, #FFF0E4 0 98%, #FFF0E400 100%);
 }
 /* the art sits against the page edges — clip sideways, nothing spills down */
 #practice { overflow-x: clip; }
